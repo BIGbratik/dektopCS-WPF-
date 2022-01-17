@@ -32,7 +32,7 @@ namespace dektopCS
             mapView.MapProvider = GoogleMapProvider.Instance;
             mapView.MinZoom = 1;
             mapView.MaxZoom = 16;
-            mapView.Zoom = 10;
+            mapView.Zoom = 11;
             mapView.Position = new GMap.NET.PointLatLng(55.796127, 49.106414);
             mapView.MouseWheelZoomType = GMap.NET.MouseWheelZoomType.MousePositionAndCenter;
             mapView.CanDragMap = true;
@@ -41,16 +41,15 @@ namespace dektopCS
             mapView.ShowTileGridLines = false;
         }
 
-        private void Push(object sender, RoutedEventArgs e)
+        private void Exit(object sender, RoutedEventArgs e)
         {
-            // Show message box when button is clicked.
-            MessageBox.Show("Поздраляю, вы умеете нажимать кнопку =)");
             Close();
         }
 
         private void CheckForcMeans(object sender, RoutedEventArgs e)
         {
-
+            WindowForceMeans forceMeans = new WindowForceMeans();
+            forceMeans.Show();
         }
     }
 }
