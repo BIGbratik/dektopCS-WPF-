@@ -11,7 +11,7 @@
         ResizeMode="NoResize">
     <Grid Margin="0,0">
         <gmaps:GMapControl x:Name="mapView" Loaded="mapView_Loaded"/>
-        <Button Click="Exit" HorizontalAlignment="Right" VerticalAlignment="Top"  Width="50" Height="20" Background="MidnightBlue" Foreground="White" BorderBrush="DarkOrange">Выход</Button>
-        <Button Click="CheckForcMeans" HorizontalAlignment="Left" VerticalAlignment="Top" Width="100" Height="20" Background="MidnightBlue" Foreground="White" BorderBrush="DarkOrange">Силы и средства</Button>
+        <Button Click="Exit_Click" HorizontalAlignment="Right" VerticalAlignment="Top"  Width="50" Height="20" Background="MidnightBlue" Foreground="White" BorderBrush="DarkOrange">Выход</Button>
+        <Button Click="CheckForcMeans_Click" HorizontalAlignment="Left" VerticalAlignment="Top" Width="100" Height="20" Background="MidnightBlue" Foreground="White" BorderBrush="DarkOrange">Силы и средства</Button>
     </Grid>
 </Window>

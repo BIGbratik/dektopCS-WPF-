@@ -5,10 +5,38 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:dektopCS"
         mc:Ignorable="d"
-                Title="Силы и средства" WindowStyle="None" Width="300" Height="300"
+                Title="Силы и средства" WindowStyle="None" Width="500" Height="300"
         WindowState="Maximized"
-        ResizeMode="NoResize">
+        ResizeMode="NoResize"
+        Background="MidnightBlue">
+    <Window.Resources>
+        <Style TargetType="ListBoxItem">
+            <Setter Property="ListBoxItem.BorderBrush" Value="MidnightBlue"/>
+            <Setter Property="ListBoxItem.Margin" Value="0,5,5,0"/>
+        </Style>
+    </Window.Resources>
     <Grid>
-        <Button Click="Exit" HorizontalAlignment="Right" VerticalAlignment="Top"  Width="50" Height="20" Background="MidnightBlue" Foreground="White" BorderBrush="DarkOrange">Выход</Button>
+        <Button 
+            Click="Exit_Click" 
+            HorizontalAlignment="Right" 
+            VerticalAlignment="Top"  
+            Width="50" Height="20" 
+            Background="MidnightBlue" 
+            Foreground="White" 
+            BorderBrush="DarkOrange">Выход</Button>
+        <Label 
+            Margin="0,20,0,0"
+            Foreground="White"
+            FontSize="16">Выберите из списка интересующий объект:</Label>
+        <ListBox
+            Margin="0,50,0,0"
+            Name="lb"
+            MouseDoubleClick="Item_MouseDoubleClick"
+            Loaded="Item_Loaded"
+            Background="DarkOrange">
+        </ListBox>
+     
     </Grid>
+
+
 </Window>

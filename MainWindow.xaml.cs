@@ -41,12 +41,12 @@ namespace dektopCS
             mapView.ShowTileGridLines = false;
         }
 
-        private void Exit(object sender, RoutedEventArgs e)
+        private void Exit_Click(object sender, RoutedEventArgs e)
         {
             Close();
         }
 
-        private void CheckForcMeans(object sender, RoutedEventArgs e)
+        private void CheckForcMeans_Click(object sender, RoutedEventArgs e)
         {
             WindowForceMeans forceMeans = new WindowForceMeans();
             forceMeans.Show();

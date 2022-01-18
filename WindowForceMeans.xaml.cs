@@ -24,9 +24,26 @@ namespace dektopCS
             InitializeComponent();
         }
 
-        private void Exit(object sender, RoutedEventArgs e)
+        private void Exit_Click(object sender, RoutedEventArgs e)
         {
             Close();
         }
+
+        private void Item_MouseDoubleClick(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show(lb.SelectedItem.ToString());
+        }
+
+        private void Item_Loaded(object sender, RoutedEventArgs e)
+        {
+            for (int i=0; i<10;i++)
+                lb.Items.Add("Объект "+i);
+        }
     }
+
+    class CSobject
+    {
+
+    }
+
 }
