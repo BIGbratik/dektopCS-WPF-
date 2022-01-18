@@ -19,6 +19,7 @@ namespace dektopCS
     /// </summary>
     public partial class WindowForceMeans : Window
     {
+        public List<CSobject> cSobjects = new List<CSobject>();
         public WindowForceMeans()
         {
             InitializeComponent();
@@ -31,19 +32,32 @@ namespace dektopCS
 
         private void Item_MouseDoubleClick(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show(lb.SelectedItem.ToString());
+            MessageBox.Show("\nНазвание объекта: " + cSobjects[lb.SelectedIndex].Name + "\nОписание: " + cSobjects[lb.SelectedIndex].Description);
         }
 
         private void Item_Loaded(object sender, RoutedEventArgs e)
         {
-            for (int i=0; i<10;i++)
-                lb.Items.Add("Объект "+i);
+            for (int i=0; i<5;i++)
+            {
+                CSobject csObj = new CSobject(i,(i+1).ToString(),"Некоторое описание");
+                cSobjects.Add(csObj);
+                lb.Items.Add(cSobjects[i].Name);
+            }
         }
     }
 
-    class CSobject
+    public class CSobject
     {
+        public int Number { get; set; }
+        public string Name { get; set; }
+        public string Description { get; set; }
 
+        public CSobject(int num, string name, string str)
+        {
+            this.Number = num;
+            this.Name = name;
+            this.Description = str;
+        }
     }
 
 }

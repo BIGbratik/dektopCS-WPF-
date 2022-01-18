@@ -11,7 +11,7 @@
         Background="MidnightBlue">
     <Window.Resources>
         <Style TargetType="ListBoxItem">
-            <Setter Property="ListBoxItem.BorderBrush" Value="MidnightBlue"/>
+            <Setter Property="ListBoxItem.BorderBrush" Value="DarkOrange"/>
             <Setter Property="ListBoxItem.Margin" Value="0,5,5,0"/>
         </Style>
     </Window.Resources>
@@ -29,13 +29,11 @@
             Foreground="White"
             FontSize="16">Выберите из списка интересующий объект:</Label>
         <ListBox
-            Margin="0,50,0,0"
+            Margin="5,50,5,5"
             Name="lb"
             MouseDoubleClick="Item_MouseDoubleClick"
-            Loaded="Item_Loaded"
-            Background="DarkOrange">
+            Loaded="Item_Loaded">
         </ListBox>
-     
     </Grid>
 
 
