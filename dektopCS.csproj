@@ -92,11 +92,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="WindowDetails.xaml.cs">
-      <DependentUpon>WindowDetails.xaml</DependentUpon>
-    </Compile>
     <Compile Include="WindowForceMeans.xaml.cs">
       <DependentUpon>WindowForceMeans.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WindowMaps.xaml.cs">
+      <DependentUpon>WindowMaps.xaml</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -110,11 +110,11 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="WindowDetails.xaml">
+    <Page Include="WindowForceMeans.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="WindowForceMeans.xaml">
+    <Page Include="WindowMaps.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

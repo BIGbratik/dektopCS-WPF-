@@ -53,7 +53,8 @@ namespace dektopCS
         }
         private void CheckMaps_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Модуль КАРТЫ, ПЛАНЫ, СХЕМЫ находится в разработке", "ВНИМАНИЕ!!!", MessageBoxButton.OK, MessageBoxImage.Information);
+            WindowMaps windowMaps = new WindowMaps();
+            windowMaps.Show();
         }
         private void CheckAnalytics_Click(object sender, RoutedEventArgs e)
         {
