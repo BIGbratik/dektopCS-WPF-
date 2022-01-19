@@ -51,5 +51,21 @@ namespace dektopCS
             WindowForceMeans forceMeans = new WindowForceMeans();
             forceMeans.Show();
         }
+        private void CheckMaps_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Модуль КАРТЫ, ПЛАНЫ, СХЕМЫ находится в разработке", "ВНИМАНИЕ!!!", MessageBoxButton.OK, MessageBoxImage.Information);
+        }
+        private void CheckAnalytics_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Модуль АНАЛИТИКА находится в разработке", "ВНИМАНИЕ!!!", MessageBoxButton.OK, MessageBoxImage.Information);
+        }
+        private void CheckGuids_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Модуль СПРАВОЧНИКИ находится в разработке", "ВНИМАНИЕ!!!", MessageBoxButton.OK, MessageBoxImage.Information);
+        }
+        private void CheckMultimedia_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Модуль МУЛЬТИМЕДИА находится в разработке", "ВНИМАНИЕ!!!", MessageBoxButton.OK, MessageBoxImage.Information);
+        }
     }
 }

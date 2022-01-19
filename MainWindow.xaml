@@ -8,10 +8,82 @@
         mc:Ignorable="d"
         Title="Главный экран" WindowStyle="None" Width="300" Height="300"
         WindowState="Maximized"
-        ResizeMode="NoResize">
-    <Grid Margin="0,0">
-        <gmaps:GMapControl x:Name="mapView" Loaded="mapView_Loaded"/>
-        <Button Click="Exit_Click" HorizontalAlignment="Right" VerticalAlignment="Top"  Width="50" Height="20" Background="MidnightBlue" Foreground="White" BorderBrush="DarkOrange">Выход</Button>
-        <Button Click="CheckForcMeans_Click" HorizontalAlignment="Left" VerticalAlignment="Top" Width="100" Height="20" Background="MidnightBlue" Foreground="White" BorderBrush="DarkOrange">Силы и средства</Button>
+        ResizeMode="NoResize"
+        Background="MidnightBlue">
+    <Window.Resources>
+        <Style TargetType="Button">
+            <Setter Property="Button.Background" Value="DarkOrange"/>
+            <Setter Property="Button.Foreground" Value="Black"/>
+            <Setter Property="Button.Margin" Value="5,5,5,5"/>
+        </Style>
+    </Window.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="100*"/>
+            <ColumnDefinition Width="50*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <gmaps:GMapControl 
+            x:Name="mapView" 
+            Loaded="mapView_Loaded"
+            Grid.ColumnSpan="2"
+            Grid.RowSpan="6"/>
+        <Button 
+            Click="Exit_Click" 
+            HorizontalAlignment="Right" 
+            VerticalAlignment="Top"  
+            Width="50" 
+            Height="20"
+            Grid.Column="1"
+            Grid.Row="0">Выход</Button>
+        <Button 
+            Click="CheckForcMeans_Click" 
+            HorizontalAlignment="Left" 
+            VerticalAlignment="Top" 
+            Width="150" 
+            Height="20"
+            Grid.Column="0"
+            Grid.Row="1">Силы и средства</Button>
+        <Button 
+            Click="CheckMaps_Click" 
+            HorizontalAlignment="Left" 
+            VerticalAlignment="Top" 
+            Width="150" 
+            Height="20"
+            Grid.Column="0"
+            Grid.Row="2">Карты, планы, схемы</Button>
+        <Button 
+            Click="CheckAnalytics_Click" 
+            HorizontalAlignment="Left" 
+            VerticalAlignment="Top" 
+            Width="150" 
+            Height="20"
+            Grid.Column="0"
+            Grid.Row="3">Аналитика</Button>
+        <Button 
+            Click="CheckGuids_Click" 
+            HorizontalAlignment="Left" 
+            VerticalAlignment="Top" 
+            Width="150" 
+            Height="20"
+            Grid.Column="0"
+            Grid.Row="4">Справочники</Button>
+        <Button 
+            Click="CheckMultimedia_Click" 
+            HorizontalAlignment="Left" 
+            VerticalAlignment="Top" 
+            Width="150" 
+            Height="20"
+            Grid.Column="0"
+            Grid.Row="5">Библиотека мультимедии</Button>
+
+
     </Grid>
 </Window>

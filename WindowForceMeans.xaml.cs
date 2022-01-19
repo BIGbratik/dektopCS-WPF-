@@ -30,14 +30,15 @@ namespace dektopCS
             Close();
         }
 
-        private void Item_MouseDoubleClick(object sender, RoutedEventArgs e)
+        private void CheckItem_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("\nНазвание объекта: " + cSobjects[lb.SelectedIndex].Name + "\nОписание: " + cSobjects[lb.SelectedIndex].Description);
+            MessageBox.Show("\nНазвание объекта: " + cSobjects[lb.SelectedIndex].Name + 
+                "\nОписание: " + cSobjects[lb.SelectedIndex].Description, "Подробная информация об объекте");
         }
 
         private void Item_Loaded(object sender, RoutedEventArgs e)
         {
-            for (int i=0; i<5;i++)
+            for (int i=0; i<10;i++)
             {
                 CSobject csObj = new CSobject(i,(i+1).ToString(),"Некоторое описание");
                 cSobjects.Add(csObj);
@@ -60,4 +61,8 @@ namespace dektopCS
         }
     }
 
+    public class forceMeans
+    {
+
+    }
 }
