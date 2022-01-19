@@ -58,7 +58,8 @@ namespace dektopCS
         }
         private void CheckAnalytics_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Модуль АНАЛИТИКА находится в разработке", "ВНИМАНИЕ!!!", MessageBoxButton.OK, MessageBoxImage.Information);
+            WindowAnalytics windowAnalytics= new WindowAnalytics();
+            windowAnalytics.Show();
         }
         private void CheckGuids_Click(object sender, RoutedEventArgs e)
         {

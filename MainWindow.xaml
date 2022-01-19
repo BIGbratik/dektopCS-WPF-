@@ -15,19 +15,24 @@
             <Setter Property="Button.Background" Value="DarkOrange"/>
             <Setter Property="Button.Foreground" Value="Black"/>
             <Setter Property="Button.Margin" Value="5,5,5,5"/>
+            <Setter Property="Button.FontSize" Value="18"/>
+            <Setter Property="Button.Height" Value="30"/>
+            <Setter Property="Button.Width" Value="200"/>
+            <Setter Property="Button.HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="Button.VerticalContentAlignment" Value="Center"/>
         </Style>
     </Window.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="100*"/>
-            <ColumnDefinition Width="50*"/>
+            <ColumnDefinition Width="10*"/>
+            <ColumnDefinition Width="4*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="30"/>
-            <RowDefinition Height="30"/>
-            <RowDefinition Height="30"/>
-            <RowDefinition Height="30"/>
-            <RowDefinition Height="30"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="40"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <gmaps:GMapControl 
@@ -38,49 +43,38 @@
         <Button 
             Click="Exit_Click" 
             HorizontalAlignment="Right" 
-            VerticalAlignment="Top"  
-            Width="50" 
-            Height="20"
+            VerticalAlignment="Center"  
             Grid.Column="1"
+            Width="70"
             Grid.Row="0">Выход</Button>
         <Button 
             Click="CheckForcMeans_Click" 
             HorizontalAlignment="Left" 
-            VerticalAlignment="Top" 
-            Width="150" 
-            Height="20"
+            VerticalAlignment="Top"  
             Grid.Column="0"
             Grid.Row="1">Силы и средства</Button>
         <Button 
             Click="CheckMaps_Click" 
             HorizontalAlignment="Left" 
-            VerticalAlignment="Top" 
-            Width="150" 
-            Height="20"
+            VerticalAlignment="Top"  
             Grid.Column="0"
             Grid.Row="2">Карты, планы, схемы</Button>
         <Button 
             Click="CheckAnalytics_Click" 
             HorizontalAlignment="Left" 
             VerticalAlignment="Top" 
-            Width="150" 
-            Height="20"
             Grid.Column="0"
             Grid.Row="3">Аналитика</Button>
         <Button 
             Click="CheckGuids_Click" 
             HorizontalAlignment="Left" 
             VerticalAlignment="Top" 
-            Width="150" 
-            Height="20"
             Grid.Column="0"
             Grid.Row="4">Справочники</Button>
         <Button 
             Click="CheckMultimedia_Click" 
             HorizontalAlignment="Left" 
             VerticalAlignment="Top" 
-            Width="150" 
-            Height="20"
             Grid.Column="0"
             Grid.Row="5">Мультимедия</Button>
     </Grid>
