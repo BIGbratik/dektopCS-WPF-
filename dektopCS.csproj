@@ -99,6 +99,9 @@
     <Compile Include="WindowFM.xaml.cs">
       <DependentUpon>WindowFM.xaml</DependentUpon>
     </Compile>
+    <Compile Include="WindowFMInfo.xaml.cs">
+      <DependentUpon>WindowFMInfo.xaml</DependentUpon>
+    </Compile>
     <Compile Include="WindowForceMeans.xaml.cs">
       <DependentUpon>WindowForceMeans.xaml</DependentUpon>
     </Compile>
@@ -122,6 +125,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="WindowFM.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WindowFMInfo.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

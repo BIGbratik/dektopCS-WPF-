@@ -17,11 +17,5 @@ namespace dektopCS
         public int Count { get; set; }
         public string Place { get; set; }
         public string Phone { get; set; }
-
-        public PMobject(int num, string name)
-        {
-            this.Number = num;
-            this.Name = name;
-        }
     }
 }
