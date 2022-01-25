@@ -92,8 +92,12 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="PMobject.cs" />
     <Compile Include="WindowAnalytics.xaml.cs">
       <DependentUpon>WindowAnalytics.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WindowFM.xaml.cs">
+      <DependentUpon>WindowFM.xaml</DependentUpon>
     </Compile>
     <Compile Include="WindowForceMeans.xaml.cs">
       <DependentUpon>WindowForceMeans.xaml</DependentUpon>
@@ -114,6 +118,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="WindowAnalytics.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WindowFM.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -152,6 +160,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="data\ForceMeans.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="data\FM\FM1.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

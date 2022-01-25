@@ -32,7 +32,7 @@ namespace dektopCS
             mapView.MapProvider = GoogleMapProvider.Instance;
             mapView.MinZoom = 1;
             mapView.MaxZoom = 16;
-            mapView.Zoom = 11;
+            mapView.Zoom = 10;
             mapView.Position = new GMap.NET.PointLatLng(55.796127, 49.106414);
             mapView.MouseWheelZoomType = GMap.NET.MouseWheelZoomType.MousePositionAndCenter;
             mapView.CanDragMap = true;

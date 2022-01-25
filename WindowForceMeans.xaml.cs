@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,7 +20,6 @@ namespace dektopCS
     /// </summary>
     public partial class WindowForceMeans : Window
     {
-        public List<CSobject> cSobjects = new List<CSobject>();
         public WindowForceMeans()
         {
             InitializeComponent();
@@ -32,37 +32,28 @@ namespace dektopCS
 
         private void CheckItem_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("\nНазвание объекта: " + cSobjects[lb.SelectedIndex].Name + 
-                "\nОписание: " + cSobjects[lb.SelectedIndex].Description, "Подробная информация об объекте");
+            WindowFM windowFM = new WindowFM(lb.SelectedIndex+1);
+            windowFM.Show();
         }
 
         private void Item_Loaded(object sender, RoutedEventArgs e)
         {
-            for (int i=0; i<10;i++)
+
+            string path = @"./data";
+            string[] str;
+            using (FileStream fStr = new FileStream($"{path}/" + "ForceMeans.txt", FileMode.OpenOrCreate))
             {
-                CSobject csObj = new CSobject(i,(i+1).ToString(),"Некоторое описание");
-                cSobjects.Add(csObj);
-                lb.Items.Add(cSobjects[i].Name);
+                byte[] arr = new byte[fStr.Length];
+                fStr.Read(arr, 0, arr.Length);
+                string fText = System.Text.Encoding.UTF8.GetString(arr);
+                str = fText.Split('\n');
+            }
+
+            for (int i = 0; i < str.Length; i++)
+            {
+                string[] line = str[i].Split('|');
+                lb.Items.Add(line[0] + ") " + line[1]);
             }
         }
-    }
-
-    public class CSobject
-    {
-        public int Number { get; set; }
-        public string Name { get; set; }
-        public string Description { get; set; }
-
-        public CSobject(int num, string name, string str)
-        {
-            this.Number = num;
-            this.Name = name;
-            this.Description = str;
-        }
-    }
-
-    public class forceMeans
-    {
-
     }
 }

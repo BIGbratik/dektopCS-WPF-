@@ -19,7 +19,6 @@ namespace dektopCS
     /// </summary>
     public partial class WindowAnalytics : Window
     {
-        public List<CSobject> programs = new List<CSobject>();
         public WindowAnalytics()
         {
             InitializeComponent();
