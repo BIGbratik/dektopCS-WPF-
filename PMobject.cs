@@ -14,7 +14,7 @@ namespace dektopCS
         public string Structer { get; set; }
         public string Subord { get; set; }
         public string isReady { get; set; }
-        public int Count { get; set; }
+        public string Count { get; set; }
         public string Place { get; set; }
         public string Phone { get; set; }
     }

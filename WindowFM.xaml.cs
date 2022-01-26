@@ -35,13 +35,6 @@ namespace dektopCS
         }
         private void CheckInfo_Click(object sender, RoutedEventArgs e)
         {
-            /*MessageBox.Show("\nНаименование - " + objs[lb.SelectedIndex].Name + 
-                "\nВедомственная принадлежность - " + objs[lb.SelectedIndex].Structer +
-                "\nПодчиненность (федеральная, региональная, территориальная, местная, объектовая) - "+ objs[lb.SelectedIndex].Subord +
-                "\nСтепень готовности (постоянная, повышенная, общая) - " + objs[lb.SelectedIndex].isReady +
-                "\nЧисленный состав  - " + objs[lb.SelectedIndex].Count +
-                "\nМесто дислокации (адрес) - " + objs[lb.SelectedIndex].Place +
-                "\nТелефон - " + objs[lb.SelectedIndex].Phone);*/
             WindowFMInfo fmInfo= new WindowFMInfo(objs[lb.SelectedIndex]);
             fmInfo.Show();
         }
@@ -70,10 +63,28 @@ namespace dektopCS
                     obj.Structer = line[2];
                     obj.Subord = line[3];
                     obj.isReady = line[4];
-                    obj.Count = Int32.Parse(line[5]);
+                    obj.Count = line[5];
                     obj.Place = line[6];
                     obj.Phone = line[7];
-                    lb.Items.Add(obj.Number + ") " + obj.Name);
+
+                    string mes = obj.Number.ToString() + ") ";
+                    if (obj.Name.Equals(" "))
+                    {
+                        mes += "наименование объекта неизвестно";
+                    }
+                    else
+                    {
+                        mes += obj.Name;
+                    }
+                    if (obj.Structer.Equals(" "))
+                    {
+                        mes += " (ведомственная принадлежность неизвестна)";
+                    }
+                    else
+                    {
+                        mes += " (" + obj.Structer + ")";
+                    }
+                    lb.Items.Add(mes);
                     objs.Add(obj);
                 }
                 catch (FormatException){}

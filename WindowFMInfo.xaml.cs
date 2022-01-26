@@ -34,13 +34,13 @@ namespace dektopCS
         private void WindowsInfo_Loaded(object sender, RoutedEventArgs e)
             
         {
-            Name.Content = obj.Name;
-            Structer.Content = obj.Structer;
-            Subord.Content = obj.Subord;
-            isReady.Content = obj.isReady;
-            Count.Content = obj.Count;
-            Place.Content = obj.Place;
-            Phone.Content = obj.Phone;
+            Name.Text = obj.Name;
+            Structer.Text = obj.Structer;
+            Subord.Text = obj.Subord;
+            isReady.Text = obj.isReady;
+            Count.Text = obj.Count;
+            Place.Text = obj.Place;
+            Phone.Text = obj.Phone;
         }
     }
 }
