@@ -11,7 +11,7 @@
         ResizeMode="NoResize" 
         WindowState="Maximized" 
         WindowStartupLocation="CenterScreen" 
-        WindowStyle="None"
+        WindowStyle="SingleBorderWindow"
         Background="MidnightBlue">
     <Window.Resources>
         <Style TargetType="Button">

@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:dektopCS"
         mc:Ignorable="d"
         Title="Силы и средства" 
-        WindowStyle="None" 
+        WindowStyle="SingleBorderWindow" 
         Width="500" 
         Height="300"
         WindowState="Maximized"

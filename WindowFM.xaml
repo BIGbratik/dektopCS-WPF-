@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:dektopCS"
         mc:Ignorable="d"
         Title="Просмотр объектов по выбранной категории" 
-        WindowStyle="None" 
+        WindowStyle="SingleBorderWindow" 
         Width="500" 
         Height="300"
         WindowState="Maximized"

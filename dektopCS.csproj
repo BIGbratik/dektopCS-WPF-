@@ -93,6 +93,12 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="PMobject.cs" />
+    <Compile Include="source\PageChoseModule.xaml.cs">
+      <DependentUpon>PageChoseModule.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="source\PageForceMeans.xaml.cs">
+      <DependentUpon>PageForceMeans.xaml</DependentUpon>
+    </Compile>
     <Compile Include="WindowAnalytics.xaml.cs">
       <DependentUpon>WindowAnalytics.xaml</DependentUpon>
     </Compile>
@@ -120,6 +126,14 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="source\PageChoseModule.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="source\PageForceMeans.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="WindowAnalytics.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

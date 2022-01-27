@@ -44,30 +44,14 @@ namespace dektopCS
         private void Exit_Click(object sender, RoutedEventArgs e)
         {
             Close();
-        }
-
-        private void CheckForcMeans_Click(object sender, RoutedEventArgs e)
-        {
-            WindowForceMeans forceMeans = new WindowForceMeans();
-            forceMeans.Show();
-        }
-        private void CheckMaps_Click(object sender, RoutedEventArgs e)
-        {
-            WindowMaps windowMaps = new WindowMaps();
-            windowMaps.Show();
-        }
-        private void CheckAnalytics_Click(object sender, RoutedEventArgs e)
-        {
-            WindowAnalytics windowAnalytics= new WindowAnalytics();
-            windowAnalytics.Show();
-        }
-        private void CheckGuids_Click(object sender, RoutedEventArgs e)
-        {
-            MessageBox.Show("Модуль СПРАВОЧНИКИ находится в разработке", "ВНИМАНИЕ!!!", MessageBoxButton.OK, MessageBoxImage.Information);
-        }
-        private void CheckMultimedia_Click(object sender, RoutedEventArgs e)
-        {
-            MessageBox.Show("Модуль МУЛЬТИМЕДИА находится в разработке", "ВНИМАНИЕ!!!", MessageBoxButton.OK, MessageBoxImage.Information);
+            /*if (rightPlace.Visibility == Visibility.Visible)
+            {
+                rightPlace.Visibility = Visibility.Collapsed;
+            }
+            else
+            {
+                rightPlace.Visibility = Visibility.Visible;
+            }*/
         }
     }
 }

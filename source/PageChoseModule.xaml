@@ -1,0 +1,59 @@
+﻿<Page x:Class="dektopCS.source.PageChoseModule"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:dektopCS.source"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" 
+      d:DesignWidth="800">
+    <Page.Resources>
+        <Style TargetType="Button">
+            <Setter Property="Button.Background" Value="DarkOrange"/>
+            <Setter Property="Button.Foreground" Value="Black"/>
+            <Setter Property="Button.Margin" Value="5,5,5,5"/>
+            <Setter Property="Button.FontSize" Value="18"/>
+            <Setter Property="Button.Height" Value="30"/>
+            <Setter Property="Button.Width" Value="200"/>
+            <Setter Property="Button.HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="Button.VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Button.HorizontalAlignment" Value="Left"/>
+        </Style>
+    </Page.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Button 
+            Click="CheckForcMeans_Click"
+            VerticalAlignment="Top"  
+            Grid.Column="0"
+            Grid.Row="0">Силы и средства</Button>
+        <Button 
+            Click="CheckMaps_Click" 
+            VerticalAlignment="Top"  
+            Grid.Column="0"
+            Grid.Row="1">Карты, планы, схемы</Button>
+        <Button 
+            Click="CheckAnalytics_Click" 
+            VerticalAlignment="Top" 
+            Grid.Column="0"
+            Grid.Row="2">Аналитика</Button>
+        <Button 
+            Click="CheckGuids_Click" 
+            VerticalAlignment="Top" 
+            Grid.Column="0"
+            Grid.Row="3">Справочники</Button>
+        <Button 
+            Click="CheckMultimedia_Click" 
+            VerticalAlignment="Top" 
+            Grid.Column="0"
+            Grid.Row="4">Мультимедия</Button>
+        
+    </Grid>
+</Page>
