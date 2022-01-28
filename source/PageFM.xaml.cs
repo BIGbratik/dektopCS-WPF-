@@ -11,40 +11,43 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace dektopCS
+namespace dektopCS.source
 {
     /// <summary>
-    /// Логика взаимодействия для WindowFM.xaml
+    /// Логика взаимодействия для PageFM.xaml
     /// </summary>
-    public partial class WindowFM : Window
+    public partial class PageFM : Page
     {
         public static int ind;
         public List<PMobject> objs = new List<PMobject>();
-        public WindowFM(int num)
+        public PageFM(int num)
         {
             InitializeComponent();
             ind = num;
         }
 
-
-        private void Exit_Click(object sender, RoutedEventArgs e)
+        private void Back_Click(object sender, RoutedEventArgs e)
         {
-            Close();
+            NavigationService.GoBack();
         }
         private void CheckInfo_Click(object sender, RoutedEventArgs e)
         {
-            WindowFMInfo fmInfo= new WindowFMInfo(objs[lb.SelectedIndex]);
-            fmInfo.Show();
+            if (lb.SelectedIndex!=-1)
+            {
+                PageFMInfo pageFMInfo = new PageFMInfo(objs[lb.SelectedIndex]);
+                NavigationService.Navigate(pageFMInfo);
+            }
         }
 
         private void Objs_Loaded(object sender, RoutedEventArgs e)
         {
-
+            lb.Items.Clear();
             string path = @"./data/FM";
             string[] str;
-            using (FileStream fStr = new FileStream($"{path}/FM" +ind+ ".txt", FileMode.OpenOrCreate))
+            using (FileStream fStr = new FileStream($"{path}/FM" + ind + ".txt", FileMode.OpenOrCreate))
             {
                 byte[] arr = new byte[fStr.Length];
                 fStr.Read(arr, 0, arr.Length);
@@ -87,7 +90,7 @@ namespace dektopCS
                     lb.Items.Add(mes);
                     objs.Add(obj);
                 }
-                catch (FormatException){}
+                catch (FormatException) { }
             }
         }
     }

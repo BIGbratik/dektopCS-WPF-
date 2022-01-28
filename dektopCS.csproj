@@ -93,26 +93,23 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="PMobject.cs" />
+    <Compile Include="source\PageAnalytics.xaml.cs">
+      <DependentUpon>PageAnalytics.xaml</DependentUpon>
+    </Compile>
     <Compile Include="source\PageChoseModule.xaml.cs">
       <DependentUpon>PageChoseModule.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="source\PageFM.xaml.cs">
+      <DependentUpon>PageFM.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="source\PageFMInfo.xaml.cs">
+      <DependentUpon>PageFMInfo.xaml</DependentUpon>
     </Compile>
     <Compile Include="source\PageForceMeans.xaml.cs">
       <DependentUpon>PageForceMeans.xaml</DependentUpon>
     </Compile>
-    <Compile Include="WindowAnalytics.xaml.cs">
-      <DependentUpon>WindowAnalytics.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="WindowFM.xaml.cs">
-      <DependentUpon>WindowFM.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="WindowFMInfo.xaml.cs">
-      <DependentUpon>WindowFMInfo.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="WindowForceMeans.xaml.cs">
-      <DependentUpon>WindowForceMeans.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="WindowMaps.xaml.cs">
-      <DependentUpon>WindowMaps.xaml</DependentUpon>
+    <Compile Include="source\PageMaps.xaml.cs">
+      <DependentUpon>PageMaps.xaml</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -126,7 +123,19 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="source\PageAnalytics.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="source\PageChoseModule.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="source\PageFM.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="source\PageFMInfo.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -134,23 +143,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="WindowAnalytics.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="WindowFM.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="WindowFMInfo.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="WindowForceMeans.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="WindowMaps.xaml">
+    <Page Include="source\PageMaps.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -1,18 +1,16 @@
-﻿<Window x:Class="dektopCS.WindowFMInfo"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:dektopCS"
-        mc:Ignorable="d"
-        Title="Подробная информация" 
-        WindowStyle="SingleBorderWindow"
-        Width="700"
-        Height="600"
-        Background="MidnightBlue"
-        Loaded="WindowsInfo_Loaded" 
-        WindowStartupLocation="CenterScreen">
-    <Window.Resources>
+﻿<Page x:Class="dektopCS.source.PageFMInfo"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:dektopCS.source"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" 
+      d:DesignWidth="800"
+      Background="MidnightBlue"
+      Title="PageFMInfo"
+      Loaded="PageInfo_Loaded">
+    <Page.Resources>
         <Style TargetType="Button">
             <Setter Property="Button.Background" Value="DarkOrange"/>
             <Setter Property="Button.Foreground" Value="Black"/>
@@ -31,123 +29,135 @@
             <Setter Property="Label.Width" Value="Auto"/>
             <Setter Property="Label.Height" Value="Auto"/>
         </Style>
-    </Window.Resources>
+    </Page.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="3*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="40"/>
             <RowDefinition Height="50"/>
-            <RowDefinition Height="60"/>
-            <RowDefinition Height="60"/>
-            <RowDefinition Height="60"/>
-            <RowDefinition Height="60"/>
-            <RowDefinition Height="60"/>
-            <RowDefinition Height="60"/>
-            <RowDefinition Height="60"/>
+            <RowDefinition Height="80"/>
+            <RowDefinition Height="80"/>
+            <RowDefinition Height="80"/>
+            <RowDefinition Height="80"/>
+            <RowDefinition Height="80"/>
+            <RowDefinition Height="80"/>
+            <RowDefinition Height="80"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Button 
-            Click="Exit_Click" 
-            HorizontalAlignment="Right" 
-            VerticalAlignment="Center"  
+            Click="Back_Click" 
+            HorizontalAlignment="Left" 
+            VerticalAlignment="Top"  
             Width="70" 
-            Grid.Column="2"
-            Grid.Row="0">Назад</Button>
+            Grid.Column="0"
+            Grid.Row="9">Назад</Button>
         <Label
             HorizontalContentAlignment="Center"
             Grid.ColumnSpan="2"
-            Grid.Row="1">
+            Grid.Row="0"
+            FontSize="20">
             <TextBlock
                 TextWrapping="WrapWithOverflow">Подробная инфомрация об объекте</TextBlock>
         </Label>
-        
+
         <Label
             Grid.Column="0"
-            Grid.Row="2">
+            Grid.Row="1"
+            FontSize="14">
             <TextBlock TextWrapping="WrapWithOverflow">Наименование:</TextBlock>
         </Label>
         <Label
             Grid.Column="1"
-            Grid.Row="2">
+            Grid.Row="1">
             <TextBlock
                 TextWrapping="WrapWithOverflow"
                 Name="Name"></TextBlock>
         </Label>
-        
+
         <Label
             Grid.Column="0"
-            Grid.Row="3">
-            <TextBlock TextWrapping="WrapWithOverflow"> Ведомственная принадлежность :</TextBlock></Label>
+            Grid.Row="2"
+            FontSize="14">
+            <TextBlock TextWrapping="WrapWithOverflow"> Ведомственная принадлежность :</TextBlock>
+        </Label>
         <Label
             Grid.Column="1"
-            Grid.Row="3">
+            Grid.Row="2">
             <TextBlock
                 TextWrapping="WrapWithOverflow"
                 Name="Structer"></TextBlock>
         </Label>
-        
+
         <Label
             Grid.Column="0"
-            Grid.Row="4">
-            <TextBlock TextWrapping="WrapWithOverflow"> Подчиненность (федеральная, региональная, территориальная, местная, объектовая):</TextBlock></Label>
+            Grid.Row="3"
+            FontSize="14">
+            <TextBlock TextWrapping="WrapWithOverflow"> Подчиненность (федеральная, региональная, территориальная, местная, объектовая):</TextBlock>
+        </Label>
         <Label
             Grid.Column="1"
-            Grid.Row="4">
+            Grid.Row="3">
             <TextBlock
                 TextWrapping="WrapWithOverflow"
                 Name="Subord"></TextBlock>
         </Label>
-        
+
         <Label
             Grid.Column="0"
-            Grid.Row="5">
-            <TextBlock TextWrapping="WrapWithOverflow"> Степень готовности (постоянная, повышенная, общая):</TextBlock></Label>
+            Grid.Row="4"
+            FontSize="14">
+            <TextBlock TextWrapping="WrapWithOverflow"> Степень готовности (постоянная, повышенная, общая):</TextBlock>
+        </Label>
         <Label
             Grid.Column="1"
-            Grid.Row="5">
+            Grid.Row="4">
             <TextBlock
                 TextWrapping="WrapWithOverflow"
                 Name="isReady"></TextBlock>
         </Label>
-        
+
         <Label
             Grid.Column="0"
-            Grid.Row="6">
-            <TextBlock TextWrapping="WrapWithOverflow"> Численный состав :</TextBlock></Label>
+            Grid.Row="5"
+            FontSize="14">
+            <TextBlock TextWrapping="WrapWithOverflow"> Численный состав :</TextBlock>
+        </Label>
         <Label
             Grid.Column="1"
-            Grid.Row="6">
+            Grid.Row="5">
             <TextBlock
                 TextWrapping="WrapWithOverflow"
                 Name="Count"></TextBlock>
         </Label>
-        
+
         <Label
             Grid.Column="0"
-            Grid.Row="7">
-            <TextBlock TextWrapping="WrapWithOverflow">Место дислокации (адрес):</TextBlock></Label>
+            Grid.Row="6"
+            FontSize="14">
+            <TextBlock TextWrapping="WrapWithOverflow">Место дислокации (адрес):</TextBlock>
+        </Label>
         <Label
             Grid.Column="1"
-            Grid.Row="7">
+            Grid.Row="6">
             <TextBlock
                 TextWrapping="WrapWithOverflow"
                 Name="Place"></TextBlock>
         </Label>
-        
+
         <Label
             Grid.Column="0"
-            Grid.Row="8">
+            Grid.Row="7"
+            FontSize="14">
             <TextBlock TextWrapping="WrapWithOverflow">Телефон:</TextBlock>
-            </Label>
+        </Label>
         <Label
             Grid.Column="1"
-            Grid.Row="8">
+            Grid.Row="7">
             <TextBlock
                 TextWrapping="WrapWithOverflow"
                 Name="Phone"></TextBlock>
         </Label>
     </Grid>
-</Window>
+</Page>

@@ -10,22 +10,23 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace dektopCS
+namespace dektopCS.source
 {
     /// <summary>
-    /// Логика взаимодействия для WindowMaps.xaml
+    /// Логика взаимодействия для PageMaps.xaml
     /// </summary>
-    public partial class WindowMaps : Window
+    public partial class PageMaps : Page
     {
-        public WindowMaps()
+        public PageMaps()
         {
             InitializeComponent();
         }
-        private void Exit_Click(object sender, RoutedEventArgs e)
+        private void Back_Click(object sender, RoutedEventArgs e)
         {
-            Close();
+            NavigationService.GoBack();
         }
 
         private void CheckMap_Click(object sender, RoutedEventArgs e)

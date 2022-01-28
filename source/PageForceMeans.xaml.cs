@@ -32,13 +32,16 @@ namespace dektopCS.source
 
         private void CheckItem_Click(object sender, RoutedEventArgs e)
         {
-            WindowFM windowFM = new WindowFM(lb.SelectedIndex + 1);
-            windowFM.Show();
+            if (lb.SelectedIndex!=-1)
+            {
+                PageFM pageFM = new PageFM(lb.SelectedIndex + 1);
+                NavigationService.Navigate(pageFM);
+            }
         }
 
         private void Item_Loaded(object sender, RoutedEventArgs e)
         {
-
+            lb.Items.Clear();
             string path = @"./data";
             string[] str;
             using (FileStream fStr = new FileStream($"{path}/"+"/ForceMeans.txt", FileMode.OpenOrCreate))
@@ -51,8 +54,10 @@ namespace dektopCS.source
 
             for (int i = 0; i < str.Length; i++)
             {
-                TextBlock tb = new TextBlock();
-                tb.TextWrapping = TextWrapping.WrapWithOverflow;
+                TextBlock tb = new TextBlock
+                {
+                    TextWrapping = TextWrapping.WrapWithOverflow
+                };
                 string[] line = str[i].Split('|');
                 string[] kostil = line[1].Split('\r');
 

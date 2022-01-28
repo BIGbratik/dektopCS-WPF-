@@ -10,29 +10,30 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace dektopCS
+namespace dektopCS.source
 {
     /// <summary>
-    /// Логика взаимодействия для WindowFMInfo.xaml
+    /// Логика взаимодействия для PageFMInfo.xaml
     /// </summary>
-    public partial class WindowFMInfo : Window
+    public partial class PageFMInfo : Page
     {
         public PMobject obj = new PMobject();
-        public WindowFMInfo(PMobject obj)
+        public PageFMInfo(PMobject obj)
         {
             InitializeComponent();
             this.obj = obj;
         }
 
-        private void Exit_Click(object sender, RoutedEventArgs e)
+        private void Back_Click(object sender, RoutedEventArgs e)
         {
-            Close();
+            NavigationService.GoBack();
         }
 
-        private void WindowsInfo_Loaded(object sender, RoutedEventArgs e)
-            
+        private void PageInfo_Loaded(object sender, RoutedEventArgs e)
+
         {
             Name.Text = obj.Name;
             Structer.Text = obj.Structer;

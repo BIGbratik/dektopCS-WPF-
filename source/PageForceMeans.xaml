@@ -46,22 +46,15 @@
             Name="lb"
             Loaded="Item_Loaded"
             Grid.ColumnSpan="2"
-            Grid.Row="1">
+            Grid.Row="1"
+            MouseDoubleClick="CheckItem_Click">
         </ListBox>
         <Button
-            Width="Auto"
-            HorizontalAlignment="Right"
-            VerticalAlignment="Center"
-            Click="CheckItem_Click"
-            Grid.Column="1"
-            Grid.Row="2">Посмотреть</Button>
-        <Button
-            Width="Auto"
             HorizontalAlignment="Left"
             VerticalAlignment="Center"
+            Width="70"
             Click="Back_Click"
             Grid.Column="0"
             Grid.Row="2">Назад</Button>
-            
     </Grid>
 </Page>

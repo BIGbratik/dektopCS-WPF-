@@ -32,13 +32,13 @@ namespace dektopCS.source
         }
         private void CheckMaps_Click(object sender, RoutedEventArgs e)
         {
-            WindowMaps windowMaps = new WindowMaps();
-            windowMaps.Show();
+            PageMaps pageMaps = new PageMaps();
+            NavigationService.Navigate(pageMaps);
         }
         private void CheckAnalytics_Click(object sender, RoutedEventArgs e)
         {
-            WindowAnalytics windowAnalytics = new WindowAnalytics();
-            windowAnalytics.Show();
+            PageAnalytics pageAnalytics = new PageAnalytics();
+            NavigationService.Navigate(pageAnalytics);
         }
         private void CheckGuids_Click(object sender, RoutedEventArgs e)
         {
