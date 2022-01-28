@@ -14,7 +14,7 @@
             <Setter Property="Button.Margin" Value="5,5,5,5"/>
             <Setter Property="Button.FontSize" Value="18"/>
             <Setter Property="Button.Height" Value="30"/>
-            <Setter Property="Button.Width" Value="200"/>
+            <Setter Property="Button.Width" Value="350"/>
             <Setter Property="Button.HorizontalContentAlignment" Value="Center"/>
             <Setter Property="Button.VerticalContentAlignment" Value="Center"/>
             <Setter Property="Button.HorizontalAlignment" Value="Left"/>
@@ -27,6 +27,12 @@
             <RowDefinition Height="40"/>
             <RowDefinition Height="40"/>
             <RowDefinition Height="40"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="40"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Button 
@@ -34,26 +40,56 @@
             VerticalAlignment="Top"  
             Grid.Column="0"
             Grid.Row="0">Силы и средства</Button>
+        <Button
+            Click="CheckPassports_Click"
+            VerticalAlignment="Top"  
+            Grid.Column="0"
+            Grid.Row="1">Паспорта безопасности</Button>
         <Button 
             Click="CheckMaps_Click" 
             VerticalAlignment="Top"  
             Grid.Column="0"
-            Grid.Row="1">Карты, планы, схемы</Button>
+            Grid.Row="2">Карты, планы, схемы</Button>
         <Button 
             Click="CheckAnalytics_Click" 
             VerticalAlignment="Top" 
             Grid.Column="0"
-            Grid.Row="2">Аналитика</Button>
+            Grid.Row="3">Аналитика</Button>
+        <Button 
+            Click="CheckIS_Click" 
+            VerticalAlignment="Top" 
+            Grid.Column="0"
+            Grid.Row="4">Информационная безопасность</Button>
+        <Button 
+            Click="CheckNorSprav_Click" 
+            VerticalAlignment="Top" 
+            Grid.Column="0"
+            Grid.Row="5">Нормативно-справочная информация</Button>
+        <Button 
+            Click="CheckKlassifs_Click" 
+            VerticalAlignment="Top" 
+            Grid.Column="0"
+            Grid.Row="6">Классификаторы</Button>
+        <Button 
+            Click="CheckExtSys_Click" 
+            VerticalAlignment="Top" 
+            Grid.Column="0"
+            Grid.Row="7">Внешние системы</Button>
+        <Button 
+            Click="CheckInfExchange_Click" 
+            VerticalAlignment="Top" 
+            Grid.Column="0"
+            Grid.Row="8">Информационный обмен</Button>
         <Button 
             Click="CheckGuids_Click" 
             VerticalAlignment="Top" 
             Grid.Column="0"
-            Grid.Row="3">Справочники</Button>
+            Grid.Row="9">Справочные данные</Button>
         <Button 
             Click="CheckMultimedia_Click" 
             VerticalAlignment="Top" 
             Grid.Column="0"
-            Grid.Row="4">Мультимедия</Button>
+            Grid.Row="10">Мультимедия</Button>
         
     </Grid>
 </Page>

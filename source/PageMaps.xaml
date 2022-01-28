@@ -30,7 +30,7 @@
         <Button 
             Click="Back_Click" 
             HorizontalAlignment="Left" 
-            VerticalAlignment="Top"  
+            VerticalAlignment="Bottom"  
             Width="70" 
             Grid.Column="2"
             Grid.Row="4">Назад</Button>

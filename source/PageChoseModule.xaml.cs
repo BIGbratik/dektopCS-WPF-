@@ -30,6 +30,10 @@ namespace dektopCS.source
             PageForceMeans pageForceMeans = new PageForceMeans();
             NavigationService.Navigate(pageForceMeans);
         }
+        private void CheckPassports_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Модуль ПАСПОРТА БЕЗОПАСНОСТИ находится в разработке", "ВНИМАНИЕ!!!", MessageBoxButton.OK, MessageBoxImage.Information);
+        }
         private void CheckMaps_Click(object sender, RoutedEventArgs e)
         {
             PageMaps pageMaps = new PageMaps();
@@ -39,6 +43,26 @@ namespace dektopCS.source
         {
             PageAnalytics pageAnalytics = new PageAnalytics();
             NavigationService.Navigate(pageAnalytics);
+        }
+        private void CheckIS_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Модуль ИНФОРМАЦИОННАЯ БЕЗОПАСНОСТЬ находится в разработке", "ВНИМАНИЕ!!!", MessageBoxButton.OK, MessageBoxImage.Information);
+        }
+        private void CheckNorSprav_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Модуль НОРМАТИВНО-СПРАВОЧНАЯ ИНФОРМАЦИЯ находится в разработке", "ВНИМАНИЕ!!!", MessageBoxButton.OK, MessageBoxImage.Information);
+        }
+        private void CheckKlassifs_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Модуль КЛАССИФИКАТОРЫ находится в разработке", "ВНИМАНИЕ!!!", MessageBoxButton.OK, MessageBoxImage.Information);
+        }
+        private void CheckExtSys_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Модуль ВНЕШНИЕ СИСТЕМЫ находится в разработке", "ВНИМАНИЕ!!!", MessageBoxButton.OK, MessageBoxImage.Information);
+        }
+        private void CheckInfExchange_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Модуль ИНФОРМАЦИОННЫЙ ОБМЕН находится в разработке", "ВНИМАНИЕ!!!", MessageBoxButton.OK, MessageBoxImage.Information);
         }
         private void CheckGuids_Click(object sender, RoutedEventArgs e)
         {
