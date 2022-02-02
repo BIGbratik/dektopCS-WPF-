@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,11 +21,16 @@ namespace dektopCS.source
     /// </summary>
     public partial class PageFMInfo : Page
     {
-        public PMobject obj = new PMobject();
         public PageFMInfo(PMobject obj)
         {
             InitializeComponent();
-            this.obj = obj;
+            Name.Text = obj.Name;
+            Structer.Text = obj.Structer;
+            Subord.Text = obj.Subord;
+            isReady.Text = obj.isReady;
+            Count.Text = obj.Count;
+            Place.Text = obj.Place;
+            Phone.Text = obj.Phone;
         }
 
         private void Back_Click(object sender, RoutedEventArgs e)
@@ -32,7 +38,7 @@ namespace dektopCS.source
             NavigationService.GoBack();
         }
 
-        private void PageInfo_Loaded(object sender, RoutedEventArgs e)
+        /*private void PageInfo_Loaded(object sender, RoutedEventArgs e)
 
         {
             Name.Text = obj.Name;
@@ -42,6 +48,6 @@ namespace dektopCS.source
             Count.Text = obj.Count;
             Place.Text = obj.Place;
             Phone.Text = obj.Phone;
-        }
+        }*/
     }
 }

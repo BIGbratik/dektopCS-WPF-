@@ -8,8 +8,7 @@
       d:DesignHeight="450" 
       d:DesignWidth="800"
       Background="MidnightBlue"
-      Title="PageFMInfo"
-      Loaded="PageInfo_Loaded">
+      Title="PageFMInfo">
     <Page.Resources>
         <Style TargetType="Button">
             <Setter Property="Button.Background" Value="DarkOrange"/>

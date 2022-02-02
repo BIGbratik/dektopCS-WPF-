@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -22,11 +23,15 @@ namespace dektopCS.source
     public partial class PageFM : Page
     {
         public static int ind;
-        public List<PMobject> objs = new List<PMobject>();
+        PMobject obj = new PMobject();
+        desktopDBEntities1 db;
         public PageFM(int num)
         {
             InitializeComponent();
             ind = num;
+            db = new desktopDBEntities1();
+            db.CSobject.Load();
+            lb.ItemsSource = db.CSobject.Where(p=>p.CategoryID.Equals(num)).Select(a=>a.ObjectName).ToList();
         }
 
         private void Back_Click(object sender, RoutedEventArgs e)
@@ -37,14 +42,24 @@ namespace dektopCS.source
         {
             if (lb.SelectedIndex!=-1)
             {
-                PageFMInfo pageFMInfo = new PageFMInfo(objs[lb.SelectedIndex]);
+                int selectedObjectID = Convert.ToInt32(db.CSobject.Where(p => p.CategoryID.Equals(ind)).Select(a=>a.ID).FirstOrDefault())+lb.SelectedIndex;
+
+
+                obj.Name = db.CSobject.Where(a => a.ID.Equals(selectedObjectID)).Select(a => a.ObjectName).FirstOrDefault();
+                obj.Structer = db.CSobject.Where(a => a.ID.Equals(selectedObjectID)).Select(a => a.Vedomstvo).FirstOrDefault();
+                obj.Subord = db.CSobject.Where(a => a.ID.Equals(selectedObjectID)).Select(a => a.Subordination).FirstOrDefault();
+                obj.isReady = db.CSobject.Where(a => a.ID.Equals(selectedObjectID)).Select(a => a.IsReady).FirstOrDefault();
+                obj.Count = db.CSobject.Where(a => a.ID.Equals(selectedObjectID)).Select(a => a.Num).FirstOrDefault();
+                obj.Place = db.CSobject.Where(a => a.ID.Equals(selectedObjectID)).Select(a => a.Place).FirstOrDefault();
+                obj.Phone = db.CSobject.Where(a => a.ID.Equals(selectedObjectID)).Select(a => a.Phone).FirstOrDefault();
+                PageFMInfo pageFMInfo = new PageFMInfo(obj);
                 NavigationService.Navigate(pageFMInfo);
             }
         }
 
-        private void Objs_Loaded(object sender, RoutedEventArgs e)
+        /*private void Objs_Loaded(object sender, RoutedEventArgs e)
         {
-            lb.Items.Clear();
+            /*lb.Items.Clear();
             string path = @"./data/FM";
             string[] str;
             using (FileStream fStr = new FileStream($"{path}/FM" + ind + ".txt", FileMode.OpenOrCreate))
@@ -92,6 +107,6 @@ namespace dektopCS.source
                 }
                 catch (FormatException) { }
             }
-        }
+        }*/
     }
 }

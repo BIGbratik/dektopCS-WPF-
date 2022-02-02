@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -13,6 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Data.SqlClient;
 
 namespace dektopCS.source
 {
@@ -21,9 +23,13 @@ namespace dektopCS.source
     /// </summary>
     public partial class PageForceMeans : Page
     {
+        desktopDBEntities1 db;
         public PageForceMeans()
         {
             InitializeComponent();
+            db = new desktopDBEntities1();
+            db.Category.Load();
+            lb.ItemsSource = db.Category.Select(a => a.CategoryName).ToList();
         }
         private void Back_Click(object sender, RoutedEventArgs e)
         {
@@ -36,15 +42,16 @@ namespace dektopCS.source
             {
                 PageFM pageFM = new PageFM(lb.SelectedIndex + 1);
                 NavigationService.Navigate(pageFM);
+                lb.SelectedIndex = -1;
             }
         }
 
-        private void Item_Loaded(object sender, RoutedEventArgs e)
+        /*private void Item_Loaded(object sender, RoutedEventArgs e)
         {
             lb.Items.Clear();
             string path = @"./data";
             string[] str;
-            using (FileStream fStr = new FileStream($"{path}/"+"/ForceMeans.txt", FileMode.OpenOrCreate))
+            using (FileStream fStr = new FileStream($"{path}/" + "/ForceMeans.txt", FileMode.OpenOrCreate))
             {
                 byte[] arr = new byte[fStr.Length];
                 fStr.Read(arr, 0, arr.Length);
@@ -64,6 +71,6 @@ namespace dektopCS.source
                 tb.Text = line[0] + ") " + kostil[0];
                 lb.Items.Add(tb);
             }
-        }
+        }*/
     }
 }

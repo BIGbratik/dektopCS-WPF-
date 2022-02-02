@@ -12,7 +12,7 @@
         <Style TargetType="ListBoxItem">
             <Setter Property="ListBoxItem.BorderBrush" Value="DarkOrange"/>
             <Setter Property="ListBoxItem.Margin" Value="0,5,5,0"/>
-            <Setter Property="ListBoxItem.Width" Value="300"/>
+            <!--<Setter Property="ListBoxItem.Width" Value="300"/>-->
         </Style>
         <Style TargetType="Button">
             <Setter Property="Button.Background" Value="DarkOrange"/>
@@ -37,14 +37,13 @@
         </Grid.RowDefinitions>
         <Label 
             Foreground="White"
+            HorizontalContentAlignment="Stretch"
             FontSize="20"
-            HorizontalContentAlignment="Center"
             Grid.ColumnSpan="2"
             Grid.Row="0">Выберите интересующую категорию</Label>
         <ListBox
             Margin="10,5,10,5"
             Name="lb"
-            Loaded="Item_Loaded"
             Grid.ColumnSpan="2"
             Grid.Row="1"
             MouseDoubleClick="CheckItem_Click">

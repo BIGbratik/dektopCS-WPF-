@@ -51,7 +51,6 @@
         <ListBox
             Margin="10,5,10,5"
             Name="lb"
-            Loaded="Objs_Loaded"
             MouseDoubleClick="CheckInfo_Click"
             Grid.ColumnSpan="2"
             Grid.Row="1">
