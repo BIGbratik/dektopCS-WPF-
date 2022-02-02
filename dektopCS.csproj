@@ -235,6 +235,14 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="data\Analityc\explosion_module.exe" />
+    <Content Include="data\Analityc\ЛВЖ.exe" />
+    <Content Include="data\Analityc\Паспорт здания.exe" />
+    <Content Include="data\Analityc\Показатель защищенности здания %28взрыв%29.exe" />
+    <Content Include="data\Analityc\Расчет токсодозы внурти здания.exe" />
+    <Content Include="data\Analityc\Система прогнозирования пожаров.exe" />
+    <Content Include="data\Analityc\Температура здания.exe" />
+    <Content Include="data\Analityc\ЧП при аварии на АЭС.exe" />
     <Content Include="desktopDB.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>desktopDB.edmx</DependentUpon>

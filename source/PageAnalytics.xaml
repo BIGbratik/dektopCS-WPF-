@@ -44,7 +44,6 @@
             Grid.Row="0">Выберите аналитическую программу из списка</Label>
         <ListBox
             Name="lb"
-            Loaded="Item_Loaded"
             MouseDoubleClick="StartProgram_Click"
             Grid.Row="1"
             Margin="10,5,10,5">
