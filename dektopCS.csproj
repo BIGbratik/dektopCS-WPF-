@@ -118,6 +118,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>desktopDB.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Marks.cs">
+      <DependentUpon>desktopDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MPS.cs">
+      <DependentUpon>desktopDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="PMobject.cs" />
     <Compile Include="source\PageAnalytics.xaml.cs">
       <DependentUpon>PageAnalytics.xaml</DependentUpon>
@@ -137,11 +143,11 @@
     <Compile Include="source\PageMaps.xaml.cs">
       <DependentUpon>PageMaps.xaml</DependentUpon>
     </Compile>
-    <Compile Include="sp_helpdiagramdefinition_Result.cs">
-      <DependentUpon>desktopDB.tt</DependentUpon>
+    <Compile Include="source\PageMPS.xaml.cs">
+      <DependentUpon>PageMPS.xaml</DependentUpon>
     </Compile>
-    <Compile Include="sp_helpdiagrams_Result.cs">
-      <DependentUpon>desktopDB.tt</DependentUpon>
+    <Compile Include="source\PageMultimedia.xaml.cs">
+      <DependentUpon>PageMultimedia.xaml</DependentUpon>
     </Compile>
     <Compile Include="sysdiagrams.cs">
       <DependentUpon>desktopDB.tt</DependentUpon>
@@ -179,6 +185,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="source\PageMaps.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="source\PageMPS.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="source\PageMultimedia.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -253,7 +267,9 @@
       <DependentUpon>desktopDB.edmx</DependentUpon>
       <LastGenOutput>desktopDB.cs</LastGenOutput>
     </Content>
+    <Resource Include="data\Marks\Метрополитен.jpg" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

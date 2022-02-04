@@ -70,7 +70,8 @@ namespace dektopCS.source
         }
         private void CheckMultimedia_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Модуль МУЛЬТИМЕДИА находится в разработке", "ВНИМАНИЕ!!!", MessageBoxButton.OK, MessageBoxImage.Information);
+            PageMultimedia pageMultimedia = new PageMultimedia();
+            NavigationService.Navigate(pageMultimedia);
         }
     }
 }

@@ -14,6 +14,12 @@ namespace dektopCS
     
     public partial class CSobject
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public CSobject()
+        {
+            this.MPS = new HashSet<MPS>();
+        }
+    
         public int ID { get; set; }
         public int CategoryID { get; set; }
         public string ObjectName { get; set; }
@@ -25,5 +31,7 @@ namespace dektopCS
         public string Phone { get; set; }
     
         public virtual Category Category { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<MPS> MPS { get; set; }
     }
 }

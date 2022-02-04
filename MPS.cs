@@ -10,13 +10,14 @@
 namespace dektopCS
 {
     using System;
+    using System.Collections.Generic;
     
-    public partial class sp_helpdiagrams_Result
+    public partial class MPS
     {
-        public string Database { get; set; }
-        public string Name { get; set; }
         public int ID { get; set; }
-        public string Owner { get; set; }
-        public int OwnerID { get; set; }
+        public int ObjectID { get; set; }
+        public string MPSfile { get; set; }
+    
+        public virtual CSobject CSobject { get; set; }
     }
 }

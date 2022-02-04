@@ -40,9 +40,8 @@ namespace dektopCS.source
         {
             if (lb.SelectedIndex!=-1)
             {
-                MessageBox.Show("\nЗапускается программа - " + lb.SelectedValue);
                 string fName = lb.SelectedValue.ToString();
-                Process.Start(@".\data\Analityc\"+fName+".exe");
+                Process.Start($"{path}" + fName + ".exe");
             }
 
         }

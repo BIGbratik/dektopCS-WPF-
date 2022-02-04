@@ -44,7 +44,7 @@ namespace dektopCS.source
             {
                 int selectedObjectID = Convert.ToInt32(db.CSobject.Where(p => p.CategoryID.Equals(ind)).Select(a=>a.ID).FirstOrDefault())+lb.SelectedIndex;
 
-
+                obj.Number = selectedObjectID;
                 obj.Name = db.CSobject.Where(a => a.ID.Equals(selectedObjectID)).Select(a => a.ObjectName).FirstOrDefault();
                 obj.Structer = db.CSobject.Where(a => a.ID.Equals(selectedObjectID)).Select(a => a.Vedomstvo).FirstOrDefault();
                 obj.Subord = db.CSobject.Where(a => a.ID.Equals(selectedObjectID)).Select(a => a.Subordination).FirstOrDefault();
