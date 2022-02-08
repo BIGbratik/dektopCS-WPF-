@@ -257,6 +257,21 @@
     <Content Include="data\Analityc\Система прогнозирования пожаров.exe" />
     <Content Include="data\Analityc\Температура здания.exe" />
     <Content Include="data\Analityc\ЧП при аварии на АЭС.exe" />
+    <Resource Include="data\Marks\БОО.png" />
+    <Resource Include="data\Marks\ВодозаборнаяСтанция.png" />
+    <Resource Include="data\Marks\ВПО.png" />
+    <Resource Include="data\Marks\ГЭС.png" />
+    <Resource Include="data\Marks\ДПО.png" />
+    <Resource Include="data\Marks\Котельная.png" />
+    <Resource Include="data\Marks\Метрополитен.png" />
+    <Resource Include="data\Marks\МПО.png" />
+    <Resource Include="data\Marks\ОчистноеСооружение.png" />
+    <Resource Include="data\Marks\ПСС.png" />
+    <Resource Include="data\Marks\РОО.png" />
+    <Resource Include="data\Marks\СЗО.png" />
+    <Resource Include="data\Marks\ТЭЦ.png" />
+    <Resource Include="data\Marks\ФПС.png" />
+    <Resource Include="data\Marks\ХОО.png" />
     <Content Include="desktopDB.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>desktopDB.edmx</DependentUpon>
@@ -267,7 +282,6 @@
       <DependentUpon>desktopDB.edmx</DependentUpon>
       <LastGenOutput>desktopDB.cs</LastGenOutput>
     </Content>
-    <Resource Include="data\Marks\Метрополитен.jpg" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

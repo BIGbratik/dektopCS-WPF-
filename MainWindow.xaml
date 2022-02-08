@@ -41,7 +41,9 @@
         </Grid.RowDefinitions>
         <gmaps:GMapControl 
             x:Name="mapView" 
+            x:FieldModifier="public"
             Loaded="mapView_Loaded"
+            MouseRightButtonDown="mapView_RightButtonDown"
             Grid.ColumnSpan="3"
             Grid.RowSpan="6"/>
         <Button 

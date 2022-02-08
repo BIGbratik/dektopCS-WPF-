@@ -40,13 +40,14 @@ namespace dektopCS.source
             NavigationService.GoBack();
         }
 
-        private void CheckItem_Click(object sender, RoutedEventArgs e)
+        private void ChooseItem_Click(object sender, RoutedEventArgs e)
         {
             if (lb.SelectedIndex != -1)
             {
-                PageFM pageFM = new PageFM(lb.SelectedIndex + 1);
-                NavigationService.Navigate(pageFM);
-                lb.SelectedIndex = -1;
+                db = new desktopDBEntities1();
+                db.Marks.Load();
+                string markerPath = db.Marks.Where(a=>a.ID.Equals(lb.SelectedIndex+1)).Select(b=>b.MakrImage).FirstOrDefault();
+                App.Current.Resources["markerPath"] = markerPath;
             }
         }
 

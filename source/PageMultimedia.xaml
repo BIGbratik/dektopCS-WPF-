@@ -49,7 +49,7 @@
             Name="lb"
             Grid.ColumnSpan="2"
             Grid.Row="1"
-            MouseDoubleClick="CheckItem_Click">
+            MouseDoubleClick="ChooseItem_Click">
         </ListBox>
         <Button
             HorizontalAlignment="Left"

@@ -1,4 +1,6 @@
-﻿using System;
+﻿using GMap.NET;
+using GMap.NET.WindowsPresentation;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.IO;
@@ -31,7 +33,7 @@ namespace dektopCS.source
             ind = num;
             db = new desktopDBEntities1();
             db.CSobject.Load();
-            lb.ItemsSource = db.CSobject.Where(p=>p.CategoryID.Equals(num)).Select(a=>a.ObjectName).ToList();
+            lb.ItemsSource = db.CSobject.Where(p => p.CategoryID.Equals(num)).Select(a => a.ObjectName).ToList();
         }
 
         private void Back_Click(object sender, RoutedEventArgs e)
@@ -40,9 +42,9 @@ namespace dektopCS.source
         }
         private void CheckInfo_Click(object sender, RoutedEventArgs e)
         {
-            if (lb.SelectedIndex!=-1)
+            if (lb.SelectedIndex != -1)
             {
-                int selectedObjectID = Convert.ToInt32(db.CSobject.Where(p => p.CategoryID.Equals(ind)).Select(a=>a.ID).FirstOrDefault())+lb.SelectedIndex;
+                int selectedObjectID = Convert.ToInt32(db.CSobject.Where(p => p.CategoryID.Equals(ind)).Select(a => a.ID).FirstOrDefault()) + lb.SelectedIndex;
 
                 obj.Number = selectedObjectID;
                 obj.Name = db.CSobject.Where(a => a.ID.Equals(selectedObjectID)).Select(a => a.ObjectName).FirstOrDefault();
@@ -54,6 +56,29 @@ namespace dektopCS.source
                 obj.Phone = db.CSobject.Where(a => a.ID.Equals(selectedObjectID)).Select(a => a.Phone).FirstOrDefault();
                 PageFMInfo pageFMInfo = new PageFMInfo(obj);
                 NavigationService.Navigate(pageFMInfo);
+
+                /*Window window = App.Current.MainWindow;
+                window.WindowStyle = WindowStyle.SingleBorderWindow;*/
+
+                /*string[] pathStr = str.Split('|');
+                double lat = Convert.ToDouble(pathStr[0]);
+                double lng = Convert.ToDouble(pathStr[1]);
+                string tip = pathStr[2];
+
+                GMapMarker marker = new GMapMarker(new PointLatLng(lat, lng));
+
+                Ellipse img = new Ellipse()
+                {
+                    Width = 20,
+                    Height = 20,
+                    ToolTip = tip,
+                    Fill = Brushes.MidnightBlue,
+                    Stroke = Brushes.DarkOrange,
+                    StrokeThickness = 3
+                };
+
+                marker.Shape = img;
+                mapView.Markers.Add(marker);*/
             }
         }
 
