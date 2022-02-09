@@ -29,9 +29,11 @@
           <Property Name="Vedomstvo" Type="nvarchar" MaxLength="250" />
           <Property Name="Subordination" Type="nvarchar" MaxLength="100" />
           <Property Name="IsReady" Type="nvarchar" MaxLength="100" />
-          <Property Name="Num" Type="nvarchar" MaxLength="100" />
+          <Property Name="Num" Type="nvarchar" MaxLength="150" />
           <Property Name="Place" Type="nvarchar" MaxLength="250" />
           <Property Name="Phone" Type="nvarchar" MaxLength="100" />
+          <Property Name="Latitude" Type="float" />
+          <Property Name="Longitude" Type="float" />
         </EntityType>
         <EntityType Name="Marks">
           <Key>
@@ -133,9 +135,11 @@
           <Property Name="Vedomstvo" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
           <Property Name="Subordination" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="IsReady" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="Num" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Num" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
           <Property Name="Place" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
           <Property Name="Phone" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Latitude" Type="Double" />
+          <Property Name="Longitude" Type="Double" />
           <NavigationProperty Name="Category" Relationship="Self.FK_CSobject_Category" FromRole="CSobject" ToRole="Category" />
           <NavigationProperty Name="MPS" Relationship="Self.FK_MPS_CSobject" FromRole="CSobject" ToRole="MPS" />
         </EntityType>
@@ -244,6 +248,8 @@
                 <ScalarProperty Name="Num" ColumnName="Num" />
                 <ScalarProperty Name="Place" ColumnName="Place" />
                 <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Latitude" ColumnName="Latitude" />
+                <ScalarProperty Name="Longitude" ColumnName="Longitude" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -17,5 +17,7 @@ namespace dektopCS
         public string Count { get; set; }
         public string Place { get; set; }
         public string Phone { get; set; }
+        public double Latitude { get; set; }
+        public double Longitude { get; set; }   
     }
 }

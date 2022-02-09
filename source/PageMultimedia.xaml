@@ -58,5 +58,13 @@
             Click="Back_Click"
             Grid.Column="0"
             Grid.Row="2">Назад</Button>
+        <Button
+            HorizontalAlignment="Right"
+            VerticalAlignment="Center"
+            Grid.Column="1"
+            Grid.Row="2"
+            Width="170"
+            Click="Clear_Btn"> Стереть все метки
+        </Button>
     </Grid>
 </Page>

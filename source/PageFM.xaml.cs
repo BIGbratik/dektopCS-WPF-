@@ -57,28 +57,31 @@ namespace dektopCS.source
                 PageFMInfo pageFMInfo = new PageFMInfo(obj);
                 NavigationService.Navigate(pageFMInfo);
 
-                /*Window window = App.Current.MainWindow;
-                window.WindowStyle = WindowStyle.SingleBorderWindow;*/
-
-                /*string[] pathStr = str.Split('|');
-                double lat = Convert.ToDouble(pathStr[0]);
-                double lng = Convert.ToDouble(pathStr[1]);
-                string tip = pathStr[2];
-
-                GMapMarker marker = new GMapMarker(new PointLatLng(lat, lng));
-
-                Ellipse img = new Ellipse()
+                try
                 {
-                    Width = 20,
-                    Height = 20,
-                    ToolTip = tip,
-                    Fill = Brushes.MidnightBlue,
-                    Stroke = Brushes.DarkOrange,
-                    StrokeThickness = 3
-                };
+                    obj.Latitude = (double)db.CSobject.Where(a => a.ID.Equals(selectedObjectID)).Select(a => a.Latitude).FirstOrDefault();
+                    obj.Longitude = (double)db.CSobject.Where(a => a.ID.Equals(selectedObjectID)).Select(a => a.Longitude).FirstOrDefault();
 
-                marker.Shape = img;
-                mapView.Markers.Add(marker);*/
+                    GMapControl map = (GMapControl)App.Current.MainWindow.FindName("mapView");
+                    App.Current.Resources["markerPath"] = "";
+
+                    GMapMarker marker = new GMapMarker(new PointLatLng(obj.Latitude, obj.Longitude));
+                        Ellipse img = new Ellipse()
+                        {
+                            Width = 20,
+                            Height = 20,
+                            ToolTip = obj.Name,
+                            Fill = Brushes.MidnightBlue,
+                            Stroke = Brushes.DarkOrange,
+                            StrokeThickness = 3
+                        };
+
+                        marker.Shape = img;
+                        map.Markers.Add(marker);
+                }
+                catch (Exception ex)
+                { }
+                
             }
         }
 

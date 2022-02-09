@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GMap.NET.WindowsPresentation;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
@@ -13,6 +14,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+
+
+
 
 namespace dektopCS.source
 {
@@ -38,6 +42,9 @@ namespace dektopCS.source
         private void Back_Click(object sender, RoutedEventArgs e)
         {
             NavigationService.GoBack();
+            GMapControl map = (GMapControl)App.Current.MainWindow.FindName("mapView");
+            App.Current.Resources["markerPath"] = "";
+            map.Markers.Clear();
         }
 
         private void MPS_Click(object sender, RoutedEventArgs e)

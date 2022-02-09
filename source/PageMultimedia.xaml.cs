@@ -14,6 +14,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using GMap.NET;
+using GMap.NET.MapProviders;
+using GMap.NET.WindowsPresentation;
 
 namespace dektopCS.source
 {
@@ -106,6 +109,13 @@ namespace dektopCS.source
                 stackPanel.Add(sp);
             }
             return stackPanel;
+        }
+
+        private void  Clear_Btn(object sender, RoutedEventArgs e)
+        {
+            GMapControl map = (GMapControl)App.Current.MainWindow.FindName("mapView");
+            App.Current.Resources["markerPath"] = "";
+            map.Markers.Clear();
         }
     }
 }
