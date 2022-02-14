@@ -50,7 +50,9 @@ namespace dektopCS.source
                 db = new desktopDBEntities1();
                 db.Marks.Load();
                 string markerPath = db.Marks.Where(a=>a.ID.Equals(lb.SelectedIndex+1)).Select(b=>b.MakrImage).FirstOrDefault();
+                string markerName = db.Marks.Where(a => a.ID.Equals(lb.SelectedIndex + 1)).Select(b => b.MarkName).FirstOrDefault();
                 App.Current.Resources["markerPath"] = markerPath;
+                App.Current.Resources["markerName"] = markerName;
             }
         }
 

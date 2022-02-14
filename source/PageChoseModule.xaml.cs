@@ -52,9 +52,10 @@ namespace dektopCS.source
         {
             MessageBox.Show("Модуль НОРМАТИВНО-СПРАВОЧНАЯ ИНФОРМАЦИЯ находится в разработке", "ВНИМАНИЕ!!!", MessageBoxButton.OK, MessageBoxImage.Information);
         }
-        private void CheckKlassifs_Click(object sender, RoutedEventArgs e)
+        private void CheckClassifs_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Модуль КЛАССИФИКАТОРЫ находится в разработке", "ВНИМАНИЕ!!!", MessageBoxButton.OK, MessageBoxImage.Information);
+            PageClassificators pageClassificators = new PageClassificators();
+            NavigationService.Navigate(pageClassificators);
         }
         private void CheckExtSys_Click(object sender, RoutedEventArgs e)
         {

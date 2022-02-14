@@ -28,6 +28,8 @@ namespace dektopCS
         public virtual DbSet<Analytic> Analytic { get; set; }
         public virtual DbSet<Category> Category { get; set; }
         public virtual DbSet<CSobject> CSobject { get; set; }
+        public virtual DbSet<Emerg> Emerg { get; set; }
+        public virtual DbSet<EmergType> EmergType { get; set; }
         public virtual DbSet<Marks> Marks { get; set; }
         public virtual DbSet<MPS> MPS { get; set; }
         public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }

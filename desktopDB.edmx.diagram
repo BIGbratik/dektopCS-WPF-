@@ -4,15 +4,18 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="d97f0946a54447e6b978c593f7621ebd" Name="Diagram1">
-        <EntityTypeShape EntityType="desktopDBModel.Analytic" Width="1.5" PointX="0.75" PointY="5.75" IsExpanded="true" />
+      <Diagram DiagramId="cc70807ee5bd435da84a0469408bd1e3" Name="Diagram1">
+        <EntityTypeShape EntityType="desktopDBModel.Analytic" Width="1.5" PointX="5.75" PointY="4.75" IsExpanded="true" />
         <EntityTypeShape EntityType="desktopDBModel.Category" Width="1.5" PointX="0.75" PointY="2" IsExpanded="true" />
         <EntityTypeShape EntityType="desktopDBModel.CSobject" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="desktopDBModel.Marks" Width="1.5" PointX="2.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="desktopDBModel.Emerg" Width="1.5" PointX="0.75" PointY="6" IsExpanded="true" />
+        <EntityTypeShape EntityType="desktopDBModel.EmergType" Width="1.5" PointX="3" PointY="5.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="desktopDBModel.Marks" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="desktopDBModel.MPS" Width="1.5" PointX="5.25" PointY="1.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="desktopDBModel.sysdiagrams" Width="1.5" PointX="5.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="desktopDBModel.sysdiagrams" Width="1.5" PointX="7.75" PointY="3.75" IsExpanded="true" />
         <AssociationConnector Association="desktopDBModel.FK_CSobject_Category" ManuallyRouted="false" />
         <AssociationConnector Association="desktopDBModel.FK_MPS_CSobject" ManuallyRouted="false" />
+        <AssociationConnector Association="desktopDBModel.FK_EmergType_Emerg" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

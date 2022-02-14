@@ -63,6 +63,15 @@ namespace dektopCS.Properties {
         /// <summary>
         ///   Ищет локализованную строку, похожую на .
         /// </summary>
+        internal static string markerName {
+            get {
+                return ResourceManager.GetString("markerName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на .
+        /// </summary>
         internal static string markerPath {
             get {
                 return ResourceManager.GetString("markerPath", resourceCulture);

@@ -28,15 +28,10 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="50"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition/>
+            <RowDefinition/>
             <RowDefinition Height="50"/>
         </Grid.RowDefinitions>
-        <Button 
-            Click="Back_Click" 
-            HorizontalAlignment="Left" 
-            VerticalAlignment="Top"  
-            Width="70"
-            Grid.Row="3">Назад</Button>
         <Label
             HorizontalContentAlignment="Center"
             Foreground="White"
@@ -48,5 +43,11 @@
             Grid.Row="1"
             Margin="10,5,10,5">
         </ListBox>
+        <Button 
+            Click="Back_Click" 
+            HorizontalAlignment="Left" 
+            VerticalAlignment="Top"  
+            Width="70"
+            Grid.Row="3">Назад</Button>
     </Grid>
 </Page>

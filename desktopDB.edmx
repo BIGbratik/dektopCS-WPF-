@@ -35,6 +35,21 @@
           <Property Name="Latitude" Type="float" />
           <Property Name="Longitude" Type="float" />
         </EntityType>
+        <EntityType Name="Emerg">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EmergName" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="EmergType">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EmergID" Type="int" Nullable="false" />
+          <Property Name="EmergTypeName" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
         <EntityType Name="Marks">
           <Key>
             <PropertyRef Name="ID" />
@@ -75,6 +90,20 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_EmergType_Emerg">
+          <End Role="Emerg" Type="Self.Emerg" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="EmergType" Type="Self.EmergType" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Emerg">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="EmergType">
+              <PropertyRef Name="EmergID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_MPS_CSobject">
           <End Role="CSobject" Type="Self.CSobject" Multiplicity="1">
             <OnDelete Action="Cascade" />
@@ -93,12 +122,18 @@
           <EntitySet Name="Analytic" EntityType="Self.Analytic" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CSobject" EntityType="Self.CSobject" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Emerg" EntityType="Self.Emerg" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EmergType" EntityType="Self.EmergType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Marks" EntityType="Self.Marks" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MPS" EntityType="Self.MPS" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_CSobject_Category" Association="Self.FK_CSobject_Category">
             <End Role="Category" EntitySet="Category" />
             <End Role="CSobject" EntitySet="CSobject" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EmergType_Emerg" Association="Self.FK_EmergType_Emerg">
+            <End Role="Emerg" EntitySet="Emerg" />
+            <End Role="EmergType" EntitySet="EmergType" />
           </AssociationSet>
           <AssociationSet Name="FK_MPS_CSobject" Association="Self.FK_MPS_CSobject">
             <End Role="CSobject" EntitySet="CSobject" />
@@ -142,6 +177,23 @@
           <Property Name="Longitude" Type="Double" />
           <NavigationProperty Name="Category" Relationship="Self.FK_CSobject_Category" FromRole="CSobject" ToRole="Category" />
           <NavigationProperty Name="MPS" Relationship="Self.FK_MPS_CSobject" FromRole="CSobject" ToRole="MPS" />
+        </EntityType>
+        <EntityType Name="Emerg">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EmergName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="EmergType" Relationship="Self.FK_EmergType_Emerg" FromRole="Emerg" ToRole="EmergType" />
+        </EntityType>
+        <EntityType Name="EmergType">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EmergID" Type="Int32" Nullable="false" />
+          <Property Name="EmergTypeName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Emerg" Relationship="Self.FK_EmergType_Emerg" FromRole="EmergType" ToRole="Emerg" />
         </EntityType>
         <EntityType Name="Marks">
           <Key>
@@ -198,10 +250,26 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_EmergType_Emerg">
+          <End Role="Emerg" Type="Self.Emerg" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="EmergType" Type="Self.EmergType" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Emerg">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="EmergType">
+              <PropertyRef Name="EmergID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="desktopDBEntities1" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Analytic" EntityType="Self.Analytic" />
           <EntitySet Name="Category" EntityType="Self.Category" />
           <EntitySet Name="CSobject" EntityType="Self.CSobject" />
+          <EntitySet Name="Emerg" EntityType="Self.Emerg" />
+          <EntitySet Name="EmergType" EntityType="Self.EmergType" />
           <EntitySet Name="Marks" EntityType="Self.Marks" />
           <EntitySet Name="MPS" EntityType="Self.MPS" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
@@ -212,6 +280,10 @@
           <AssociationSet Name="FK_MPS_CSobject" Association="Self.FK_MPS_CSobject">
             <End Role="CSobject" EntitySet="CSobject" />
             <End Role="MPS" EntitySet="MPS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EmergType_Emerg" Association="Self.FK_EmergType_Emerg">
+            <End Role="Emerg" EntitySet="Emerg" />
+            <End Role="EmergType" EntitySet="EmergType" />
           </AssociationSet>
         </EntityContainer>
       </Schema>
@@ -250,6 +322,23 @@
                 <ScalarProperty Name="Phone" ColumnName="Phone" />
                 <ScalarProperty Name="Latitude" ColumnName="Latitude" />
                 <ScalarProperty Name="Longitude" ColumnName="Longitude" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Emerg">
+            <EntityTypeMapping TypeName="desktopDBModel.Emerg">
+              <MappingFragment StoreEntitySet="Emerg">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="EmergName" ColumnName="EmergName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EmergType">
+            <EntityTypeMapping TypeName="desktopDBModel.EmergType">
+              <MappingFragment StoreEntitySet="EmergType">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="EmergID" ColumnName="EmergID" />
+                <ScalarProperty Name="EmergTypeName" ColumnName="EmergTypeName" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

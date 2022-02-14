@@ -30,35 +30,11 @@ namespace dektopCS
             InitializeComponent();
         }
 
-        public void drowObject(string str)
-        {
-            string[] pathStr = str.Split('|');
-            double lat = Convert.ToDouble(pathStr[0]);
-            double lng = Convert.ToDouble(pathStr[1]);
-            string tip = pathStr[2];
-
-            GMapMarker marker = new GMapMarker(new PointLatLng(lat, lng));
-
-            Ellipse img = new Ellipse()
-            {
-                Width = 20,
-                Height = 20,
-                ToolTip = tip,
-                Fill = Brushes.MidnightBlue,
-                Stroke=Brushes.DarkOrange,
-                StrokeThickness=3
-
-            };
-
-            marker.Shape = img;
-            mapView.Markers.Add(marker);
-        }
-
         private void mapView_Loaded(object sender, RoutedEventArgs e)
         {
             mapView.MapProvider = GoogleMapProvider.Instance;
             mapView.MinZoom = 4;
-            mapView.MaxZoom = 16;
+            mapView.MaxZoom = 18;
             mapView.Zoom = 10;
             mapView.Position = new PointLatLng(55.796127, 49.106414);
             mapView.MouseWheelZoomType = MouseWheelZoomType.MousePositionAndCenter;
@@ -90,8 +66,7 @@ namespace dektopCS
                     Source = bitmapImage,
                     Width = 20,
                     Height = 20,
-                    ToolTip = "Тестовая метка",
-
+                    ToolTip = App.Current.Resources["markerName"]
                 };
 
                 marker.Shape = img;

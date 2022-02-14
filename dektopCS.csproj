@@ -118,6 +118,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>desktopDB.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Emerg.cs">
+      <DependentUpon>desktopDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EmergType.cs">
+      <DependentUpon>desktopDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Marks.cs">
       <DependentUpon>desktopDB.tt</DependentUpon>
     </Compile>
@@ -130,6 +136,9 @@
     </Compile>
     <Compile Include="source\PageChoseModule.xaml.cs">
       <DependentUpon>PageChoseModule.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="source\PageClassificators.xaml.cs">
+      <DependentUpon>PageClassificators.xaml</DependentUpon>
     </Compile>
     <Compile Include="source\PageFM.xaml.cs">
       <DependentUpon>PageFM.xaml</DependentUpon>
@@ -169,6 +178,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="source\PageChoseModule.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="source\PageClassificators.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
