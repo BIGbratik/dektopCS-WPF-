@@ -22,20 +22,33 @@ namespace dektopCS.source
     public partial class PageMPS : Page
     {
         desktopDBEntities1 db;
+        private string path = @"/data/MPS/";
+        List<string> types = new List<string>();
         public PageMPS(int id)
         {
             InitializeComponent();
             db = new desktopDBEntities1();
             db.MPS.Load();
-            var list = db.MPS.Where(x => x.ObjectID.Equals(id)).Select(a => a.MPSfile).ToList();
-            if (list.Count==0)
+            List<string> str = new List<string>();
+
+
+            var list = db.MPS.Where(x => x.ObjectID.HasValue.Equals(true)).Select(a => new {a.ObjectID, a.MPSfile, a.MPSType}).ToList();
+            for (int i = 0; i < list.Count; i++)
+            {
+                if (list[i].ObjectID == id)
+                {
+                    str.Add(list[i].MPSfile);
+                    types.Add(list[i].MPSType);
+                }
+            }
+            if (str.Count==0)
             {
                 lb.Items.Add("В базе данных отсутствуют объекты, связанные с выбранным объектом");
                 lb.IsEnabled = false;
             }
             else
             {
-                lb.ItemsSource = list;
+                lb.ItemsSource = str;
                 lb.IsEnabled = true;
             }
         }
@@ -48,8 +61,16 @@ namespace dektopCS.source
         {
             if (lb.SelectedIndex != -1)
             {
-                PageFM pageFM = new PageFM(lb.SelectedIndex + 1);
-                NavigationService.Navigate(pageFM);
+                path += types[lb.SelectedIndex] + "/"+ lb.SelectedItem.ToString();
+                Image image = new Image();
+                Uri uri = new Uri(path, UriKind.RelativeOrAbsolute);
+                BitmapImage bitmapImage = new BitmapImage();
+                bitmapImage.BeginInit();
+                bitmapImage.UriSource = uri;
+                bitmapImage.EndInit();
+
+                img.Source = bitmapImage;
+
                 lb.SelectedIndex = -1;
             }
         }

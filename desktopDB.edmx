@@ -10,6 +10,7 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AnalyticName" Type="nvarchar" MaxLength="150" Nullable="false" />
           <Property Name="AnalyticFile" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="Category">
@@ -48,7 +49,7 @@
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="EmergID" Type="int" Nullable="false" />
-          <Property Name="EmergTypeName" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="EmergTypeName" Type="varchar" MaxLength="200" Nullable="false" />
         </EntityType>
         <EntityType Name="Marks">
           <Key>
@@ -63,7 +64,8 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="ObjectID" Type="int" Nullable="false" />
+          <Property Name="ObjectID" Type="int" />
+          <Property Name="MPSType" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="MPSfile" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="sysdiagrams">
@@ -105,7 +107,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_MPS_CSobject">
-          <End Role="CSobject" Type="Self.CSobject" Multiplicity="1">
+          <End Role="CSobject" Type="Self.CSobject" Multiplicity="0..1">
             <OnDelete Action="Cascade" />
           </End>
           <End Role="MPS" Type="Self.MPS" Multiplicity="*" />
@@ -150,6 +152,7 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AnalyticName" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="AnalyticFile" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
         </EntityType>
         <EntityType Name="Category">
@@ -192,7 +195,7 @@
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="EmergID" Type="Int32" Nullable="false" />
-          <Property Name="EmergTypeName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="EmergTypeName" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="Emerg" Relationship="Self.FK_EmergType_Emerg" FromRole="EmergType" ToRole="Emerg" />
         </EntityType>
         <EntityType Name="Marks">
@@ -208,7 +211,8 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ObjectID" Type="Int32" Nullable="false" />
+          <Property Name="ObjectID" Type="Int32" />
+          <Property Name="MPSType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="MPSfile" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="CSobject" Relationship="Self.FK_MPS_CSobject" FromRole="MPS" ToRole="CSobject" />
         </EntityType>
@@ -237,7 +241,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_MPS_CSobject">
-          <End Role="CSobject" Type="Self.CSobject" Multiplicity="1">
+          <End Role="CSobject" Type="Self.CSobject" Multiplicity="0..1">
             <OnDelete Action="Cascade" />
           </End>
           <End Role="MPS" Type="Self.MPS" Multiplicity="*" />
@@ -296,6 +300,7 @@
             <EntityTypeMapping TypeName="desktopDBModel.Analytic">
               <MappingFragment StoreEntitySet="Analytic">
                 <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="AnalyticName" ColumnName="AnalyticName" />
                 <ScalarProperty Name="AnalyticFile" ColumnName="AnalyticFile" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -356,6 +361,7 @@
               <MappingFragment StoreEntitySet="MPS">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="ObjectID" ColumnName="ObjectID" />
+                <ScalarProperty Name="MPSType" ColumnName="MPSType" />
                 <ScalarProperty Name="MPSfile" ColumnName="MPSfile" />
               </MappingFragment>
             </EntityTypeMapping>

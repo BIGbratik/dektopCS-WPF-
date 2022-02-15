@@ -31,15 +31,18 @@ namespace dektopCS.source
 
         private void CheckMap_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Модуль КАРТЫ находится в разработке", "ВНИМАНИЕ!!!", MessageBoxButton.OK, MessageBoxImage.Information);
+            PageMPSinfo pageMPSinfo = new PageMPSinfo("Maps");
+            NavigationService.Navigate(pageMPSinfo);
         }
         private void CheckPlans_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Модуль ПЛАНЫ находится в разработке", "ВНИМАНИЕ!!!", MessageBoxButton.OK, MessageBoxImage.Information);
+            PageMPSinfo pageMPSinfo = new PageMPSinfo("Plans");
+            NavigationService.Navigate(pageMPSinfo);
         }
         private void CheckShemes_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Модуль СХЕМЫ находится в разработке", "ВНИМАНИЕ!!!", MessageBoxButton.OK, MessageBoxImage.Information);
+            PageMPSinfo pageMPSinfo = new PageMPSinfo("Shemes");
+            NavigationService.Navigate(pageMPSinfo);
         }
     }
 }

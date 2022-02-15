@@ -15,6 +15,7 @@ namespace dektopCS
     public partial class Analytic
     {
         public int ID { get; set; }
+        public string AnalyticName { get; set; }
         public string AnalyticFile { get; set; }
     }
 }

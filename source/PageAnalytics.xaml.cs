@@ -29,7 +29,7 @@ namespace dektopCS.source
             InitializeComponent();
             db = new desktopDBEntities1();
             db.Analytic.Load();
-            lb.ItemsSource = db.Analytic.Select(a => a.AnalyticFile).ToList();
+            lb.ItemsSource = db.Analytic.Select(a => a.AnalyticName).ToList();
         }
         private void Back_Click(object sender, RoutedEventArgs e)
         {
@@ -40,8 +40,8 @@ namespace dektopCS.source
         {
             if (lb.SelectedIndex!=-1)
             {
-                string fName = lb.SelectedValue.ToString();
-                Process.Start($"{path}" + fName + ".exe");
+                string fName = db.Analytic.Where(a => a.ID.Equals(lb.SelectedIndex + 1)).Select(b => b.AnalyticFile).FirstOrDefault();
+                Process.Start($"{path}" + fName);
             }
 
         }

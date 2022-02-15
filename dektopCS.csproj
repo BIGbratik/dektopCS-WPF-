@@ -155,6 +155,9 @@
     <Compile Include="source\PageMPS.xaml.cs">
       <DependentUpon>PageMPS.xaml</DependentUpon>
     </Compile>
+    <Compile Include="source\PageMPSinfo.xaml.cs">
+      <DependentUpon>PageMPSinfo.xaml</DependentUpon>
+    </Compile>
     <Compile Include="source\PageMultimedia.xaml.cs">
       <DependentUpon>PageMultimedia.xaml</DependentUpon>
     </Compile>
@@ -202,6 +205,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="source\PageMPS.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="source\PageMPSinfo.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -280,6 +287,14 @@
       <DependentUpon>desktopDB.edmx</DependentUpon>
       <LastGenOutput>desktopDB.cs</LastGenOutput>
     </Content>
+    <Resource Include="data\MPS\Maps\Казань ЗОНЫ.jpg" />
+    <Resource Include="data\MPS\Maps\Казань ОБЪЕКТЫ.jpg" />
+    <Resource Include="data\MPS\Maps\Казань ПОДТОПЛЕНИЯ.jpg" />
+    <Resource Include="data\MPS\Maps\Казань РАЙОНЫ.jpg" />
+    <Resource Include="data\MPS\Plans\План метро.jpg" />
+    <Resource Include="data\MPS\Plans\План порт.jpg" />
+    <Resource Include="data\MPS\Plans\План электросетей.jpg" />
+    <Resource Include="data\MPS\Shemes\Схема оповещения.jpg" />
     <Resource Include="data\Marks\БОО.png" />
     <Resource Include="data\Marks\ВодозаборнаяСтанция.png" />
     <Resource Include="data\Marks\ВПО.png" />

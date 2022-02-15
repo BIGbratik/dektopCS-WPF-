@@ -15,7 +15,8 @@ namespace dektopCS
     public partial class MPS
     {
         public int ID { get; set; }
-        public int ObjectID { get; set; }
+        public Nullable<int> ObjectID { get; set; }
+        public string MPSType { get; set; }
         public string MPSfile { get; set; }
     
         public virtual CSobject CSobject { get; set; }
