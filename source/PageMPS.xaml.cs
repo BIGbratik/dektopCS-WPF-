@@ -21,11 +21,13 @@ namespace dektopCS.source
     /// </summary>
     public partial class PageMPS : Page
     {
+        //Инициализация БД, пути к локальным данным, списка для нужных данных
         desktopDBEntities1 db;
         private string path = @"/data/MPS/";
         List<string> types = new List<string>();
         public PageMPS(int id)
         {
+            //Инициализация страницы и заполнение её выбранным перечнем данных
             InitializeComponent();
             db = new desktopDBEntities1();
             db.MPS.Load();
@@ -52,11 +54,14 @@ namespace dektopCS.source
                 lb.IsEnabled = true;
             }
         }
+
+        //Возврат на предыдущю страницу
         private void Back_Click(object sender, RoutedEventArgs e)
         {
             NavigationService.GoBack();
         }
 
+        //Отрисовка выбранного изображения
         private void CheckItem_Click(object sender, RoutedEventArgs e)
         {
             if (lb.SelectedIndex != -1)
@@ -74,32 +79,5 @@ namespace dektopCS.source
                 lb.SelectedIndex = -1;
             }
         }
-
-        /*private void Item_Loaded(object sender, RoutedEventArgs e)
-        {
-            lb.Items.Clear();
-            string path = @"./data";
-            string[] str;
-            using (FileStream fStr = new FileStream($"{path}/" + "/ForceMeans.txt", FileMode.OpenOrCreate))
-            {
-                byte[] arr = new byte[fStr.Length];
-                fStr.Read(arr, 0, arr.Length);
-                string fText = System.Text.Encoding.UTF8.GetString(arr);
-                str = fText.Split('\n');
-            }
-
-            for (int i = 0; i < str.Length; i++)
-            {
-                TextBlock tb = new TextBlock
-                {
-                    TextWrapping = TextWrapping.WrapWithOverflow
-                };
-                string[] line = str[i].Split('|');
-                string[] kostil = line[1].Split('\r');
-
-                tb.Text = line[0] + ") " + kostil[0];
-                lb.Items.Add(tb);
-            }
-        }*/
     }
 }

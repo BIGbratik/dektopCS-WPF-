@@ -25,9 +25,11 @@ namespace dektopCS.source
     /// </summary>
     public partial class PageMultimedia : Page
     {
+        //ИНициализация БД
         desktopDBEntities1 db;
         public PageMultimedia()
         {
+            //Инициализация страницы и выгрузка необходимых данных из БД
             InitializeComponent();
 
             List<string> fNames = new List<string>();
@@ -38,11 +40,14 @@ namespace dektopCS.source
             marksNames= db.Marks.Select(a => a.MarkName).ToList();
             lb.ItemsSource = GetSP(fNames,marksNames);
         }
+
+        //Возврат на предыдущую страницу
         private void Back_Click(object sender, RoutedEventArgs e)
         {
             NavigationService.GoBack();
         }
 
+        //Запоминание выбранной метки для карты
         private void ChooseItem_Click(object sender, RoutedEventArgs e)
         {
             if (lb.SelectedIndex != -1)
@@ -56,6 +61,7 @@ namespace dektopCS.source
             }
         }
 
+        //Метод составление списка, содержащего изображения меток и их названия
         public List<StackPanel> GetSP(List<string> fn, List<string>mn)
         {
             string path = "/data/Marks/";
@@ -113,6 +119,7 @@ namespace dektopCS.source
             return stackPanel;
         }
 
+        //Метод удаления всех поставленных меток на карту
         private void  Clear_Btn(object sender, RoutedEventArgs e)
         {
             GMapControl map = (GMapControl)App.Current.MainWindow.FindName("mapView");

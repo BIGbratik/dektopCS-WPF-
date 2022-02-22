@@ -30,6 +30,7 @@ namespace dektopCS
             InitializeComponent();
         }
 
+        //Метод отрисовки карты при загрузке окна
         private void mapView_Loaded(object sender, RoutedEventArgs e)
         {
             mapView.MapProvider = GoogleMapProvider.Instance;
@@ -44,18 +45,19 @@ namespace dektopCS
             mapView.ShowTileGridLines = false;
         }
 
+        //Метод закрытия окна
         private void Exit_Click(object sender, RoutedEventArgs e)
         {
             Close();
         }
 
-        //ДОРАБОТАТЬ!!!!!!!!!!!!!!!!
+        //Метод постановки метки на карту по ПКМ
         void mapView_RightButtonDown(object sender, MouseEventArgs e)
         {
             if (App.Current.Resources["markerPath"]!=null)
             {
                 string path = @"/data/Marks/" + App.Current.Resources["markerPath"];
-                GMapMarker marker = new GMapMarker(mapView.FromLocalToLatLng((int)e.GetPosition(mapView).X, (int)e.GetPosition(mapView).Y));
+                GMapMarker marker = new GMapMarker(mapView.FromLocalToLatLng((int)e.GetPosition(mapView).X-15, (int)e.GetPosition(mapView).Y-15));
                 BitmapImage bitmapImage = new BitmapImage();
                 bitmapImage.BeginInit();
                 bitmapImage.UriSource = new Uri(path, UriKind.RelativeOrAbsolute);
@@ -64,8 +66,8 @@ namespace dektopCS
                 Image img = new Image()
                 {
                     Source = bitmapImage,
-                    Width = 20,
-                    Height = 20,
+                    Width = 30,
+                    Height = 30,
                     ToolTip = App.Current.Resources["markerName"]
                 };
 
@@ -73,6 +75,5 @@ namespace dektopCS
                 mapView.Markers.Add(marker);
             }
         }
-
     }
 }

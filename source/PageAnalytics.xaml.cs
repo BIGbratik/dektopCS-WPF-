@@ -22,20 +22,25 @@ namespace dektopCS.source
     /// </summary>
     public partial class PageAnalytics : Page
     {
+        //Инициализация БД и пути к статическим ресурсам
         desktopDBEntities1 db;
         string path = @".\data\Analityc\";
         public PageAnalytics()
         {
+            //Инициализация страницы с выгрузкой данных из БД
             InitializeComponent();
             db = new desktopDBEntities1();
             db.Analytic.Load();
             lb.ItemsSource = db.Analytic.Select(a => a.AnalyticName).ToList();
         }
+
+        //Метод возвращения ан предыдущую страницу
         private void Back_Click(object sender, RoutedEventArgs e)
         {
             NavigationService.GoBack();
         }
 
+        //Запуск аналитической программы
         private void StartProgram_Click(object sender, RoutedEventArgs e)
         {
             if (lb.SelectedIndex!=-1)
@@ -45,13 +50,5 @@ namespace dektopCS.source
             }
 
         }
-
-        /*private void Item_Loaded(object sender, RoutedEventArgs e)
-        {
-            for (int i = 0; i < 10; i++)
-            {
-                lb.Items.Add("Программа №" + (i + 1));
-            }
-        }*/
     }
 }

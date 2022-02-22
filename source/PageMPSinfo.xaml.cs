@@ -21,10 +21,12 @@ namespace dektopCS.source
     /// </summary>
     public partial class PageMPSinfo : Page
     {
+        //Инициализация БД и пути к локальным данным
         desktopDBEntities1 db;
         private string path = @"/data/MPS/";
         public PageMPSinfo(string type)
         {
+            //Инициализация страницы и загрузка списка данных, касающихся выбранного объекта
             InitializeComponent();
             path =path+type+"/";
             db = new desktopDBEntities1();
@@ -42,11 +44,14 @@ namespace dektopCS.source
                 lb.IsEnabled = true;
             }
         }
+
+        //Возврат на предыдущю страницу
         private void Back_Click(object sender, RoutedEventArgs e)
         {
             NavigationService.GoBack();
         }
 
+        //Отрисовка выбранного изображения
         private void CheckItem_Click(object sender, RoutedEventArgs e)
         {
             if (lb.SelectedIndex != -1)

@@ -24,11 +24,13 @@ namespace dektopCS.source
     /// </summary>
     public partial class PageFM : Page
     {
+        //Инициализация переменной индекса, объекта ЧС и БД
         public static int ind;
         PMobject obj = new PMobject();
         desktopDBEntities1 db;
         public PageFM(int num)
         {
+            //Инициализация страницы с выгрузкой необходимых данных из БД
             InitializeComponent();
             ind = num;
             db = new desktopDBEntities1();
@@ -36,10 +38,13 @@ namespace dektopCS.source
             lb.ItemsSource = db.CSobject.Where(p => p.CategoryID.Equals(num)).Select(a => a.ObjectName).ToList();
         }
 
+        //Возвращение на предыдущую страницу
         private void Back_Click(object sender, RoutedEventArgs e)
         {
             NavigationService.GoBack();
         }
+
+        //Переход к странице подробной информации об выбранном объекте СиС и постановка на карте метки выбранного объекта
         private void CheckInfo_Click(object sender, RoutedEventArgs e)
         {
             if (lb.SelectedIndex != -1)
@@ -84,57 +89,5 @@ namespace dektopCS.source
                 
             }
         }
-
-        /*private void Objs_Loaded(object sender, RoutedEventArgs e)
-        {
-            /*lb.Items.Clear();
-            string path = @"./data/FM";
-            string[] str;
-            using (FileStream fStr = new FileStream($"{path}/FM" + ind + ".txt", FileMode.OpenOrCreate))
-            {
-                byte[] arr = new byte[fStr.Length];
-                fStr.Read(arr, 0, arr.Length);
-                string fText = System.Text.Encoding.UTF8.GetString(arr);
-                str = fText.Split('\n');
-            }
-
-            for (int i = 0; i < str.Length; i++)
-            {
-                string[] line = str[i].Split('|');
-                try
-                {
-                    PMobject obj = new PMobject();
-                    obj.Number = Int32.Parse(line[0]);
-                    obj.Name = line[1];
-                    obj.Structer = line[2];
-                    obj.Subord = line[3];
-                    obj.isReady = line[4];
-                    obj.Count = line[5];
-                    obj.Place = line[6];
-                    obj.Phone = line[7];
-
-                    string mes = obj.Number.ToString() + ") ";
-                    if (obj.Name.Equals(" "))
-                    {
-                        mes += "наименование объекта неизвестно";
-                    }
-                    else
-                    {
-                        mes += obj.Name;
-                    }
-                    if (obj.Structer.Equals(" "))
-                    {
-                        mes += " (ведомственная принадлежность неизвестна)";
-                    }
-                    else
-                    {
-                        mes += " (" + obj.Structer + ")";
-                    }
-                    lb.Items.Add(mes);
-                    objs.Add(obj);
-                }
-                catch (FormatException) { }
-            }
-        }*/
     }
 }

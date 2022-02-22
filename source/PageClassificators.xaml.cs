@@ -20,10 +20,12 @@ namespace dektopCS.source
     /// </summary>
     public partial class PageClassificators : Page
     {
+        //Инициализации БД и объекта будужщей страницы
         desktopDBEntities1 db;
         object page;
         public PageClassificators()
         {
+            //Инициализация страницы с выгрузкой необходимых данных из БД
             InitializeComponent();
             db = new desktopDBEntities1();
             string left = db.Emerg.Where(a => a.ID.Equals(1)).Select(b => b.EmergName).FirstOrDefault();
@@ -33,21 +35,25 @@ namespace dektopCS.source
             page = Claasifs.Content;
         }
 
+        //Возвращение на предыдущую страницу
         private void BackBtn_Click(object sender, RoutedEventArgs e)
         {
             NavigationService.GoBack();
         }
 
+        //Просмотр информации по перовму типу ЧС
         private void BtnLeft_Click(object sender, RoutedEventArgs e)
         {
             ShowTypes(1);
         }
 
+        //Просмотр информации по второму типу ЧС
         private void BtnRight_Click(object sender, RoutedEventArgs e)
         {
             ShowTypes(2);
         }
 
+        //Метод отрисовки страницы в зависимости от выбранного характера ЧС
         private void ShowTypes (int id)
         {
             List<string> types = new List<string>();
@@ -91,6 +97,7 @@ namespace dektopCS.source
             Claasifs.Content = grid;
         }
 
+        //Метод отрисовки стартового состояния окна
         private void ReturnBtn_Click(object sender, RoutedEventArgs e)
         {
             Claasifs.Content = page;

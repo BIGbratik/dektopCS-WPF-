@@ -4,15 +4,15 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="f2f2d32af5264b4dbb93d67c94283c6b" Name="Diagram1">
-        <EntityTypeShape EntityType="desktopDBModel.Analytic" Width="1.5" PointX="5.75" PointY="4.75" IsExpanded="true" />
+      <Diagram DiagramId="f2f2d32af5264b4dbb93d67c94283c6b" Name="Diagram1" ZoomLevel="77">
+        <EntityTypeShape EntityType="desktopDBModel.Analytic" Width="1.5" PointX="5.25" PointY="3.25" IsExpanded="true" />
         <EntityTypeShape EntityType="desktopDBModel.Category" Width="1.5" PointX="0.75" PointY="2" IsExpanded="true" />
         <EntityTypeShape EntityType="desktopDBModel.CSobject" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="desktopDBModel.Emerg" Width="1.5" PointX="0.75" PointY="6" IsExpanded="true" />
-        <EntityTypeShape EntityType="desktopDBModel.EmergType" Width="1.5" PointX="3" PointY="5.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="desktopDBModel.Marks" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="desktopDBModel.MPS" Width="1.5" PointX="5.25" PointY="1.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="desktopDBModel.sysdiagrams" Width="1.5" PointX="7.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="desktopDBModel.Emerg" Width="1.5" PointX="0.75" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="desktopDBModel.EmergType" Width="1.5" PointX="3.125" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="desktopDBModel.Marks" Width="1.5" PointX="5.25" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="desktopDBModel.MPS" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="desktopDBModel.sysdiagrams" Width="1.5" PointX="8.125" PointY="4.75" IsExpanded="true" />
         <AssociationConnector Association="desktopDBModel.FK_CSobject_Category" ManuallyRouted="false" />
         <AssociationConnector Association="desktopDBModel.FK_MPS_CSobject" ManuallyRouted="false" />
         <AssociationConnector Association="desktopDBModel.FK_EmergType_Emerg" ManuallyRouted="false" />

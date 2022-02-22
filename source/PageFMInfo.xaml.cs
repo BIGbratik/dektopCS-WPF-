@@ -25,6 +25,7 @@ namespace dektopCS.source
     /// </summary>
     public partial class PageFMInfo : Page
     {
+        //Инициализация объекта ЧС
         PMobject pmObject=new PMobject();
         public PageFMInfo(PMobject obj)
         {
@@ -39,6 +40,7 @@ namespace dektopCS.source
             Phone.Text = pmObject.Phone;
         }
 
+        //Возврат на предыдущю страницу и удаление метки объекта с карты
         private void Back_Click(object sender, RoutedEventArgs e)
         {
             NavigationService.GoBack();
@@ -47,22 +49,11 @@ namespace dektopCS.source
             map.Markers.Clear();
         }
 
+        //Переход на страницу дополнительных графических материалов, относящихс к данному объекту
         private void MPS_Click(object sender, RoutedEventArgs e)
         {
             PageMPS pageMPS = new PageMPS(pmObject.Number);
             NavigationService.Navigate(pageMPS);
         }
-
-        /*private void PageInfo_Loaded(object sender, RoutedEventArgs e)
-
-        {
-            Name.Text = obj.Name;
-            Structer.Text = obj.Structer;
-            Subord.Text = obj.Subord;
-            isReady.Text = obj.isReady;
-            Count.Text = obj.Count;
-            Place.Text = obj.Place;
-            Phone.Text = obj.Phone;
-        }*/
     }
 }
