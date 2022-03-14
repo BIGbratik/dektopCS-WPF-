@@ -31,7 +31,18 @@ namespace dektopCS.source
             InitializeComponent();
             db = new desktopDBEntities1();
             db.Category.Load();
-            lb.ItemsSource = db.Category.Select(a => a.CategoryName).ToList();
+
+            List<string> list = new List<string>(db.Category.Select(a => a.CategoryName).ToList());
+            List<TextBlock> tb = new List<TextBlock>();
+            for (int i=0; i<list.Count;i++)
+            {
+                tb.Add(new TextBlock
+                    { 
+                    Text=list[i],
+                    TextWrapping = TextWrapping.WrapWithOverflow});
+            }
+            lb.ItemsSource = tb;
+
         }
 
         //Возврат на предыдущю страницу

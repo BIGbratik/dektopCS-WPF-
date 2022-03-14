@@ -40,6 +40,16 @@ namespace dektopCS.source
             }
             else
             {
+                List<TextBlock> tb = new List<TextBlock>();
+                for (int i = 0; i < list.Count; i++)
+                {
+                    tb.Add(new TextBlock
+                    {
+                        Text = list[i],
+                        TextWrapping = TextWrapping.WrapWithOverflow
+                    });
+                }
+                lb.ItemsSource = tb;
                 lb.ItemsSource = list;
                 lb.IsEnabled = true;
             }
@@ -68,6 +78,13 @@ namespace dektopCS.source
 
                 lb.SelectedIndex = -1;
             }
+        }
+
+        //ДОРАБОТАТЬ ПРИБЛИЖЕНИЕ КАРТИНКИ!!!
+        private void Zoom_Wheel (object sender, RoutedEventArgs e)
+        {
+            img.Width = 200;
+            img.Height = 200;
         }
     }
 }

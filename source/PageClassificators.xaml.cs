@@ -82,9 +82,11 @@ namespace dektopCS.source
             returnBtn.Content = "Вернуться к выбору характера ЧС";
             returnBtn.Click += ReturnBtn_Click;
 
-            ListBox lb = new ListBox();
-            lb.Name = "lb";
-            lb.ItemsSource= types;
+            ListBox lb = new ListBox
+            {
+                Name = "lb",
+                ItemsSource = types,
+            };
 
             grid.Children.Add(returnBtn);
             grid.Children.Add(tb);

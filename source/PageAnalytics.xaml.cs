@@ -31,7 +31,18 @@ namespace dektopCS.source
             InitializeComponent();
             db = new desktopDBEntities1();
             db.Analytic.Load();
-            lb.ItemsSource = db.Analytic.Select(a => a.AnalyticName).ToList();
+
+            List<string> list = new List<string>(db.Analytic.Select(a => a.AnalyticName).ToList());
+            List<TextBlock> tb = new List<TextBlock>();
+            for (int i = 0; i < list.Count; i++)
+            {
+                tb.Add(new TextBlock
+                {
+                    Text = list[i],
+                    TextWrapping = TextWrapping.WrapWithOverflow
+                });
+            }
+            lb.ItemsSource = tb;
         }
 
         //Метод возвращения ан предыдущую страницу
@@ -47,6 +58,7 @@ namespace dektopCS.source
             {
                 string fName = db.Analytic.Where(a => a.ID.Equals(lb.SelectedIndex + 1)).Select(b => b.AnalyticFile).FirstOrDefault();
                 Process.Start($"{path}" + fName);
+                
             }
 
         }

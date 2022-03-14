@@ -50,6 +50,7 @@
             Name="lb"
             Grid.ColumnSpan="2"
             Grid.Row="1"
+            ScrollViewer.HorizontalScrollBarVisibility="Disabled"
             MouseDoubleClick="CheckItem_Click">
         </ListBox>
         <Button
@@ -60,8 +61,17 @@
             Grid.Column="0"
             Grid.Row="3">Назад</Button>
         <Image  
-              Grid.Row="2"
+            Grid.Row="2"
             Grid.ColumnSpan="2"
-            Name="img"/>
+            ScrollViewer.HorizontalScrollBarVisibility="Auto"
+            ScrollViewer.VerticalScrollBarVisibility="Auto"
+            MouseWheel="Zoom_Wheel"
+            Name="img"
+            >
+            <Image.RenderTransform>
+                <ScaleTransform 
+                    x:Name="imgScale"/>
+            </Image.RenderTransform>
+        </Image>
     </Grid>
 </Page>

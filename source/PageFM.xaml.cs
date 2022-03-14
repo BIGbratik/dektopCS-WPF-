@@ -35,7 +35,19 @@ namespace dektopCS.source
             ind = num;
             db = new desktopDBEntities1();
             db.CSobject.Load();
-            lb.ItemsSource = db.CSobject.Where(p => p.CategoryID.Equals(num)).Select(a => a.ObjectName).ToList();
+            //lb.ItemsSource = db.CSobject.Where(p => p.CategoryID.Equals(num)).Select(a => a.ObjectName).ToList();
+
+            List<string> list = new List<string>(db.CSobject.Where(p => p.CategoryID.Equals(num)).Select(a => a.ObjectName).ToList());
+            List<TextBlock> tb = new List<TextBlock>();
+            for (int i = 0; i < list.Count; i++)
+            {
+                tb.Add(new TextBlock
+                {
+                    Text = list[i],
+                    TextWrapping = TextWrapping.WrapWithOverflow
+                });
+            }
+            lb.ItemsSource = tb;
         }
 
         //Возвращение на предыдущую страницу
@@ -71,18 +83,19 @@ namespace dektopCS.source
                     App.Current.Resources["markerPath"] = "";
 
                     GMapMarker marker = new GMapMarker(new PointLatLng(obj.Latitude, obj.Longitude));
-                        Ellipse img = new Ellipse()
-                        {
-                            Width = 20,
-                            Height = 20,
-                            ToolTip = obj.Name,
-                            Fill = Brushes.MidnightBlue,
-                            Stroke = Brushes.DarkOrange,
-                            StrokeThickness = 3
-                        };
 
-                        marker.Shape = img;
-                        map.Markers.Add(marker);
+                    Ellipse img = new Ellipse()
+                    {
+                        Width = 20,
+                        Height = 20,
+                        ToolTip = obj.Name,
+                        Fill = Brushes.MidnightBlue,
+                        Stroke = Brushes.DarkOrange,
+                        StrokeThickness = 3
+                    };
+                    marker.Shape = img;
+                    map.Markers.Add(marker);
+                    map.Position= new PointLatLng(obj.Latitude, obj.Longitude);
                 }
                 catch (Exception ex)
                 { }

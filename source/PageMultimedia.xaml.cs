@@ -72,7 +72,8 @@ namespace dektopCS.source
 
                 TextBlock tb = new TextBlock
                 {
-                    Text = mn[i]
+                    Text = mn[i],
+                    TextWrapping= TextWrapping.WrapWithOverflow
                 };
                 tb.VerticalAlignment = VerticalAlignment.Center;
                 tb.FontSize = 16;

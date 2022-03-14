@@ -50,7 +50,16 @@ namespace dektopCS.source
             }
             else
             {
-                lb.ItemsSource = str;
+                List<TextBlock> tb = new List<TextBlock>();
+                for (int i = 0; i < str.Count; i++)
+                {
+                    tb.Add(new TextBlock
+                    {
+                        Text = str[i],
+                        TextWrapping = TextWrapping.WrapWithOverflow
+                    });
+                }
+                lb.ItemsSource = tb;
                 lb.IsEnabled = true;
             }
         }

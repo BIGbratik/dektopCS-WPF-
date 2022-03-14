@@ -46,6 +46,7 @@
             Name="lb"
             Grid.ColumnSpan="2"
             Grid.Row="1"
+            ScrollViewer.HorizontalScrollBarVisibility="Disabled"
             MouseDoubleClick="CheckItem_Click">
         </ListBox>
         <Button
