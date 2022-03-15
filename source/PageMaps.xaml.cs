@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using MySql.Data.MySqlClient;
+using System.Data.Common;
 
 namespace dektopCS.source
 {
@@ -20,9 +22,12 @@ namespace dektopCS.source
     /// </summary>
     public partial class PageMaps : Page
     {
-        public PageMaps()
+        MySqlConnection myConnection;
+
+        public PageMaps(MySqlConnection conn)
         {
             InitializeComponent();
+            myConnection = conn;
         }
 
         //Возврат к предыдущей странице
@@ -34,21 +39,21 @@ namespace dektopCS.source
         //Метод перехода к списку имеющихся общих карт
         private void CheckMap_Click(object sender, RoutedEventArgs e)
         {
-            PageMPSinfo pageMPSinfo = new PageMPSinfo("Maps");
+            PageMPSinfo pageMPSinfo = new PageMPSinfo("Maps",myConnection);
             NavigationService.Navigate(pageMPSinfo);
         }
 
         //Метод перехода к списку имеющихся общих планов
         private void CheckPlans_Click(object sender, RoutedEventArgs e)
         {
-            PageMPSinfo pageMPSinfo = new PageMPSinfo("Plans");
+            PageMPSinfo pageMPSinfo = new PageMPSinfo("Plans", myConnection);
             NavigationService.Navigate(pageMPSinfo);
         }
 
         //Метод перехода к списку имеющихся общих схем
         private void CheckShemes_Click(object sender, RoutedEventArgs e)
         {
-            PageMPSinfo pageMPSinfo = new PageMPSinfo("Shemes");
+            PageMPSinfo pageMPSinfo = new PageMPSinfo("Shemes", myConnection);
             NavigationService.Navigate(pageMPSinfo);
         }
     }

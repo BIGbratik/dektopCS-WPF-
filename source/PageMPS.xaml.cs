@@ -13,6 +13,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using MySql.Data.MySqlClient;
+using System.Data.Common;
 
 namespace dektopCS.source
 {
@@ -22,45 +24,63 @@ namespace dektopCS.source
     public partial class PageMPS : Page
     {
         //Инициализация БД, пути к локальным данным, списка для нужных данных
-        desktopDBEntities1 db;
+        MySqlConnection myConnection = (MySqlConnection)App.Current.Resources["connectionMySQL"];
         private string path = @"/data/MPS/";
         List<string> types = new List<string>();
         public PageMPS(int id)
         {
             //Инициализация страницы и заполнение её выбранным перечнем данных
             InitializeComponent();
-            db = new desktopDBEntities1();
-            db.MPS.Load();
-            List<string> str = new List<string>();
+            
+            try
+            {
+                //СОставление запроса к БД
+                string sql = "SELECT MPStype,MPSfile FROM MPS WHERE ObjectID IS NOT NULL AND ObjectID = " + id;
+                MySqlCommand cmd = new MySqlCommand(sql, myConnection);
+                List<string> list = new List<string>();
 
-
-            var list = db.MPS.Where(x => x.ObjectID.HasValue.Equals(true)).Select(a => new {a.ObjectID, a.MPSfile, a.MPSType}).ToList();
-            for (int i = 0; i < list.Count; i++)
-            {
-                if (list[i].ObjectID == id)
+                //Чтение ответа БД
+                using (DbDataReader reader = cmd.ExecuteReader())
                 {
-                    str.Add(list[i].MPSfile);
-                    types.Add(list[i].MPSType);
-                }
-            }
-            if (str.Count==0)
-            {
-                lb.Items.Add("В базе данных отсутствуют объекты, связанные с выбранным объектом");
-                lb.IsEnabled = false;
-            }
-            else
-            {
-                List<TextBlock> tb = new List<TextBlock>();
-                for (int i = 0; i < str.Count; i++)
-                {
-                    tb.Add(new TextBlock
+                    if (reader.HasRows)
                     {
-                        Text = str[i],
-                        TextWrapping = TextWrapping.WrapWithOverflow
-                    });
+                        //Построчное считывание ответа
+                        while (reader.Read())
+                        {
+                            string mpsType = reader.GetString(0);
+                            types.Add(mpsType);
+                            string mpsFiles = reader.GetString(1);
+                            list.Add(mpsFiles);
+                        }
+
+                    }
                 }
-                lb.ItemsSource = tb;
-                lb.IsEnabled = true;
+
+                //Запись ответа в текстовые блоки
+                if (list.Count == 0)
+                {
+                    lb.Items.Add("В базе данных отсутствуют объекты, связанные с выбранным объектом");
+                    lb.IsEnabled = false;
+                }
+                else
+                {
+                    List<TextBlock> tb = new List<TextBlock>();
+                    for (int i = 0; i < list.Count; i++)
+                    {
+                        tb.Add(new TextBlock
+                        {
+                            Text = list[i],
+                            TextWrapping = TextWrapping.WrapWithOverflow
+                        });
+                    }
+                    lb.ItemsSource = tb;
+                    lb.ItemsSource = list;
+                    lb.IsEnabled = true;
+                }
+            }
+            catch
+            {
+                MessageBox.Show("Потеряно соединение с базой данных");
             }
         }
 

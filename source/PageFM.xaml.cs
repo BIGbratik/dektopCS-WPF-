@@ -92,7 +92,7 @@ namespace dektopCS.source
             {
                 try
                 {
-                    string sql = "SELECT ID FROM CSobject WHERE CategoryID = " + ind;
+                    string sql = "SELECT ID FROM CSobject WHERE CategoryID = " + ind+" LIMIT 1";
                     MySqlCommand cmd = new MySqlCommand(sql, myConnection);
                     int id = -1;
 
@@ -104,13 +104,13 @@ namespace dektopCS.source
                             //Построчное считывание ответа
                             while (reader.Read())
                             {
-                                id = reader.GetInt32(0) + (lb.SelectedIndex-1);
+                                obj.Number = reader.GetInt32(0) + lb.SelectedIndex;
                             }
 
                         }
                     }
 
-                    sql = "SELECT ObjectName,Vedomstvo,Subordination,IsReady,Num,Place,Phone,Latitude,Longitude FROM CSobject WHERE ID = " + id;
+                    sql = "SELECT ObjectName,Vedomstvo,Subordination,IsReady,Num,Place,Phone,Latitude,Longitude FROM CSobject WHERE ID = " + obj.Number;
                     cmd = new MySqlCommand(sql, myConnection);
 
                     //Чтение ответа БД

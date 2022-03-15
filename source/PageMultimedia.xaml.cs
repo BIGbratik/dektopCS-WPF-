@@ -17,6 +17,8 @@ using System.Windows.Shapes;
 using GMap.NET;
 using GMap.NET.MapProviders;
 using GMap.NET.WindowsPresentation;
+using MySql.Data.MySqlClient;
+using System.Data.Common;
 
 namespace dektopCS.source
 {
@@ -26,18 +28,44 @@ namespace dektopCS.source
     public partial class PageMultimedia : Page
     {
         //ИНициализация БД
-        desktopDBEntities1 db;
+        MySqlConnection myConnection = (MySqlConnection)App.Current.Resources["connectionMySQL"];
         public PageMultimedia()
         {
             //Инициализация страницы и выгрузка необходимых данных из БД
             InitializeComponent();
 
             List<string> fNames = new List<string>();
-            List<string>marksNames=new List<string>();
-            db = new desktopDBEntities1();
+            List<string> marksNames = new List<string>();
+            /*db = new desktopDBEntities1();
             db.Marks.Load();
             fNames = db.Marks.Select(a => a.MakrImage).ToList();
-            marksNames= db.Marks.Select(a => a.MarkName).ToList();
+            marksNames= db.Marks.Select(a => a.MarkName).ToList();*/
+            try
+            {
+                //СОставление запроса к БД
+                string sql = "SELECT MarkName, MarkImage FROM Marks";
+                MySqlCommand cmd = new MySqlCommand(sql, myConnection);
+                List<string> list = new List<string>();
+
+                //Чтение ответа БД
+                using (DbDataReader reader = cmd.ExecuteReader())
+                {
+                    if (reader.HasRows)
+                    {
+                        //Построчное считывание ответа
+                        while (reader.Read())
+                        {
+                            fNames.Add(reader.GetString(0));
+                            marksNames.Add(reader.GetString(1));
+                        }
+
+                    }
+                }
+            }
+            catch
+            {
+                MessageBox.Show("Потеряно соединение с базой данных");
+            }
             lb.ItemsSource = GetSP(fNames,marksNames);
         }
 
@@ -48,7 +76,7 @@ namespace dektopCS.source
         }
 
         //Запоминание выбранной метки для карты
-        private void ChooseItem_Click(object sender, RoutedEventArgs e)
+        /*private void ChooseItem_Click(object sender, RoutedEventArgs e)
         {
             if (lb.SelectedIndex != -1)
             {
@@ -59,7 +87,7 @@ namespace dektopCS.source
                 App.Current.Resources["markerPath"] = markerPath;
                 App.Current.Resources["markerName"] = markerName;
             }
-        }
+        }*/
 
         //Метод составление списка, содержащего изображения меток и их названия
         public List<StackPanel> GetSP(List<string> fn, List<string>mn)

@@ -44,7 +44,7 @@ namespace dektopCS.source
         //Метод перехода на страницу карт, планов и схем
         private void CheckMaps_Click(object sender, RoutedEventArgs e)
         {
-            PageMaps pageMaps = new PageMaps();
+            PageMaps pageMaps = new PageMaps(conn);
             NavigationService.Navigate(pageMaps);
         }
 

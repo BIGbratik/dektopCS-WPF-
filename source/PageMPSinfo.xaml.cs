@@ -13,6 +13,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using MySql.Data.MySqlClient;
+using System.Data.Common;
 
 namespace dektopCS.source
 {
@@ -22,37 +24,64 @@ namespace dektopCS.source
     public partial class PageMPSinfo : Page
     {
         //Инициализация БД и пути к локальным данным
-        desktopDBEntities1 db;
         private string path = @"/data/MPS/";
-        public PageMPSinfo(string type)
+        MySqlConnection myConnection;
+        public PageMPSinfo(string type, MySqlConnection conn)
         {
             //Инициализация страницы и загрузка списка данных, касающихся выбранного объекта
             InitializeComponent();
             path =path+type+"/";
-            db = new desktopDBEntities1();
-            db.MPS.Load();
+            myConnection = conn;
+            
+            try
+            {
+                //СОставление запроса к БД
+                string sql = "SELECT MPSfile FROM MPS WHERE MPStype = '"+type+"' AND ObjectID IS NULL";
+                MySqlCommand cmd = new MySqlCommand(sql, myConnection);
+                List<string> list = new List<string>();
 
-            var list = db.MPS.Where(x => x.ObjectID.HasValue.Equals(false)).Where(y=>y.MPSType.Equals(type)).Select(a => a.MPSfile).ToList();
-            if (list.Count == 0)
-            {
-                lb.Items.Add("В базе данных отсутствуют объекты, связанные с выбранным объектом");
-                lb.IsEnabled = false;
-            }
-            else
-            {
-                List<TextBlock> tb = new List<TextBlock>();
-                for (int i = 0; i < list.Count; i++)
+                //Чтение ответа БД
+                using (DbDataReader reader = cmd.ExecuteReader())
                 {
-                    tb.Add(new TextBlock
+                    if (reader.HasRows)
                     {
-                        Text = list[i],
-                        TextWrapping = TextWrapping.WrapWithOverflow
-                    });
+                        //Построчное считывание ответа
+                        while (reader.Read())
+                        {
+                            string mpsFiles = reader.GetString(0);
+                            list.Add(mpsFiles);
+                        }
+
+                    }
                 }
-                lb.ItemsSource = tb;
-                lb.ItemsSource = list;
-                lb.IsEnabled = true;
+
+                //Запись ответа в текстовые блоки
+                if (list.Count == 0)
+                {
+                    lb.Items.Add("В базе данных отсутствуют объекты, связанные с выбранным объектом");
+                    lb.IsEnabled = false;
+                }
+                else
+                {
+                    List<TextBlock> tb = new List<TextBlock>();
+                    for (int i = 0; i < list.Count; i++)
+                    {
+                        tb.Add(new TextBlock
+                        {
+                            Text = list[i],
+                            TextWrapping = TextWrapping.WrapWithOverflow
+                        });
+                    }
+                    lb.ItemsSource = tb;
+                    lb.ItemsSource = list;
+                    lb.IsEnabled = true;
+                }
             }
+            catch
+            {
+                MessageBox.Show("Потеряно соединение с базой данных");
+            }
+
         }
 
         //Возврат на предыдущю страницу
@@ -83,8 +112,8 @@ namespace dektopCS.source
         //ДОРАБОТАТЬ ПРИБЛИЖЕНИЕ КАРТИНКИ!!!
         private void Zoom_Wheel (object sender, RoutedEventArgs e)
         {
-            img.Width = 200;
-            img.Height = 200;
+            /*img.Width = 200;
+            img.Height = 200;*/
         }
     }
 }

@@ -85,7 +85,7 @@ namespace dektopCS.source
         {
             if (lb.SelectedIndex!=-1)
             {
-                PageFM pageFM = new PageFM(lb.SelectedIndex + 1,myConnection);
+                PageFM pageFM = new PageFM(lb.SelectedIndex+1,myConnection);
                 NavigationService.Navigate(pageFM);
                 lb.SelectedIndex = -1;
             }
