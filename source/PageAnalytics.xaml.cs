@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Common;
 using System.Data.Entity;
 using System.Diagnostics;
 using System.Linq;
@@ -14,6 +15,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using MySql.Data.MySqlClient;
 
 namespace dektopCS.source
 {
@@ -29,20 +31,45 @@ namespace dektopCS.source
         {
             //Инициализация страницы с выгрузкой данных из БД
             InitializeComponent();
-            db = new desktopDBEntities1();
-            db.Analytic.Load();
 
-            List<string> list = new List<string>(db.Analytic.Select(a => a.AnalyticName).ToList());
-            List<TextBlock> tb = new List<TextBlock>();
-            for (int i = 0; i < list.Count; i++)
+            MySqlConnection myConnection = myStringConn.GetDBConnection();
+            myConnection.Open();
+            try
             {
-                tb.Add(new TextBlock
+                string sql = "SELECT AnalyticName FROM desktopdb.analytic";
+                MySqlCommand cmd = new MySqlCommand(sql, myConnection);
+                List<string> list = new List<string>();
+                using (DbDataReader reader = cmd.ExecuteReader())
                 {
-                    Text = list[i],
-                    TextWrapping = TextWrapping.WrapWithOverflow
-                });
+                    if (reader.HasRows)
+                    {
+                        while (reader.Read())
+                        {
+                            string analyticFile = reader.GetString(0);
+                            list.Add(analyticFile);
+                        }
+
+                    }
+                }
+                List<TextBlock> tb = new List<TextBlock>();
+                for (int i = 0; i < list.Count; i++)
+                {
+                    tb.Add(new TextBlock
+                    {
+                        Text = list[i],
+                        TextWrapping = TextWrapping.WrapWithOverflow
+                    });
+                }
+                lb.ItemsSource = tb;
             }
-            lb.ItemsSource = tb;
+            catch
+            {
+                MessageBox.Show("Connection lost");
+            }
+            finally
+            {
+                myConnection.Close();
+            }
         }
 
         //Метод возвращения ан предыдущую страницу
