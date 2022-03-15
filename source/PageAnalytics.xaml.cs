@@ -24,33 +24,39 @@ namespace dektopCS.source
     /// </summary>
     public partial class PageAnalytics : Page
     {
-        //Инициализация БД и пути к статическим ресурсам
-        desktopDBEntities1 db;
+        //Инициализация пути к статическим ресурсам
         string path = @".\data\Analityc\";
-        public PageAnalytics()
+        MySqlConnection myConnection;
+        public PageAnalytics(MySqlConnection conn)
         {
             //Инициализация страницы с выгрузкой данных из БД
             InitializeComponent();
 
-            MySqlConnection myConnection = myStringConn.GetDBConnection();
-            myConnection.Open();
+            //Установление соединения с MySQL бд
+            myConnection = conn;
             try
             {
-                string sql = "SELECT AnalyticName FROM desktopdb.analytic";
+                //СОставление запроса к БД
+                string sql = "SELECT AnalyticName FROM Analytic";
                 MySqlCommand cmd = new MySqlCommand(sql, myConnection);
                 List<string> list = new List<string>();
+
+                //Чтение ответа БД
                 using (DbDataReader reader = cmd.ExecuteReader())
                 {
                     if (reader.HasRows)
                     {
+                        //Построчное считывание ответа
                         while (reader.Read())
                         {
-                            string analyticFile = reader.GetString(0);
-                            list.Add(analyticFile);
+                            string analyticName = reader.GetString(0);
+                            list.Add(analyticName);
                         }
 
                     }
                 }
+
+                //Запись ответа в текстовые блоки
                 List<TextBlock> tb = new List<TextBlock>();
                 for (int i = 0; i < list.Count; i++)
                 {
@@ -64,11 +70,7 @@ namespace dektopCS.source
             }
             catch
             {
-                MessageBox.Show("Connection lost");
-            }
-            finally
-            {
-                myConnection.Close();
+                MessageBox.Show("Потеряно соединение с базой данных");
             }
         }
 
@@ -81,13 +83,43 @@ namespace dektopCS.source
         //Запуск аналитической программы
         private void StartProgram_Click(object sender, RoutedEventArgs e)
         {
-            if (lb.SelectedIndex!=-1)
+            if (lb.SelectedIndex != -1)
             {
-                string fName = db.Analytic.Where(a => a.ID.Equals(lb.SelectedIndex + 1)).Select(b => b.AnalyticFile).FirstOrDefault();
-                Process.Start($"{path}" + fName);
-                
-            }
+                //Установление соединения с MySQL бд
+                try
+                {
+                    //СОставление запроса к БД
+                    string sql = "SELECT AnalyticFile FROM Analytic WHERE ID = " + (lb.SelectedIndex + 1);
+                    string analyticFile="";
+                    MySqlCommand cmd = new MySqlCommand(sql, myConnection);
 
+                    //Чтение ответа БД
+                    using (DbDataReader reader = cmd.ExecuteReader())
+                    {
+                        if (reader.HasRows)
+                        {
+                            //Построчное считывание ответа
+                            while (reader.Read())
+                            {
+                                analyticFile = reader.GetString(0);
+                            }
+
+                        }
+                    }
+                    try
+                    {
+                        Process.Start($"{path}" + analyticFile);
+                    }
+                    catch
+                    {
+                        MessageBox.Show("Не удаётся запустить выбранную программу");
+                    }
+                }
+                catch
+                {
+                    MessageBox.Show("Потеряно соединение с базой данных");
+                }
+            }
         }
     }
 }

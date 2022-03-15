@@ -3,15 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using MySql.Data.MySqlClient;
 
 namespace dektopCS
 {
+    //Служебный класс, для подключения к бд MySQL
     public class myStringConn
     {
+        //Метод подключения к БД с возможностью быстрого изменения параметров строки подключения
         public static MySqlConnection GetDBConnection()
         {
-            string host = "localhost";
+            string host = /*"192.168.43.106"*/"localhost";
             int port = 3306;
             string database = "desktopdb";
             string username = "root";
@@ -19,8 +22,21 @@ namespace dektopCS
 
             String connString = "server=" + host + ";port=" + port + ";database=" + database + ";user=" + username + ";password=" + password;
             MySqlConnection conn = new MySqlConnection(connString);
+            try
+            {
+                conn.Open();
+            }
+            catch
+            {
+                MessageBox.Show("Не удалось установить соединение с сервером БАЗЫ ДАННЫХ");
+            }
 
             return conn; 
+        }
+
+        public static void CloseDBConnection(MySqlConnection connection)
+        {
+            connection.Close();
         }
     }
 }

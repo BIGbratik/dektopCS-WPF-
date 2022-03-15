@@ -26,9 +26,12 @@ namespace dektopCS
     /// </summary>
     public partial class MainWindow : Window
     {
+        public MySqlConnection conn;
         public MainWindow()
         {
             InitializeComponent();
+            conn = myStringConn.GetDBConnection();
+            App.Current.Resources["connectionMySQL"] = conn;
         }
 
         //Метод отрисовки карты при загрузке окна
@@ -49,6 +52,7 @@ namespace dektopCS
         //Метод закрытия окна
         private void Exit_Click(object sender, RoutedEventArgs e)
         {
+            myStringConn.CloseDBConnection(conn);
             Close();
         }
 

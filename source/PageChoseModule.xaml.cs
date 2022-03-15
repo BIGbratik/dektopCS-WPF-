@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using MySql.Data.MySqlClient;
 
 namespace dektopCS.source
 {
@@ -20,9 +21,11 @@ namespace dektopCS.source
     /// </summary>
     public partial class PageChoseModule : Page
     {
+        MySqlConnection conn;
         public PageChoseModule()
         {
             InitializeComponent();
+            conn = (MySqlConnection)App.Current.Resources["connectionMySQL"];
         }
 
         //Метод перехода на страницу сил и средств
@@ -48,7 +51,7 @@ namespace dektopCS.source
         //Метод перехода на страницу выбора аналитической программы
         private void CheckAnalytics_Click(object sender, RoutedEventArgs e)
         {
-            PageAnalytics pageAnalytics = new PageAnalytics();
+            PageAnalytics pageAnalytics = new PageAnalytics(conn);
             NavigationService.Navigate(pageAnalytics);
         }
 
