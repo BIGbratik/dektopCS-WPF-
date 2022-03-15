@@ -15,6 +15,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Data.SqlClient;
+using MySql.Data.MySqlClient;
+using System.Data.Common;
 
 namespace dektopCS.source
 {
@@ -24,24 +26,51 @@ namespace dektopCS.source
     public partial class PageForceMeans : Page
     {
         //Инициализация БД
-        desktopDBEntities1 db;
-        public PageForceMeans()
+        MySqlConnection myConnection;
+        public PageForceMeans(MySqlConnection conn)
         {
             //Инициализация страницы и выгрузка необходимых данных из БД
             InitializeComponent();
-            db = new desktopDBEntities1();
-            db.Category.Load();
+            myConnection = conn;
 
-            List<string> list = new List<string>(db.Category.Select(a => a.CategoryName).ToList());
-            List<TextBlock> tb = new List<TextBlock>();
-            for (int i=0; i<list.Count;i++)
+            try
             {
-                tb.Add(new TextBlock
-                    { 
-                    Text=list[i],
-                    TextWrapping = TextWrapping.WrapWithOverflow});
+                //СОставление запроса к БД
+                string sql = "SELECT CategoryName FROM Category";
+                MySqlCommand cmd = new MySqlCommand(sql, myConnection);
+                List<string> list = new List<string>();
+
+                //Чтение ответа БД
+                using (DbDataReader reader = cmd.ExecuteReader())
+                {
+                    if (reader.HasRows)
+                    {
+                        //Построчное считывание ответа
+                        while (reader.Read())
+                        {
+                            string categoryName = reader.GetString(0);
+                            list.Add(categoryName);
+                        }
+
+                    }
+                }
+
+                //Запись ответа в текстовые блоки
+                List<TextBlock> tb = new List<TextBlock>();
+                for (int i = 0; i < list.Count; i++)
+                {
+                    tb.Add(new TextBlock
+                    {
+                        Text = list[i],
+                        TextWrapping = TextWrapping.WrapWithOverflow
+                    });
+                }
+                lb.ItemsSource = tb;
             }
-            lb.ItemsSource = tb;
+            catch
+            {
+                MessageBox.Show("Потеряно соединение с базой данных");
+            }
 
         }
 
@@ -56,7 +85,7 @@ namespace dektopCS.source
         {
             if (lb.SelectedIndex!=-1)
             {
-                PageFM pageFM = new PageFM(lb.SelectedIndex + 1);
+                PageFM pageFM = new PageFM(lb.SelectedIndex + 1,myConnection);
                 NavigationService.Navigate(pageFM);
                 lb.SelectedIndex = -1;
             }

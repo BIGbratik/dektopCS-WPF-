@@ -31,7 +31,7 @@ namespace dektopCS.source
         //Метод перехода на страницу сил и средств
         private void CheckForcMeans_Click(object sender, RoutedEventArgs e)
         {
-            PageForceMeans pageForceMeans = new PageForceMeans();
+            PageForceMeans pageForceMeans = new PageForceMeans(conn);
             NavigationService.Navigate(pageForceMeans);
         }
 

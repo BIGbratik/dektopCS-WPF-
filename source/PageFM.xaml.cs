@@ -1,5 +1,6 @@
 ﻿using GMap.NET;
 using GMap.NET.WindowsPresentation;
+using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -16,6 +17,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Data.Common;
 
 namespace dektopCS.source
 {
@@ -27,27 +29,54 @@ namespace dektopCS.source
         //Инициализация переменной индекса, объекта ЧС и БД
         public static int ind;
         PMobject obj = new PMobject();
-        desktopDBEntities1 db;
-        public PageFM(int num)
+        MySqlConnection myConnection;
+
+        public PageFM(int num, MySqlConnection conn)
         {
             //Инициализация страницы с выгрузкой необходимых данных из БД
             InitializeComponent();
             ind = num;
-            db = new desktopDBEntities1();
-            db.CSobject.Load();
-            //lb.ItemsSource = db.CSobject.Where(p => p.CategoryID.Equals(num)).Select(a => a.ObjectName).ToList();
+            myConnection = conn;
 
-            List<string> list = new List<string>(db.CSobject.Where(p => p.CategoryID.Equals(num)).Select(a => a.ObjectName).ToList());
-            List<TextBlock> tb = new List<TextBlock>();
-            for (int i = 0; i < list.Count; i++)
+            try
             {
-                tb.Add(new TextBlock
+                //СОставление запроса к БД
+                string sql = "SELECT ObjectName FROM CSobject WHERE CategoryID = " + ind;
+                MySqlCommand cmd = new MySqlCommand(sql, myConnection);
+                List<string> list = new List<string>();
+
+                //Чтение ответа БД
+                using (DbDataReader reader = cmd.ExecuteReader())
                 {
-                    Text = list[i],
-                    TextWrapping = TextWrapping.WrapWithOverflow
-                });
+                    if (reader.HasRows)
+                    {
+                        //Построчное считывание ответа
+                        while (reader.Read())
+                        {
+                            string csObjectName = reader.GetString(0);
+                            list.Add(csObjectName);
+                        }
+
+                    }
+                }
+
+                //Запись ответа в текстовые блоки
+                List<TextBlock> tb = new List<TextBlock>();
+                for (int i = 0; i < list.Count; i++)
+                {
+                    tb.Add(new TextBlock
+                    {
+                        Text = list[i],
+                        TextWrapping = TextWrapping.WrapWithOverflow
+                    });
+                }
+                lb.ItemsSource = tb;
             }
-            lb.ItemsSource = tb;
+            catch
+            {
+                MessageBox.Show("Потеряно соединение с базой данных");
+            }
+
         }
 
         //Возвращение на предыдущую страницу
@@ -61,44 +90,81 @@ namespace dektopCS.source
         {
             if (lb.SelectedIndex != -1)
             {
-                int selectedObjectID = Convert.ToInt32(db.CSobject.Where(p => p.CategoryID.Equals(ind)).Select(a => a.ID).FirstOrDefault()) + lb.SelectedIndex;
-
-                obj.Number = selectedObjectID;
-                obj.Name = db.CSobject.Where(a => a.ID.Equals(selectedObjectID)).Select(a => a.ObjectName).FirstOrDefault();
-                obj.Structer = db.CSobject.Where(a => a.ID.Equals(selectedObjectID)).Select(a => a.Vedomstvo).FirstOrDefault();
-                obj.Subord = db.CSobject.Where(a => a.ID.Equals(selectedObjectID)).Select(a => a.Subordination).FirstOrDefault();
-                obj.isReady = db.CSobject.Where(a => a.ID.Equals(selectedObjectID)).Select(a => a.IsReady).FirstOrDefault();
-                obj.Count = db.CSobject.Where(a => a.ID.Equals(selectedObjectID)).Select(a => a.Num).FirstOrDefault();
-                obj.Place = db.CSobject.Where(a => a.ID.Equals(selectedObjectID)).Select(a => a.Place).FirstOrDefault();
-                obj.Phone = db.CSobject.Where(a => a.ID.Equals(selectedObjectID)).Select(a => a.Phone).FirstOrDefault();
-                PageFMInfo pageFMInfo = new PageFMInfo(obj);
-                NavigationService.Navigate(pageFMInfo);
-
                 try
                 {
-                    obj.Latitude = (double)db.CSobject.Where(a => a.ID.Equals(selectedObjectID)).Select(a => a.Latitude).FirstOrDefault();
-                    obj.Longitude = (double)db.CSobject.Where(a => a.ID.Equals(selectedObjectID)).Select(a => a.Longitude).FirstOrDefault();
+                    string sql = "SELECT ID FROM CSobject WHERE CategoryID = " + ind;
+                    MySqlCommand cmd = new MySqlCommand(sql, myConnection);
+                    int id = -1;
 
-                    GMapControl map = (GMapControl)App.Current.MainWindow.FindName("mapView");
-                    App.Current.Resources["markerPath"] = "";
-
-                    GMapMarker marker = new GMapMarker(new PointLatLng(obj.Latitude, obj.Longitude));
-
-                    Ellipse img = new Ellipse()
+                    //Чтение ответа БД
+                    using (DbDataReader reader = cmd.ExecuteReader())
                     {
-                        Width = 20,
-                        Height = 20,
-                        ToolTip = obj.Name,
-                        Fill = Brushes.MidnightBlue,
-                        Stroke = Brushes.DarkOrange,
-                        StrokeThickness = 3
-                    };
-                    marker.Shape = img;
-                    map.Markers.Add(marker);
-                    map.Position= new PointLatLng(obj.Latitude, obj.Longitude);
+                        if (reader.HasRows)
+                        {
+                            //Построчное считывание ответа
+                            while (reader.Read())
+                            {
+                                id = reader.GetInt32(0) + (lb.SelectedIndex-1);
+                            }
+
+                        }
+                    }
+
+                    sql = "SELECT ObjectName,Vedomstvo,Subordination,IsReady,Num,Place,Phone,Latitude,Longitude FROM CSobject WHERE ID = " + id;
+                    cmd = new MySqlCommand(sql, myConnection);
+
+                    //Чтение ответа БД
+                    using (DbDataReader reader = cmd.ExecuteReader())
+                    {
+                        if (reader.HasRows)
+                        {
+                            //Построчное считывание ответа
+                            while (reader.Read())
+                            {
+                                obj.Name = reader.GetString(0);
+                                obj.Structer = reader.GetString(1);
+                                obj.Subord = reader.GetString(2);
+                                obj.isReady = reader.GetString(3);
+                                obj.Count = reader.GetString(4);
+                                obj.Place = reader.GetString(5);
+                                obj.Phone = reader.GetString(6);
+                                obj.Latitude = reader.GetDouble(7);
+                                obj.Longitude = reader.GetDouble(8);
+                            }
+                        }
+                    }
+                    PageFMInfo pageFMInfo = new PageFMInfo(obj);
+                    NavigationService.Navigate(pageFMInfo);
+
+                    try
+                    {
+                        GMapControl map = (GMapControl)App.Current.MainWindow.FindName("mapView");
+                        App.Current.Resources["markerPath"] = "";
+
+                        GMapMarker marker = new GMapMarker(new PointLatLng(obj.Latitude, obj.Longitude));
+
+                        Ellipse img = new Ellipse()
+                        {
+                            Width = 20,
+                            Height = 20,
+                            ToolTip = obj.Name,
+                            Fill = Brushes.MidnightBlue,
+                            Stroke = Brushes.DarkOrange,
+                            StrokeThickness = 3
+                        };
+                        marker.Shape = img;
+                        map.Markers.Add(marker);
+                        map.Position = new PointLatLng(obj.Latitude, obj.Longitude);
+                    }
+                    catch
+                    {
+                        MessageBox.Show("Не удалось отобразить точку объекта");
+                    }
                 }
-                catch (Exception ex)
-                { }
+                catch
+                {
+                    MessageBox.Show("Потеряно соединение с базой данных");
+                }
                 
             }
         }
