@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using MySql.Data.MySqlClient;
+using System.Data.Common;
 
 namespace dektopCS.source
 {
@@ -22,16 +24,56 @@ namespace dektopCS.source
     {
         //Инициализации БД и объекта будужщей страницы
         desktopDBEntities1 db;
+        MySqlConnection myConnection = (MySqlConnection)App.Current.Resources["connectionMySQL"];
         object page;
         public PageClassificators()
         {
             //Инициализация страницы с выгрузкой необходимых данных из БД
             InitializeComponent();
-            db = new desktopDBEntities1();
-            string left = db.Emerg.Where(a => a.ID.Equals(1)).Select(b => b.EmergName).FirstOrDefault();
-            BtnLeft.Content = left;
-            string right = db.Emerg.Where(a => a.ID.Equals(2)).Select(b => b.EmergName).FirstOrDefault();
-            BtnRight.Content = right;
+
+            try
+            {
+                //СОставление запроса к БД
+                string sql = "SELECT EmergName FROM Emerg WHERE ID = 1";
+                MySqlCommand cmd = new MySqlCommand(sql, myConnection);
+                string left = "";
+
+                //Чтение ответа БД
+                using (DbDataReader reader = cmd.ExecuteReader())
+                {
+                    if (reader.HasRows)
+                    {
+                        //Построчное считывание ответа
+                        while (reader.Read())
+                        {
+                            left=reader.GetString(0);
+                        }
+                    }
+                    BtnLeft.Content = left;
+                }
+
+                sql = "SELECT EmergName FROM Emerg WHERE ID = 2";
+                cmd = new MySqlCommand(sql, myConnection);
+                string right = "";
+
+                //Чтение ответа БД
+                using (DbDataReader reader = cmd.ExecuteReader())
+                {
+                    if (reader.HasRows)
+                    {
+                        //Построчное считывание ответа
+                        while (reader.Read())
+                        {
+                            right = reader.GetString(0);
+                        }
+                    }
+                    BtnRight.Content = right;
+                }
+            }
+            catch
+            {
+                MessageBox.Show("Потеряно соединение с базой данных");
+            }
             page = Claasifs.Content;
         }
 
@@ -57,8 +99,31 @@ namespace dektopCS.source
         private void ShowTypes (int id)
         {
             List<string> types = new List<string>();
-            db = new desktopDBEntities1();
-            types = db.EmergType.Where(a => a.EmergID.Equals(id)).Select(b => b.EmergTypeName).ToList();
+
+            try
+            {
+                //СОставление запроса к БД
+                string sql = "SELECT EmergTypeName FROM EmergType WHERE EmergID = "+id;
+                MySqlCommand cmd = new MySqlCommand(sql, myConnection);
+
+                //Чтение ответа БД
+                using (DbDataReader reader = cmd.ExecuteReader())
+                {
+                    if (reader.HasRows)
+                    {
+                        //Построчное считывание ответа
+                        while (reader.Read())
+                        {
+                            types.Add(reader.GetString(0));
+                        }
+
+                    }
+                }
+            }
+            catch
+            {
+                MessageBox.Show("Потеряно соединение с базой данных");
+            }
 
             Grid grid = new Grid();
             RowDefinition row1 = new RowDefinition();

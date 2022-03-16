@@ -36,10 +36,6 @@ namespace dektopCS.source
 
             List<string> fNames = new List<string>();
             List<string> marksNames = new List<string>();
-            /*db = new desktopDBEntities1();
-            db.Marks.Load();
-            fNames = db.Marks.Select(a => a.MakrImage).ToList();
-            marksNames= db.Marks.Select(a => a.MarkName).ToList();*/
             try
             {
                 //СОставление запроса к БД
@@ -55,8 +51,8 @@ namespace dektopCS.source
                         //Построчное считывание ответа
                         while (reader.Read())
                         {
-                            fNames.Add(reader.GetString(0));
-                            marksNames.Add(reader.GetString(1));
+                            fNames.Add(reader.GetString(1));
+                            marksNames.Add(reader.GetString(0));
                         }
 
                     }
@@ -76,18 +72,44 @@ namespace dektopCS.source
         }
 
         //Запоминание выбранной метки для карты
-        /*private void ChooseItem_Click(object sender, RoutedEventArgs e)
+        private void ChooseItem_Click(object sender, RoutedEventArgs e)
         {
             if (lb.SelectedIndex != -1)
             {
-                db = new desktopDBEntities1();
-                db.Marks.Load();
-                string markerPath = db.Marks.Where(a=>a.ID.Equals(lb.SelectedIndex+1)).Select(b=>b.MakrImage).FirstOrDefault();
-                string markerName = db.Marks.Where(a => a.ID.Equals(lb.SelectedIndex + 1)).Select(b => b.MarkName).FirstOrDefault();
-                App.Current.Resources["markerPath"] = markerPath;
-                App.Current.Resources["markerName"] = markerName;
+                string markerPath="";
+                string markerName="";
+
+                try
+                {
+                    //СОставление запроса к БД
+                    string sql = "SELECT MarkName, MarkImage FROM Marks WHERE ID = "+(lb.SelectedIndex+1);
+                    MySqlCommand cmd = new MySqlCommand(sql, myConnection);
+                    List<string> list = new List<string>();
+
+                    //Чтение ответа БД
+                    using (DbDataReader reader = cmd.ExecuteReader())
+                    {
+                        if (reader.HasRows)
+                        {
+                            //Построчное считывание ответа
+                            while (reader.Read())
+                            {
+                                markerName=reader.GetString(0);
+                                markerPath=reader.GetString(1);
+                            }
+                        }
+                        App.Current.Resources["markerPath"] = markerPath;
+                        App.Current.Resources["markerName"] = markerName;
+                    }
+                }
+                catch
+                {
+                    MessageBox.Show("Потеряно соединение с базой данных");
+                }
+
+
             }
-        }*/
+        }
 
         //Метод составление списка, содержащего изображения меток и их названия
         public List<StackPanel> GetSP(List<string> fn, List<string>mn)
