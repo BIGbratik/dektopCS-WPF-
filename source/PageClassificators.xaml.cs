@@ -23,7 +23,6 @@ namespace dektopCS.source
     public partial class PageClassificators : Page
     {
         //Инициализации БД и объекта будужщей страницы
-        desktopDBEntities1 db;
         MySqlConnection myConnection = (MySqlConnection)App.Current.Resources["connectionMySQL"];
         object page;
         public PageClassificators()

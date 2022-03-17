@@ -139,42 +139,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Analytic.cs">
-      <DependentUpon>desktopDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Category.cs">
-      <DependentUpon>desktopDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="CSobject.cs">
-      <DependentUpon>desktopDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="desktopDB.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>desktopDB.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="desktopDB.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>desktopDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="desktopDB.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>desktopDB.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="Emerg.cs">
-      <DependentUpon>desktopDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="EmergType.cs">
-      <DependentUpon>desktopDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Marks.cs">
-      <DependentUpon>desktopDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="MPS.cs">
-      <DependentUpon>desktopDB.tt</DependentUpon>
-    </Compile>
     <Compile Include="myStringConn.cs" />
     <Compile Include="PMobject.cs" />
     <Compile Include="source\PageAnalytics.xaml.cs">
@@ -206,9 +170,6 @@
     </Compile>
     <Compile Include="source\PageMultimedia.xaml.cs">
       <DependentUpon>PageMultimedia.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="sysdiagrams.cs">
-      <DependentUpon>desktopDB.tt</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -281,13 +242,6 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EntityDeploy Include="desktopDB.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>desktopDB.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <None Include="desktopDB.edmx.diagram">
-      <DependentUpon>desktopDB.edmx</DependentUpon>
-    </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -323,16 +277,6 @@
     <Content Include="data\Analityc\Система прогнозирования пожаров.exe" />
     <Content Include="data\Analityc\Температура здания.exe" />
     <Content Include="data\Analityc\ЧП при аварии на АЭС.exe" />
-    <Content Include="desktopDB.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>desktopDB.edmx</DependentUpon>
-      <LastGenOutput>desktopDB.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="desktopDB.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>desktopDB.edmx</DependentUpon>
-      <LastGenOutput>desktopDB.cs</LastGenOutput>
-    </Content>
     <Resource Include="data\MPS\Maps\Казань ЗОНЫ.jpg" />
     <Resource Include="data\MPS\Maps\Казань ОБЪЕКТЫ.jpg" />
     <Resource Include="data\MPS\Maps\Казань ПОДТОПЛЕНИЯ.jpg" />

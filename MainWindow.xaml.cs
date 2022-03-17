@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Common;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -27,11 +28,17 @@ namespace dektopCS
     public partial class MainWindow : Window
     {
         public MySqlConnection conn;
+        public double startLat = 55.796127;
+        public double startLng = 49.106414;
         public MainWindow()
         {
             InitializeComponent();
             conn = myStringConn.GetDBConnection();
             App.Current.Resources["connectionMySQL"] = conn;
+            string weatherPath = "https://yandex.ru/pogoda/?lat=" + startLat.ToString("G",CultureInfo.InvariantCulture) + "&lon=" + startLng.ToString("G", CultureInfo.InvariantCulture);
+            MessageBox.Show(weatherPath);
+            Uri weaterUri = new Uri(weatherPath, UriKind.RelativeOrAbsolute);
+            weather.Source = weaterUri;
         }
 
         //Метод отрисовки карты при загрузке окна
@@ -41,7 +48,7 @@ namespace dektopCS
             mapView.MinZoom = 4;
             mapView.MaxZoom = 18;
             mapView.Zoom = 10;
-            mapView.Position = new PointLatLng(55.796127, 49.106414);
+            mapView.Position = new PointLatLng(startLat, startLng);
             mapView.MouseWheelZoomType = MouseWheelZoomType.MousePositionAndCenter;
             mapView.CanDragMap = true;
             mapView.DragButton = MouseButton.Left;

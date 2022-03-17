@@ -38,26 +38,31 @@
             <RowDefinition Height="40"/>
             <RowDefinition Height="40"/>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="300"/>
         </Grid.RowDefinitions>
         <gmaps:GMapControl 
-            x:Name="mapView" 
-            x:FieldModifier="public"
-            Loaded="mapView_Loaded"
-            MouseRightButtonDown="mapView_RightButtonDown"
-            Grid.ColumnSpan="3"
-            Grid.RowSpan="6"/>
+                x:Name="mapView" 
+                x:FieldModifier="public"
+                Loaded="mapView_Loaded"
+                MouseRightButtonDown="mapView_RightButtonDown"
+                Grid.ColumnSpan="3"
+                Grid.RowSpan="7"/>
         <Button 
-            Click="Exit_Click" 
-            HorizontalAlignment="Right" 
-            VerticalAlignment="Center"  
-            Grid.Column="2"
-            Width="70"
-            Grid.Row="0">Выход</Button>
+                Click="Exit_Click" 
+                HorizontalAlignment="Right" 
+                VerticalAlignment="Center"  
+                Grid.Column="2"
+                Width="70"
+                Grid.Row="0">Выход</Button>
         <Frame 
-            Grid.Column="0"
-            Grid.RowSpan="6"
-            Name="leftPlace"
-            Source="source/PageChoseModule.xaml" 
-            NavigationUIVisibility="Hidden"/>
+			    Grid.Column="0"
+			    Grid.RowSpan="7"
+			    Name="leftPlace"
+			    Source="source/PageChoseModule.xaml" 
+			    NavigationUIVisibility="Hidden"/>
+        <WebBrowser
+            Grid.Row="6"
+            Grid.Column="2"
+            Name="weather"></WebBrowser>
     </Grid>
 </Window>
