@@ -121,5 +121,48 @@ namespace dektopCS.source
                 }
             }
         }
+
+        private void StartProgram_TouchUp(object sender, RoutedEventArgs e)
+        {
+            if (lb.SelectedIndex != -1)
+            {
+                //Установление соединения с MySQL бд
+                try
+                {
+                    //СОставление запроса к БД
+                    string sql = "SELECT AnalyticFile FROM Analytic WHERE ID = " + (lb.SelectedIndex + 1);
+                    string analyticFile = "";
+                    MySqlCommand cmd = new MySqlCommand(sql, myConnection);
+
+                    //Чтение ответа БД
+                    using (DbDataReader reader = cmd.ExecuteReader())
+                    {
+                        if (reader.HasRows)
+                        {
+                            //Построчное считывание ответа
+                            while (reader.Read())
+                            {
+                                analyticFile = reader.GetString(0);
+                            }
+
+                        }
+                    }
+                    try
+                    {
+                        Process.Start($"{path}" + analyticFile);
+                    }
+                    catch
+                    {
+                        MessageBox.Show("Не удаётся запустить выбранную программу");
+                    }
+                }
+                catch
+                {
+                    MessageBox.Show("Потеряно соединение с базой данных");
+                }
+            }
+        }
+
+
     }
 }

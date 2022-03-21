@@ -94,7 +94,6 @@ namespace dektopCS.source
                 {
                     string sql = "SELECT ID FROM CSobject WHERE CategoryID = " + ind+" LIMIT 1";
                     MySqlCommand cmd = new MySqlCommand(sql, myConnection);
-                    int id = -1;
 
                     //Чтение ответа БД
                     using (DbDataReader reader = cmd.ExecuteReader())
@@ -166,6 +165,88 @@ namespace dektopCS.source
                     MessageBox.Show("Потеряно соединение с базой данных");
                 }
                 
+            }
+        }
+       
+        private void CheckInfo_TouchUp(object sender, RoutedEventArgs e)
+        {
+            if (lb.SelectedIndex != -1)
+            {
+                try
+                {
+                    string sql = "SELECT ID FROM CSobject WHERE CategoryID = " + ind + " LIMIT 1";
+                    MySqlCommand cmd = new MySqlCommand(sql, myConnection);
+
+                    //Чтение ответа БД
+                    using (DbDataReader reader = cmd.ExecuteReader())
+                    {
+                        if (reader.HasRows)
+                        {
+                            //Построчное считывание ответа
+                            while (reader.Read())
+                            {
+                                obj.Number = reader.GetInt32(0) + lb.SelectedIndex;
+                            }
+
+                        }
+                    }
+
+                    sql = "SELECT ObjectName,Vedomstvo,Subordination,IsReady,Num,Place,Phone,Latitude,Longitude FROM CSobject WHERE ID = " + obj.Number;
+                    cmd = new MySqlCommand(sql, myConnection);
+
+                    //Чтение ответа БД
+                    using (DbDataReader reader = cmd.ExecuteReader())
+                    {
+                        if (reader.HasRows)
+                        {
+                            //Построчное считывание ответа
+                            while (reader.Read())
+                            {
+                                obj.Name = reader.GetString(0);
+                                obj.Structer = reader.GetString(1);
+                                obj.Subord = reader.GetString(2);
+                                obj.isReady = reader.GetString(3);
+                                obj.Count = reader.GetString(4);
+                                obj.Place = reader.GetString(5);
+                                obj.Phone = reader.GetString(6);
+                                obj.Latitude = reader.GetDouble(7);
+                                obj.Longitude = reader.GetDouble(8);
+                            }
+                        }
+                    }
+                    PageFMInfo pageFMInfo = new PageFMInfo(obj);
+                    NavigationService.Navigate(pageFMInfo);
+
+                    try
+                    {
+                        GMapControl map = (GMapControl)App.Current.MainWindow.FindName("mapView");
+                        App.Current.Resources["markerPath"] = "";
+
+                        GMapMarker marker = new GMapMarker(new PointLatLng(obj.Latitude, obj.Longitude));
+
+                        Ellipse img = new Ellipse()
+                        {
+                            Width = 20,
+                            Height = 20,
+                            ToolTip = obj.Name,
+                            Fill = Brushes.MidnightBlue,
+                            Stroke = Brushes.DarkOrange,
+                            StrokeThickness = 3
+                        };
+                        marker.Shape = img;
+                        map.Markers.Add(marker);
+                        map.Position = new PointLatLng(obj.Latitude, obj.Longitude);
+                    }
+                    catch
+                    {
+                        MessageBox.Show("Не удалось отобразить точку объекта");
+                    }
+                }
+                catch
+                {
+                    MessageBox.Show("Потеряно соединение с базой данных");
+                }
+
             }
         }
     }

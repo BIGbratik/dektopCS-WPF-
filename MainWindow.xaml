@@ -25,7 +25,7 @@
             <Setter Property="Button.VerticalContentAlignment" Value="Center"/>
         </Style>
     </Window.Resources>
-    <Grid>
+    <Grid Name="grid">
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
             <ColumnDefinition/>

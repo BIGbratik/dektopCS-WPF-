@@ -90,5 +90,15 @@ namespace dektopCS.source
                 lb.SelectedIndex = -1;
             }
         }
+
+        private void ChekItem_TouchUp(object sender, RoutedEventArgs e)
+        {
+            if (lb.SelectedIndex != -1)
+            {
+                PageFM pageFM = new PageFM(lb.SelectedIndex + 1, myConnection);
+                NavigationService.Navigate(pageFM);
+                lb.SelectedIndex = -1;
+            }
+        }
     }
 }

@@ -53,6 +53,7 @@
             Name="lb"
             ScrollViewer.HorizontalScrollBarVisibility="Disabled"
             MouseDoubleClick="CheckInfo_Click"
+            TouchUp="CheckInfo_TouchUp"
             Grid.ColumnSpan="2"
             Grid.Row="1">
         </ListBox>

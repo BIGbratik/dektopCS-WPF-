@@ -109,6 +109,23 @@ namespace dektopCS.source
             }
         }
 
+        private void CheckItem_TouchUp(object sender, RoutedEventArgs e)
+        {
+            if (lb.SelectedIndex != -1)
+            {
+                string fName = lb.SelectedItem.ToString();
+                Image image = new Image();
+                Uri uri = new Uri(path + fName, UriKind.RelativeOrAbsolute);
+                BitmapImage bitmapImage = new BitmapImage();
+                bitmapImage.BeginInit();
+                bitmapImage.UriSource = uri;
+                bitmapImage.EndInit();
+
+                img.Source = bitmapImage;
+
+                lb.SelectedIndex = -1;
+            }
+        }
         //ДОРАБОТАТЬ ПРИБЛИЖЕНИЕ КАРТИНКИ!!!
         private void Zoom_Wheel (object sender, RoutedEventArgs e)
         {

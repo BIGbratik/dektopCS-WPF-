@@ -47,7 +47,8 @@
             Grid.ColumnSpan="2"
             Grid.Row="1"
             ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-            MouseDoubleClick="CheckItem_Click">
+            MouseDoubleClick="CheckItem_Click"
+            TouchUp="ChekItem_TouchUp">
         </ListBox>
         <Button
             HorizontalAlignment="Left"

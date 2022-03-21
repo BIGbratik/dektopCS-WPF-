@@ -139,6 +139,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="InternetAvailability.cs" />
     <Compile Include="myStringConn.cs" />
     <Compile Include="PMobject.cs" />
     <Compile Include="source\PageAnalytics.xaml.cs">
@@ -252,20 +253,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="data\ForceMeans.txt" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="data\FM\FM1.txt" />
-    <Resource Include="data\FM\FM2.txt" />
-    <Resource Include="data\FM\FM3.txt" />
-    <Resource Include="data\FM\FM4.txt" />
-    <Resource Include="data\FM\FM5.txt" />
-    <Resource Include="data\FM\FM6.txt" />
-    <Resource Include="data\FM\FM7.txt" />
-    <Resource Include="data\FM\FM8.txt" />
-    <Resource Include="data\FM\FM9.txt" />
-  </ItemGroup>
-  <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
@@ -277,6 +264,7 @@
     <Content Include="data\Analityc\Система прогнозирования пожаров.exe" />
     <Content Include="data\Analityc\Температура здания.exe" />
     <Content Include="data\Analityc\ЧП при аварии на АЭС.exe" />
+    <Resource Include="data\ЗвездаМЧС.png" />
     <Resource Include="data\MPS\Maps\Казань ЗОНЫ.jpg" />
     <Resource Include="data\MPS\Maps\Казань ОБЪЕКТЫ.jpg" />
     <Resource Include="data\MPS\Maps\Казань ПОДТОПЛЕНИЯ.jpg" />

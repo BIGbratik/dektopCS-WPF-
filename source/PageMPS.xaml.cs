@@ -108,5 +108,23 @@ namespace dektopCS.source
                 lb.SelectedIndex = -1;
             }
         }
+
+        private void CheckItem_TouchUp(object sender, RoutedEventArgs e)
+        {
+            if (lb.SelectedIndex != -1)
+            {
+                path += types[lb.SelectedIndex] + "/" + lb.SelectedItem.ToString();
+                Image image = new Image();
+                Uri uri = new Uri(path, UriKind.RelativeOrAbsolute);
+                BitmapImage bitmapImage = new BitmapImage();
+                bitmapImage.BeginInit();
+                bitmapImage.UriSource = uri;
+                bitmapImage.EndInit();
+
+                img.Source = bitmapImage;
+
+                lb.SelectedIndex = -1;
+            }
+        }
     }
 }

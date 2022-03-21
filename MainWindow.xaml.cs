@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data.Common;
 using System.Globalization;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -28,32 +29,63 @@ namespace dektopCS
     public partial class MainWindow : Window
     {
         public MySqlConnection conn;
+        //Координаты стартового положения центра карты
         public double startLat = 55.796127;
         public double startLng = 49.106414;
         public MainWindow()
         {
             InitializeComponent();
-            conn = myStringConn.GetDBConnection();
-            App.Current.Resources["connectionMySQL"] = conn;
-            string weatherPath = "https://yandex.ru/pogoda/?lat=" + startLat.ToString("G",CultureInfo.InvariantCulture) + "&lon=" + startLng.ToString("G", CultureInfo.InvariantCulture);
-            MessageBox.Show(weatherPath);
-            Uri weaterUri = new Uri(weatherPath, UriKind.RelativeOrAbsolute);
-            weather.Source = weaterUri;
+            //Формирование фонового изображения окна
+            Uri mcs = new Uri(BaseUriHelper.GetBaseUri(this), "data/ЗвездаМЧС.png");
+            BitmapImage image = new BitmapImage(mcs);
+            ImageBrush img = new ImageBrush(image);
+            this.Background = img;
         }
 
         //Метод отрисовки карты при загрузке окна
         private void mapView_Loaded(object sender, RoutedEventArgs e)
         {
-            mapView.MapProvider = GoogleMapProvider.Instance;
-            mapView.MinZoom = 4;
-            mapView.MaxZoom = 18;
-            mapView.Zoom = 10;
-            mapView.Position = new PointLatLng(startLat, startLng);
-            mapView.MouseWheelZoomType = MouseWheelZoomType.MousePositionAndCenter;
-            mapView.CanDragMap = true;
-            mapView.DragButton = MouseButton.Left;
-            mapView.ShowCenter = false;
-            mapView.ShowTileGridLines = false;
+
+            //Установление соединения с БД
+            conn = myStringConn.GetDBConnection();
+            App.Current.Resources["connectionMySQL"] = conn;
+
+            if (InternetAvailability.IsInternetAvailable())
+            {
+                //Отрисовка карты с центро в г.Казань
+                mapView.MapProvider = GoogleMapProvider.Instance;
+                mapView.MinZoom = 4;
+                mapView.MaxZoom = 18;
+                mapView.Zoom = 10;
+                mapView.Position = new PointLatLng(startLat, startLng);
+                mapView.MouseWheelZoomType = MouseWheelZoomType.MousePositionAndCenter;
+                mapView.CanDragMap = true;
+                mapView.DragButton = MouseButton.Left;
+                mapView.ShowCenter = false;
+                mapView.ShowTileGridLines = false;
+
+                //Создание строки запроса к Я.Погоде и добавление её в ресурс WebBrowser
+                try
+                {
+                    string weatherPath = "https://yandex.ru/pogoda/?lat=" + startLat.ToString("G", CultureInfo.InvariantCulture) + "&lon=" + startLng.ToString("G", CultureInfo.InvariantCulture);
+                    Uri weaterUri = new Uri(weatherPath, UriKind.RelativeOrAbsolute);
+                    weather.Source = weaterUri;
+                }
+                catch
+                {
+                    MessageBox.Show("Внешний ресурс ПОГОДА недоступен. Возможно отсутствует соединение с сетью Интернет", "Ошибка соединения", MessageBoxButton.OK, MessageBoxImage.Warning);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Кажется отсутствует соединение с сетью Интернет, либо оно слабое\n" +
+                    "Для доступа к некоторым функциям приложения требуется наличие подключения к сети. " +
+                    "Устарните проблемы и перезапустите приложение", "Ошибка сети", MessageBoxButton.OK, MessageBoxImage.Warning);
+                grid.Children.Remove(weather);
+                grid.Children.Remove(mapView);
+
+            }
+
         }
 
         //Метод закрытия окна

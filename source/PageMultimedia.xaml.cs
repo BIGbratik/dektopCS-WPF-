@@ -111,6 +111,44 @@ namespace dektopCS.source
             }
         }
 
+        private void ChooseItem_TouchIUp(object sender, RoutedEventArgs e)
+        {
+            if (lb.SelectedIndex != -1)
+            {
+                string markerPath = "";
+                string markerName = "";
+
+                try
+                {
+                    //СОставление запроса к БД
+                    string sql = "SELECT MarkName, MarkImage FROM Marks WHERE ID = " + (lb.SelectedIndex + 1);
+                    MySqlCommand cmd = new MySqlCommand(sql, myConnection);
+                    List<string> list = new List<string>();
+
+                    //Чтение ответа БД
+                    using (DbDataReader reader = cmd.ExecuteReader())
+                    {
+                        if (reader.HasRows)
+                        {
+                            //Построчное считывание ответа
+                            while (reader.Read())
+                            {
+                                markerName = reader.GetString(0);
+                                markerPath = reader.GetString(1);
+                            }
+                        }
+                        App.Current.Resources["markerPath"] = markerPath;
+                        App.Current.Resources["markerName"] = markerName;
+                    }
+                }
+                catch
+                {
+                    MessageBox.Show("Потеряно соединение с базой данных");
+                }
+
+
+            }
+        }
         //Метод составление списка, содержащего изображения меток и их названия
         public List<StackPanel> GetSP(List<string> fn, List<string>mn)
         {
