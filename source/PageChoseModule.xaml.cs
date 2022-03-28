@@ -92,11 +92,18 @@ namespace dektopCS.source
             MessageBox.Show("Модуль СПРАВОЧНИКИ находится в разработке", "ВНИМАНИЕ!!!", MessageBoxButton.OK, MessageBoxImage.Information);
         }
 
-        //Метод перехода на тсраницу мультимедии (значков для карты)
+        //Метод перехода на сраницу мультимедии (значков для карты)
         private void CheckMultimedia_Click(object sender, RoutedEventArgs e)
         {
             PageMultimedia pageMultimedia = new PageMultimedia();
             NavigationService.Navigate(pageMultimedia);
+        }
+
+        //Метод перехода на сраницу просмотра действий при ЧС
+        private void CheckCSAction_Click(object sender, RoutedEventArgs e)
+        {
+            PageCSAction pageCSAction= new PageCSAction();
+            NavigationService.Navigate(pageCSAction);
         }
     }
 }

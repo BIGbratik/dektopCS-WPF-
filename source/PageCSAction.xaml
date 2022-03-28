@@ -1,27 +1,30 @@
-﻿<Page x:Class="dektopCS.source.PageMPSinfo"
+﻿<Page x:Class="dektopCS.source.PageCSAction"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:dektopCS.source"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
-      Title="PageMPSinfo"
+      d:DesignHeight="450" 
+      d:DesignWidth="800"
+      Title="PageCSAction"
       Background="MidnightBlue">
     <Page.Resources>
-        <Style TargetType="ListBoxItem">
-            <Setter Property="ListBoxItem.BorderBrush" Value="DarkOrange"/>
-            <Setter Property="ListBoxItem.Margin" Value="0,5,5,0"/>
-            <!--<Setter Property="ListBoxItem.Width" Value="300"/>-->
-        </Style>
         <Style TargetType="Button">
             <Setter Property="Button.Background" Value="DarkOrange"/>
             <Setter Property="Button.Foreground" Value="Black"/>
             <Setter Property="Button.Margin" Value="5,5,5,5"/>
             <Setter Property="Button.FontSize" Value="18"/>
             <Setter Property="Button.Height" Value="30"/>
-            <Setter Property="Button.Width" Value="200"/>
+            <Setter Property="Button.Width" Value="350"/>
             <Setter Property="Button.HorizontalContentAlignment" Value="Center"/>
             <Setter Property="Button.VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Button.HorizontalAlignment" Value="Left"/>
+        </Style>
+        <Style TargetType="ListBoxItem">
+            <Setter Property="ListBoxItem.BorderBrush" Value="DarkOrange"/>
+            <Setter Property="ListBoxItem.Margin" Value="0,5,5,0"/>
+            <!--<Setter Property="ListBoxItem.Width" Value="300"/>-->
         </Style>
     </Page.Resources>
     <Grid>
@@ -32,26 +35,39 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="40"/>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="40"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="50"/>
         </Grid.RowDefinitions>
-        <TextBlock
-            Grid.Row="0"
-            Grid.ColumnSpan="2"
-            HorizontalAlignment="Center"
-            VerticalAlignment="Center"
+        <Label 
             Foreground="White"
-            FontSize="20">
-            Общие планы, планы, схемы
-        </TextBlock>
+            HorizontalContentAlignment="Center"
+            FontSize="20"
+            Grid.ColumnSpan="2"
+            Grid.Row="0">Выберите тип ЧС</Label>
         <ListBox
             Margin="10,5,10,5"
-            Name="lb"
+            Name="lbType"
             Grid.ColumnSpan="2"
             Grid.Row="1"
             ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-            MouseLeftButtonUp="CheckItem_Click"
-            TouchUp="CheckItem_TouchUp">
+            MouseLeftButtonUp="CheckType_Click"
+            TouchUp="CheckType_TouchUp">
+        </ListBox>
+        <Label 
+            Foreground="White"
+            HorizontalContentAlignment="Center"
+            FontSize="20"
+            Grid.ColumnSpan="2"
+            Grid.Row="2">Выберите чс</Label>
+        <ListBox
+            Margin="10,5,10,5"
+            Name="lbEmerg"
+            Grid.ColumnSpan="2"
+            Grid.Row="3"
+            ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+            MouseLeftButtonUp="CheckEmerg_Click"
+            TouchUp="CheckEmerg_TouchUp">
         </ListBox>
         <Button
             HorizontalAlignment="Left"
@@ -59,19 +75,6 @@
             Width="70"
             Click="Back_Click"
             Grid.Column="0"
-            Grid.Row="3">Назад</Button>
-        <Image  
-            Grid.Row="2"
-            Grid.ColumnSpan="2"
-            ScrollViewer.HorizontalScrollBarVisibility="Auto"
-            ScrollViewer.VerticalScrollBarVisibility="Auto"
-            MouseWheel="Zoom_Wheel"
-            Name="img"
-            >
-            <Image.RenderTransform>
-                <ScaleTransform 
-                    x:Name="imgScale"/>
-            </Image.RenderTransform>
-        </Image>
+            Grid.Row="4">Назад</Button>
     </Grid>
 </Page>

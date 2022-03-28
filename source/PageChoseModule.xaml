@@ -33,6 +33,7 @@
             <RowDefinition Height="40"/>
             <RowDefinition Height="40"/>
             <RowDefinition Height="40"/>
+            <RowDefinition Height="40"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Button 
@@ -90,6 +91,11 @@
             VerticalAlignment="Top" 
             Grid.Column="0"
             Grid.Row="10">Мультимедия</Button>
+        <Button
+            Click="CheckCSAction_Click"
+            VerticalAlignment="Top"
+            Grid.Column="0"
+            Grid.Row="11">Действия при ЧС</Button>
         
     </Grid>
 </Page>

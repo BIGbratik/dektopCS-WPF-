@@ -11,8 +11,10 @@
         Width="500" 
         Height="300"
         WindowState="Maximized"
-        ResizeMode="NoResize"
-        Background="MidnightBlue">
+        ResizeMode="NoResize">
+    <Window.Background>
+        <ImageBrush ImageSource="./data/ЗвездаМЧС.png"/>
+    </Window.Background>
     <Window.Resources>
         <Style TargetType="Button">
             <Setter Property="Button.Background" Value="DarkOrange"/>
@@ -25,17 +27,14 @@
             <Setter Property="Button.VerticalContentAlignment" Value="Center"/>
         </Style>
     </Window.Resources>
+
     <Grid Name="grid">
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
-            <ColumnDefinition/>
+            <ColumnDefinition Width="100"/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="40"/>
-            <RowDefinition Height="40"/>
-            <RowDefinition Height="40"/>
-            <RowDefinition Height="40"/>
             <RowDefinition Height="40"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="300"/>
@@ -46,7 +45,27 @@
                 Loaded="mapView_Loaded"
                 MouseRightButtonDown="mapView_RightButtonDown"
                 Grid.ColumnSpan="3"
-                Grid.RowSpan="7"/>
+                Grid.RowSpan="3"/>
+        <Button
+            Name="ZoomUP"
+            Grid.Column="1"
+            Grid.Row="0"
+            Width="25"
+            Height="25"
+            HorizontalAlignment="Right"
+            Click="ZoomUP_Click">
+            <Image Source="./data/Плюс.png"/>
+        </Button>
+        <Button
+            Name="ZoomDOWN"
+            Grid.Column="1"
+            Grid.Row="0"
+            Width="25"
+            Height="25"
+            HorizontalAlignment="Left"
+            Click="ZoomDOWN_Click">
+            <Image Source="./data/Минус.png"/>
+        </Button>
         <Button 
                 Click="Exit_Click" 
                 HorizontalAlignment="Right" 
@@ -56,13 +75,17 @@
                 Grid.Row="0">Выход</Button>
         <Frame 
 			    Grid.Column="0"
-			    Grid.RowSpan="7"
+			    Grid.RowSpan="3"
 			    Name="leftPlace"
 			    Source="source/PageChoseModule.xaml" 
 			    NavigationUIVisibility="Hidden"/>
         <WebBrowser
             Grid.Row="6"
             Grid.Column="2"
-            Name="weather"></WebBrowser>
+            Name="weather"
+            HorizontalAlignment="Right"
+            VerticalAlignment="Bottom"
+            Width="450"
+            Height="250"></WebBrowser>
     </Grid>
 </Window>

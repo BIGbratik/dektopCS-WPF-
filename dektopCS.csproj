@@ -151,6 +151,12 @@
     <Compile Include="source\PageClassificators.xaml.cs">
       <DependentUpon>PageClassificators.xaml</DependentUpon>
     </Compile>
+    <Compile Include="source\PageCSAction.xaml.cs">
+      <DependentUpon>PageCSAction.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="source\PageCSTasks.xaml.cs">
+      <DependentUpon>PageCSTasks.xaml</DependentUpon>
+    </Compile>
     <Compile Include="source\PageFM.xaml.cs">
       <DependentUpon>PageFM.xaml</DependentUpon>
     </Compile>
@@ -193,6 +199,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="source\PageClassificators.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="source\PageCSAction.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="source\PageCSTasks.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -264,6 +278,8 @@
     <Content Include="data\Analityc\Система прогнозирования пожаров.exe" />
     <Content Include="data\Analityc\Температура здания.exe" />
     <Content Include="data\Analityc\ЧП при аварии на АЭС.exe" />
+    <Resource Include="data\Минус.png" />
+    <Resource Include="data\Плюс.png" />
     <Resource Include="data\ЗвездаМЧС.png" />
     <Resource Include="data\MPS\Maps\Казань ЗОНЫ.jpg" />
     <Resource Include="data\MPS\Maps\Казань ОБЪЕКТЫ.jpg" />

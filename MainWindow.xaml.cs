@@ -35,11 +35,6 @@ namespace dektopCS
         public MainWindow()
         {
             InitializeComponent();
-            //Формирование фонового изображения окна
-            Uri mcs = new Uri(BaseUriHelper.GetBaseUri(this), "data/ЗвездаМЧС.png");
-            BitmapImage image = new BitmapImage(mcs);
-            ImageBrush img = new ImageBrush(image);
-            this.Background = img;
         }
 
         //Метод отрисовки карты при загрузке окна
@@ -93,6 +88,16 @@ namespace dektopCS
         {
             myStringConn.CloseDBConnection(conn);
             Close();
+        }
+
+        private void ZoomUP_Click(object sender, RoutedEventArgs e)
+        {
+            mapView.Zoom += 1;
+        }
+
+        private void ZoomDOWN_Click(object sender, RoutedEventArgs e)
+        {
+            mapView.Zoom -= 1;
         }
 
         //Метод постановки метки на карту по ПКМ
