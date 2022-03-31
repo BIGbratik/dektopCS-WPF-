@@ -1,37 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
-using System.Windows.Shapes;
-using MySql.Data.MySqlClient;
 
 namespace dektopCS.source
 {
-    /// <summary>
-    /// Логика взаимодействия для PageChoseModule.xaml
-    /// </summary>
     public partial class PageChoseModule : Page
     {
-        MySqlConnection conn;
         public PageChoseModule()
         {
             InitializeComponent();
-            conn = (MySqlConnection)App.Current.Resources["connectionMySQL"];
         }
 
         //Метод перехода на страницу сил и средств
         private void CheckForcMeans_Click(object sender, RoutedEventArgs e)
         {
-            PageForceMeans pageForceMeans = new PageForceMeans(conn);
+            PageForceMeans pageForceMeans = new PageForceMeans();
             NavigationService.Navigate(pageForceMeans);
         }
 
@@ -44,14 +27,14 @@ namespace dektopCS.source
         //Метод перехода на страницу карт, планов и схем
         private void CheckMaps_Click(object sender, RoutedEventArgs e)
         {
-            PageMaps pageMaps = new PageMaps(conn);
+            PageMaps pageMaps = new PageMaps();
             NavigationService.Navigate(pageMaps);
         }
 
         //Метод перехода на страницу выбора аналитической программы
         private void CheckAnalytics_Click(object sender, RoutedEventArgs e)
         {
-            PageAnalytics pageAnalytics = new PageAnalytics(conn);
+            PageAnalytics pageAnalytics = new PageAnalytics();
             NavigationService.Navigate(pageAnalytics);
         }
 

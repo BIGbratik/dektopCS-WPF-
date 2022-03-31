@@ -44,7 +44,7 @@
             HorizontalContentAlignment="Center"
             FontSize="20"
             Grid.ColumnSpan="2"
-            Grid.Row="0">Выберите тип ЧС</Label>
+            Grid.Row="0">Выберите характер ЧС</Label>
         <ListBox
             Margin="10,5,10,5"
             Name="lbType"
@@ -59,7 +59,7 @@
             HorizontalContentAlignment="Center"
             FontSize="20"
             Grid.ColumnSpan="2"
-            Grid.Row="2">Выберите чс</Label>
+            Grid.Row="2">Выберите тип чс</Label>
         <ListBox
             Margin="10,5,10,5"
             Name="lbEmerg"

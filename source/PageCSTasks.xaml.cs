@@ -2,37 +2,32 @@
 using System;
 using System.Collections.Generic;
 using System.Data.Common;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
-using System.Windows.Shapes;
 using System.Windows.Threading;
 
 namespace dektopCS.source
 {
     public partial class PageCSTasks : Page
     {
-        MySqlConnection myConnection = (MySqlConnection)App.Current.Resources["connectionMySQL"];
+        //Получение данных подключения к БД
+        private readonly MySqlConnection myConnection = (MySqlConnection)App.Current.Resources["connectionMySQL"];
+
         DispatcherTimer timer = new DispatcherTimer();
+        private int ID;
         public PageCSTasks(int id)
         {
             InitializeComponent();
+            ID = id;
             try
             {
-                //СОставление запроса к БД
+                //Составление и отпарвка запроса к БД
                 string sql = "SELECT TaskName FROM EmergTasks WHERE EmergTypeID = "+id;
                 MySqlCommand cmd = new MySqlCommand(sql, myConnection);
-                List<string> list = new List<string>();
 
                 //Чтение ответа БД
+                List<string> list = new List<string>();
                 using (DbDataReader reader = cmd.ExecuteReader())
                 {
                     if (reader.HasRows)
@@ -78,13 +73,14 @@ namespace dektopCS.source
 
         private void AddCS_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService.GoBack();
+            PageCSAdd pageCSAdd = new PageCSAdd(ID);
+            NavigationService.Navigate(pageCSAdd);
         }
 
         //Получение списка задач по выбранному ЧС (по клику мыши)
         private void CheckTask_Click(object sender, RoutedEventArgs e)
         {
-            timer.Tick += new EventHandler(dispatcherTimer_Tick);
+            timer.Tick += new EventHandler(DispatcherTimer_Tick);
             timer.Interval = new TimeSpan(0, 0, 0, 0, 50);
             timer.Start();
             /*ProgressBar bar = new ProgressBar()
@@ -106,7 +102,7 @@ namespace dektopCS.source
         //Получение списка задач по выбранному ЧС (по касанию экрана)
         private void CheckTask_TouchUp(object sender, RoutedEventArgs e)
         {
-            timer.Tick += new EventHandler(dispatcherTimer_Tick);
+            timer.Tick += new EventHandler(DispatcherTimer_Tick);
             timer.Interval = new TimeSpan(0, 0, 0, 0, 50);
             timer.Start();
             /*ProgressBar bar = new ProgressBar()
@@ -125,9 +121,10 @@ namespace dektopCS.source
             Grid.SetColumnSpan(bar, 2);*/
         }
 
-        private void dispatcherTimer_Tick(object sender, EventArgs e)
+        //Метод, вызываемый по тику таймера (заполнение прогресс бара)
+        private void DispatcherTimer_Tick(object sender, EventArgs e)
         {
-            if (taskProgres.Value<100)
+            /*if (taskProgres.Value<100)
             {
                 taskProgres.Value += 1;
             }
@@ -135,7 +132,7 @@ namespace dektopCS.source
             {
                 timer.Stop();
                 MessageBox.Show("Задача успешно выполнена","Успех",MessageBoxButton.OK,MessageBoxImage.Information);
-            }
+            }*/
         }
     }
 

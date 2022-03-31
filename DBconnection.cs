@@ -9,7 +9,7 @@ using MySql.Data.MySqlClient;
 namespace dektopCS
 {
     //Служебный класс, для подключения к бд MySQL
-    public class myStringConn
+    public class DBconnection
     {
         //Метод подключения к БД с возможностью быстрого изменения параметров строки подключения
         public static MySqlConnection GetDBConnection()
@@ -22,6 +22,7 @@ namespace dektopCS
 
             String connString = "server=" + host + ";port=" + port + ";database=" + database + ";user=" + username + ";password=" + password;
             MySqlConnection conn = new MySqlConnection(connString);
+            //Открытие соединения
             try
             {
                 conn.Open();
@@ -34,6 +35,7 @@ namespace dektopCS
             return conn; 
         }
 
+        //Метод закрытия соединения с переданным в параметрах подключением
         public static void CloseDBConnection(MySqlConnection connection)
         {
             connection.Close();

@@ -8,8 +8,8 @@
         mc:Ignorable="d"
         Title="Главный экран" 
         WindowStyle="None" 
-        Width="500" 
-        Height="300"
+        Width="900" 
+        Height="600"
         WindowState="Maximized"
         ResizeMode="NoResize">
     <Window.Background>
@@ -42,8 +42,8 @@
         <gmaps:GMapControl 
                 x:Name="mapView" 
                 x:FieldModifier="public"
-                Loaded="mapView_Loaded"
-                MouseRightButtonDown="mapView_RightButtonDown"
+                Loaded="MapView_Loaded"
+                MouseRightButtonDown="MapView_RightButtonDown"
                 Grid.ColumnSpan="3"
                 Grid.RowSpan="3"/>
         <Button
@@ -85,7 +85,7 @@
             Name="weather"
             HorizontalAlignment="Right"
             VerticalAlignment="Bottom"
-            Width="450"
-            Height="250"></WebBrowser>
+            Width="600"
+            Height="350"></WebBrowser>
     </Grid>
 </Window>

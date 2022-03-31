@@ -1,47 +1,32 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Data.Common;
-using System.Data.Entity;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
-using System.Windows.Shapes;
 using MySql.Data.MySqlClient;
 
 namespace dektopCS.source
 {
-    /// <summary>
-    /// Логика взаимодействия для PageAnalytics.xaml
-    /// </summary>
     public partial class PageAnalytics : Page
     {
         //Инициализация пути к статическим ресурсам
-        string path = @".\data\Analityc\";
-        MySqlConnection myConnection;
-        public PageAnalytics(MySqlConnection conn)
+        private readonly string path = @".\data\Analityc\";
+
+        //Получение данных подключения к БД
+        private readonly MySqlConnection myConnection = (MySqlConnection)App.Current.Resources["connectionMySQL"];
+        public PageAnalytics()
         {
-            //Инициализация страницы с выгрузкой данных из БД
             InitializeComponent();
 
-            //Установление соединения с MySQL бд
-            myConnection = conn;
             try
             {
-                //СОставление запроса к БД
+                //Составление и отправка запроса к БД
                 string sql = "SELECT AnalyticName FROM Analytic";
                 MySqlCommand cmd = new MySqlCommand(sql, myConnection);
-                List<string> list = new List<string>();
 
-                //Чтение ответа БД
+                //Чтение ответа БД построчно
+                List<string> list = new List<string>();
                 using (DbDataReader reader = cmd.ExecuteReader())
                 {
                     if (reader.HasRows)
@@ -49,8 +34,7 @@ namespace dektopCS.source
                         //Построчное считывание ответа
                         while (reader.Read())
                         {
-                            string analyticName = reader.GetString(0);
-                            list.Add(analyticName);
+                            list.Add(reader.GetString(0));
                         }
 
                     }
@@ -83,17 +67,17 @@ namespace dektopCS.source
         //Запуск аналитической программы
         private void StartProgram_Click(object sender, RoutedEventArgs e)
         {
+            //Запуск только при выборе какого-либо элемента
             if (lb.SelectedIndex != -1)
             {
-                //Установление соединения с MySQL бд
                 try
                 {
-                    //СОставление запроса к БД
+                    //Составление и отправка запроса к БД
                     string sql = "SELECT AnalyticFile FROM Analytic WHERE ID = " + (lb.SelectedIndex + 1);
-                    string analyticFile="";
                     MySqlCommand cmd = new MySqlCommand(sql, myConnection);
 
-                    //Чтение ответа БД
+                    //Чтение ответа БД построчно
+                    string analyticFile = "";
                     using (DbDataReader reader = cmd.ExecuteReader())
                     {
                         if (reader.HasRows)
@@ -103,7 +87,6 @@ namespace dektopCS.source
                             {
                                 analyticFile = reader.GetString(0);
                             }
-
                         }
                     }
                     try
@@ -124,17 +107,17 @@ namespace dektopCS.source
 
         private void StartProgram_TouchUp(object sender, RoutedEventArgs e)
         {
+            //Запуск только при выборе какого-либо элемента
             if (lb.SelectedIndex != -1)
             {
-                //Установление соединения с MySQL бд
                 try
                 {
-                    //СОставление запроса к БД
+                    //Составление и отправка запроса к БД
                     string sql = "SELECT AnalyticFile FROM Analytic WHERE ID = " + (lb.SelectedIndex + 1);
-                    string analyticFile = "";
                     MySqlCommand cmd = new MySqlCommand(sql, myConnection);
 
-                    //Чтение ответа БД
+                    //Чтение ответа БД построчно
+                    string analyticFile = "";
                     using (DbDataReader reader = cmd.ExecuteReader())
                     {
                         if (reader.HasRows)
@@ -144,7 +127,6 @@ namespace dektopCS.source
                             {
                                 analyticFile = reader.GetString(0);
                             }
-
                         }
                     }
                     try
@@ -162,7 +144,5 @@ namespace dektopCS.source
                 }
             }
         }
-
-
     }
 }

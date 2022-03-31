@@ -21,31 +21,28 @@ using System.Data.Common;
 
 namespace dektopCS.source
 {
-    /// <summary>
-    /// Логика взаимодействия для PageFM.xaml
-    /// </summary>
     public partial class PageFM : Page
     {
         //Инициализация переменной индекса, объекта ЧС и БД
-        public static int ind;
-        PMobject obj = new PMobject();
-        MySqlConnection myConnection;
+        private static int ind;
+        private PMobject obj = new PMobject();
 
-        public PageFM(int num, MySqlConnection conn)
+        //Получение данных подключения к БД
+        private readonly MySqlConnection myConnection = (MySqlConnection)App.Current.Resources["connectionMySQL"];
+
+        public PageFM(int num)
         {
-            //Инициализация страницы с выгрузкой необходимых данных из БД
             InitializeComponent();
             ind = num;
-            myConnection = conn;
 
             try
             {
-                //СОставление запроса к БД
+                //Составление и отправка запроса к БД
                 string sql = "SELECT ObjectName FROM CSobject WHERE CategoryID = " + ind;
                 MySqlCommand cmd = new MySqlCommand(sql, myConnection);
-                List<string> list = new List<string>();
 
-                //Чтение ответа БД
+                //Чтение ответа построчно
+                List<string> list = new List<string>();
                 using (DbDataReader reader = cmd.ExecuteReader())
                 {
                     if (reader.HasRows)
@@ -53,14 +50,13 @@ namespace dektopCS.source
                         //Построчное считывание ответа
                         while (reader.Read())
                         {
-                            string csObjectName = reader.GetString(0);
-                            list.Add(csObjectName);
+                            list.Add(reader.GetString(0));
                         }
 
                     }
                 }
 
-                //Запись ответа в текстовые блоки
+                //Формирование полученных данных в правильные блоки отображения
                 List<TextBlock> tb = new List<TextBlock>();
                 for (int i = 0; i < list.Count; i++)
                 {
@@ -88,14 +84,16 @@ namespace dektopCS.source
         //Переход к странице подробной информации об выбранном объекте СиС и постановка на карте метки выбранного объекта
         private void CheckInfo_Click(object sender, RoutedEventArgs e)
         {
+            //Проверка, выбран ли какой-либо пункт
             if (lb.SelectedIndex != -1)
             {
                 try
                 {
+                    //Формирование и отпарвка запроса к БД
                     string sql = "SELECT ID FROM CSobject WHERE CategoryID = " + ind+" LIMIT 1";
                     MySqlCommand cmd = new MySqlCommand(sql, myConnection);
 
-                    //Чтение ответа БД
+                    //Чтение ответа БД построчно
                     using (DbDataReader reader = cmd.ExecuteReader())
                     {
                         if (reader.HasRows)
@@ -109,10 +107,11 @@ namespace dektopCS.source
                         }
                     }
 
+                    //Формирование и отпарвка запроса к БД
                     sql = "SELECT ObjectName,Vedomstvo,Subordination,IsReady,Num,Place,Phone,Latitude,Longitude FROM CSobject WHERE ID = " + obj.Number;
                     cmd = new MySqlCommand(sql, myConnection);
 
-                    //Чтение ответа БД
+                    //Чтение ответа БД построчно
                     using (DbDataReader reader = cmd.ExecuteReader())
                     {
                         if (reader.HasRows)
@@ -132,9 +131,11 @@ namespace dektopCS.source
                             }
                         }
                     }
+                    //Открытие страницы с подробными данными о выбранном объекте
                     PageFMInfo pageFMInfo = new PageFMInfo(obj);
                     NavigationService.Navigate(pageFMInfo);
 
+                    //Поставка метки выбранного объекта на карту
                     try
                     {
                         GMapControl map = (GMapControl)App.Current.MainWindow.FindName("mapView");
@@ -154,6 +155,7 @@ namespace dektopCS.source
                         marker.Shape = img;
                         map.Markers.Add(marker);
                         map.Position = new PointLatLng(obj.Latitude, obj.Longitude);
+                        map.Zoom = 18;
                     }
                     catch
                     {
@@ -170,14 +172,16 @@ namespace dektopCS.source
        
         private void CheckInfo_TouchUp(object sender, RoutedEventArgs e)
         {
+            //Проверка, выбран ли какой-либо пункт
             if (lb.SelectedIndex != -1)
             {
                 try
                 {
+                    //Формирование и отпарвка запроса к БД
                     string sql = "SELECT ID FROM CSobject WHERE CategoryID = " + ind + " LIMIT 1";
                     MySqlCommand cmd = new MySqlCommand(sql, myConnection);
 
-                    //Чтение ответа БД
+                    //Чтение ответа БД построчно
                     using (DbDataReader reader = cmd.ExecuteReader())
                     {
                         if (reader.HasRows)
@@ -191,10 +195,11 @@ namespace dektopCS.source
                         }
                     }
 
+                    //Формирование и отпарвка запроса к БД
                     sql = "SELECT ObjectName,Vedomstvo,Subordination,IsReady,Num,Place,Phone,Latitude,Longitude FROM CSobject WHERE ID = " + obj.Number;
                     cmd = new MySqlCommand(sql, myConnection);
 
-                    //Чтение ответа БД
+                    //Чтение ответа БД построчно
                     using (DbDataReader reader = cmd.ExecuteReader())
                     {
                         if (reader.HasRows)
@@ -214,9 +219,11 @@ namespace dektopCS.source
                             }
                         }
                     }
+                    //Открытие страницы с подробными данными о выбранном объекте
                     PageFMInfo pageFMInfo = new PageFMInfo(obj);
                     NavigationService.Navigate(pageFMInfo);
 
+                    //Поставка метки выбранного объекта на карту
                     try
                     {
                         GMapControl map = (GMapControl)App.Current.MainWindow.FindName("mapView");
@@ -236,6 +243,7 @@ namespace dektopCS.source
                         marker.Shape = img;
                         map.Markers.Add(marker);
                         map.Position = new PointLatLng(obj.Latitude, obj.Longitude);
+                        map.Zoom = 18;
                     }
                     catch
                     {
@@ -246,7 +254,6 @@ namespace dektopCS.source
                 {
                     MessageBox.Show("Потеряно соединение с базой данных");
                 }
-
             }
         }
     }

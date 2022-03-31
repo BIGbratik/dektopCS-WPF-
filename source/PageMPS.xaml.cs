@@ -1,45 +1,34 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.Entity;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
-using System.Windows.Shapes;
 using MySql.Data.MySqlClient;
 using System.Data.Common;
 
 namespace dektopCS.source
 {
-    /// <summary>
-    /// Логика взаимодействия для PageMPS.xaml
-    /// </summary>
     public partial class PageMPS : Page
     {
-        //Инициализация БД, пути к локальным данным, списка для нужных данных
-        MySqlConnection myConnection = (MySqlConnection)App.Current.Resources["connectionMySQL"];
-        private string path = @"/data/MPS/";
+        //Получение данных подключения к БД
+        private readonly MySqlConnection myConnection = (MySqlConnection)App.Current.Resources["connectionMySQL"];
+
+        private readonly string path = @"/data/MPS/";
+
         List<string> types = new List<string>();
         public PageMPS(int id)
         {
-            //Инициализация страницы и заполнение её выбранным перечнем данных
             InitializeComponent();
             
             try
             {
-                //СОставление запроса к БД
+                //Составление и отпарвка запроса к БД
                 string sql = "SELECT MPStype,MPSfile FROM MPS WHERE ObjectID IS NOT NULL AND ObjectID = " + id;
                 MySqlCommand cmd = new MySqlCommand(sql, myConnection);
-                List<string> list = new List<string>();
 
-                //Чтение ответа БД
+                //Чтение ответа БД построчно
+                List<string> list = new List<string>();
                 using (DbDataReader reader = cmd.ExecuteReader())
                 {
                     if (reader.HasRows)
@@ -47,10 +36,8 @@ namespace dektopCS.source
                         //Построчное считывание ответа
                         while (reader.Read())
                         {
-                            string mpsType = reader.GetString(0);
-                            types.Add(mpsType);
-                            string mpsFiles = reader.GetString(1);
-                            list.Add(mpsFiles);
+                            types.Add(reader.GetString(0));
+                            list.Add(reader.GetString(1));
                         }
 
                     }
@@ -95,9 +82,7 @@ namespace dektopCS.source
         {
             if (lb.SelectedIndex != -1)
             {
-                path += types[lb.SelectedIndex] + "/"+ lb.SelectedItem.ToString();
-                Image image = new Image();
-                Uri uri = new Uri(path, UriKind.RelativeOrAbsolute);
+                Uri uri = new Uri(path+ types[lb.SelectedIndex] + "/" + lb.SelectedItem.ToString(), UriKind.RelativeOrAbsolute);
                 BitmapImage bitmapImage = new BitmapImage();
                 bitmapImage.BeginInit();
                 bitmapImage.UriSource = uri;
@@ -113,9 +98,7 @@ namespace dektopCS.source
         {
             if (lb.SelectedIndex != -1)
             {
-                path += types[lb.SelectedIndex] + "/" + lb.SelectedItem.ToString();
-                Image image = new Image();
-                Uri uri = new Uri(path, UriKind.RelativeOrAbsolute);
+                Uri uri = new Uri(path + types[lb.SelectedIndex] + "/" + lb.SelectedItem.ToString(), UriKind.RelativeOrAbsolute);
                 BitmapImage bitmapImage = new BitmapImage();
                 bitmapImage.BeginInit();
                 bitmapImage.UriSource = uri;
@@ -126,5 +109,4 @@ namespace dektopCS.source
                 lb.SelectedIndex = -1;
             }
         }
-    }
 }

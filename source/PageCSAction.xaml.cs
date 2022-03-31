@@ -2,24 +2,17 @@
 using System;
 using System.Collections.Generic;
 using System.Data.Common;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace dektopCS.source
 {
     public partial class PageCSAction : Page
     {
-        MySqlConnection myConnection=(MySqlConnection)App.Current.Resources["connectionMySQL"];
+        //Получение данных подключения к БД
+        private readonly MySqlConnection myConnection =(MySqlConnection)App.Current.Resources["connectionMySQL"];
+
         private List<int> EmergID = new List<int>();
         public PageCSAction()
         {
@@ -27,12 +20,12 @@ namespace dektopCS.source
 
             try
             {
-                //СОставление запроса к БД
+                //Составление и отпарвка запроса к БД
                 string sql = "SELECT EmergName FROM Emerg";
                 MySqlCommand cmd = new MySqlCommand(sql, myConnection);
-                List<string> list = new List<string>();
 
-                //Чтение ответа БД
+                //Чтение ответа БД построчно
+                List<string> list = new List<string>();
                 using (DbDataReader reader = cmd.ExecuteReader())
                 {
                     if (reader.HasRows)
@@ -76,12 +69,12 @@ namespace dektopCS.source
             try
             {
                 EmergID.Clear();
-                //СОставление запроса к БД
+                //Составление и отпарвка запроса к БД
                 string sql = "SELECT ID,EmergTypeName FROM EmergType WHERE EmergID = " + (lbType.SelectedIndex + 1);
                 MySqlCommand cmd = new MySqlCommand(sql, myConnection);
-                List<string> list = new List<string>();
 
-                //Чтение ответа БД
+                //Чтение ответа БД построчно
+                List<string> list = new List<string>();
                 using (DbDataReader reader = cmd.ExecuteReader())
                 {
                     if (reader.HasRows)
@@ -121,12 +114,12 @@ namespace dektopCS.source
             try
             {
                 EmergID.Clear();
-                //СОставление запроса к БД
+                //Составление и отпарвка запроса к БД
                 string sql = "SELECT ID,EmergTypeName FROM EmergType WHERE EmergID = " + (lbType.SelectedIndex + 1);
                 MySqlCommand cmd = new MySqlCommand(sql, myConnection);
-                List<string> list = new List<string>();
 
-                //Чтение ответа БД
+                //Чтение ответа БД построчно
+                List<string> list = new List<string>();
                 using (DbDataReader reader = cmd.ExecuteReader())
                 {
                     if (reader.HasRows)

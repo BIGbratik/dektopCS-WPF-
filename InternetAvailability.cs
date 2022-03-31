@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Runtime;
-using System.Runtime.InteropServices;
+﻿using System.Runtime.InteropServices;
 
 namespace dektopCS
 {
@@ -16,8 +10,7 @@ namespace dektopCS
 
         public static bool IsInternetAvailable()
         {
-            int description;
-            return InternetGetConnectedState(out description, 0);
+            return InternetGetConnectedState(out _, 0);
         }
     }
 }

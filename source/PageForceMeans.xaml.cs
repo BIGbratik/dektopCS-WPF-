@@ -1,46 +1,28 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
-using System.Windows.Shapes;
-using System.Data.SqlClient;
 using MySql.Data.MySqlClient;
 using System.Data.Common;
 
 namespace dektopCS.source
 {
-    /// <summary>
-    /// Логика взаимодействия для PageForceMeans.xaml
-    /// </summary>
     public partial class PageForceMeans : Page
     {
-        //Инициализация БД
-        MySqlConnection myConnection;
-        public PageForceMeans(MySqlConnection conn)
+        //Получение данных подключения к БД
+        private readonly MySqlConnection myConnection = (MySqlConnection)App.Current.Resources["connectionMySQL"];
+        public PageForceMeans()
         {
-            //Инициализация страницы и выгрузка необходимых данных из БД
             InitializeComponent();
-            myConnection = conn;
 
             try
             {
-                //СОставление запроса к БД
+                //Составление и отправка запроса к БД
                 string sql = "SELECT CategoryName FROM Category";
                 MySqlCommand cmd = new MySqlCommand(sql, myConnection);
-                List<string> list = new List<string>();
 
-                //Чтение ответа БД
+                //Чтение ответа БД построчно
+                List<string> list = new List<string>();
                 using (DbDataReader reader = cmd.ExecuteReader())
                 {
                     if (reader.HasRows)
@@ -48,14 +30,13 @@ namespace dektopCS.source
                         //Построчное считывание ответа
                         while (reader.Read())
                         {
-                            string categoryName = reader.GetString(0);
-                            list.Add(categoryName);
+                            list.Add(reader.GetString(0));
                         }
 
                     }
                 }
 
-                //Запись ответа в текстовые блоки
+                //Формирование полученных данных в правильные блоки отображения
                 List<TextBlock> tb = new List<TextBlock>();
                 for (int i = 0; i < list.Count; i++)
                 {
@@ -81,11 +62,11 @@ namespace dektopCS.source
         }
 
         //Переход на страницу объектов СиС из выбранной категории
-        private void CheckItem_Click(object sender, RoutedEventArgs e)
+        private void CheckItem_ClickUp(object sender, RoutedEventArgs e)
         {
             if (lb.SelectedIndex!=-1)
             {
-                PageFM pageFM = new PageFM(lb.SelectedIndex+1,myConnection);
+                PageFM pageFM = new PageFM(lb.SelectedIndex+1);
                 NavigationService.Navigate(pageFM);
                 lb.SelectedIndex = -1;
             }
@@ -95,7 +76,7 @@ namespace dektopCS.source
         {
             if (lb.SelectedIndex != -1)
             {
-                PageFM pageFM = new PageFM(lb.SelectedIndex + 1, myConnection);
+                PageFM pageFM = new PageFM(lb.SelectedIndex + 1);
                 NavigationService.Navigate(pageFM);
                 lb.SelectedIndex = -1;
             }

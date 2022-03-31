@@ -140,7 +140,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="InternetAvailability.cs" />
-    <Compile Include="myStringConn.cs" />
+    <Compile Include="DBconnection.cs" />
     <Compile Include="PMobject.cs" />
     <Compile Include="source\PageAnalytics.xaml.cs">
       <DependentUpon>PageAnalytics.xaml</DependentUpon>
@@ -153,6 +153,9 @@
     </Compile>
     <Compile Include="source\PageCSAction.xaml.cs">
       <DependentUpon>PageCSAction.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="source\PageCSAdd.xaml.cs">
+      <DependentUpon>PageCSAdd.xaml</DependentUpon>
     </Compile>
     <Compile Include="source\PageCSTasks.xaml.cs">
       <DependentUpon>PageCSTasks.xaml</DependentUpon>
@@ -203,6 +206,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="source\PageCSAction.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="source\PageCSAdd.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

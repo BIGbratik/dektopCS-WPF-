@@ -1,49 +1,34 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
-using System.Windows.Shapes;
-using GMap.NET;
-using GMap.NET.MapProviders;
 using GMap.NET.WindowsPresentation;
 using MySql.Data.MySqlClient;
 using System.Data.Common;
 
 namespace dektopCS.source
 {
-    /// <summary>
-    /// Логика взаимодействия для PageMultimedia.xaml
-    /// </summary>
     public partial class PageMultimedia : Page
     {
-        //ИНициализация БД
-        MySqlConnection myConnection = (MySqlConnection)App.Current.Resources["connectionMySQL"];
+        //Получение данных подключения к БД
+        private readonly MySqlConnection myConnection = (MySqlConnection)App.Current.Resources["connectionMySQL"];
         public PageMultimedia()
         {
-            //Инициализация страницы и выгрузка необходимых данных из БД
             InitializeComponent();
 
             List<string> fNames = new List<string>();
             List<string> marksNames = new List<string>();
             try
             {
-                //СОставление запроса к БД
+                //Составление и отправка запроса к БД
                 string sql = "SELECT MarkName, MarkImage FROM Marks";
                 MySqlCommand cmd = new MySqlCommand(sql, myConnection);
-                List<string> list = new List<string>();
 
-                //Чтение ответа БД
+                //Чтение ответа БД построчно
+                List<string> list = new List<string>();
                 using (DbDataReader reader = cmd.ExecuteReader())
                 {
                     if (reader.HasRows)
@@ -74,6 +59,7 @@ namespace dektopCS.source
         //Запоминание выбранной метки для карты
         private void ChooseItem_Click(object sender, RoutedEventArgs e)
         {
+            //Проверка, выбран ли элемент из списка
             if (lb.SelectedIndex != -1)
             {
                 string markerPath="";
@@ -81,12 +67,12 @@ namespace dektopCS.source
 
                 try
                 {
-                    //СОставление запроса к БД
+                    //Составление и отправка запроса к БД
                     string sql = "SELECT MarkName, MarkImage FROM Marks WHERE ID = "+(lb.SelectedIndex+1);
                     MySqlCommand cmd = new MySqlCommand(sql, myConnection);
-                    List<string> list = new List<string>();
 
-                    //Чтение ответа БД
+                    //Чтение ответа БД построчно
+                    List<string> list = new List<string>();
                     using (DbDataReader reader = cmd.ExecuteReader())
                     {
                         if (reader.HasRows)
@@ -113,6 +99,7 @@ namespace dektopCS.source
 
         private void ChooseItem_TouchIUp(object sender, RoutedEventArgs e)
         {
+            //Проверка, выбран ли какой-либо элемент
             if (lb.SelectedIndex != -1)
             {
                 string markerPath = "";
@@ -120,12 +107,12 @@ namespace dektopCS.source
 
                 try
                 {
-                    //СОставление запроса к БД
+                    //Составление и отправка запроса к БД
                     string sql = "SELECT MarkName, MarkImage FROM Marks WHERE ID = " + (lb.SelectedIndex + 1);
                     MySqlCommand cmd = new MySqlCommand(sql, myConnection);
-                    List<string> list = new List<string>();
 
-                    //Чтение ответа БД
+                    //Чтение ответа БД построчно
+                    List<string> list = new List<string>();
                     using (DbDataReader reader = cmd.ExecuteReader())
                     {
                         if (reader.HasRows)
@@ -180,13 +167,17 @@ namespace dektopCS.source
 
                 Grid grid = new Grid();
 
-                ColumnDefinition column1 = new ColumnDefinition();
-                column1.Width = new GridLength(60);
+                ColumnDefinition column1 = new ColumnDefinition
+                {
+                    Width = new GridLength(60)
+                };
 
                 ColumnDefinition column2 = new ColumnDefinition();
-                
-                RowDefinition row1= new RowDefinition();
-                row1.Height = new GridLength(60);
+
+                RowDefinition row1 = new RowDefinition
+                {
+                    Height = new GridLength(60)
+                };
 
                 grid.ColumnDefinitions.Add(column1);
                 grid.ColumnDefinitions.Add(column2);

@@ -1,37 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.Entity;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
-using System.Windows.Shapes;
 using MySql.Data.MySqlClient;
 using System.Data.Common;
 
 namespace dektopCS.source
 {
-    /// <summary>
-    /// Логика взаимодействия для PageMPSinfo.xaml
-    /// </summary>
     public partial class PageMPSinfo : Page
     {
         //Инициализация БД и пути к локальным данным
         private string path = @"/data/MPS/";
-        MySqlConnection myConnection;
-        public PageMPSinfo(string type, MySqlConnection conn)
+
+        //Получение данных подключения к БД
+        private readonly MySqlConnection myConnection = (MySqlConnection)App.Current.Resources["connectionMySQL"];
+        public PageMPSinfo(string type)
         {
-            //Инициализация страницы и загрузка списка данных, касающихся выбранного объекта
             InitializeComponent();
             path =path+type+"/";
-            myConnection = conn;
             
             try
             {
@@ -96,7 +84,6 @@ namespace dektopCS.source
             if (lb.SelectedIndex != -1)
             {
                 string fName=lb.SelectedItem.ToString();
-                Image image = new Image();
                 Uri uri = new Uri(path+fName, UriKind.RelativeOrAbsolute);
                 BitmapImage bitmapImage = new BitmapImage();
                 bitmapImage.BeginInit();
@@ -114,7 +101,6 @@ namespace dektopCS.source
             if (lb.SelectedIndex != -1)
             {
                 string fName = lb.SelectedItem.ToString();
-                Image image = new Image();
                 Uri uri = new Uri(path + fName, UriKind.RelativeOrAbsolute);
                 BitmapImage bitmapImage = new BitmapImage();
                 bitmapImage.BeginInit();
