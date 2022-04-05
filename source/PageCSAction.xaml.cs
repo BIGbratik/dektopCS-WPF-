@@ -52,7 +52,12 @@ namespace dektopCS.source
                         TextWrapping = TextWrapping.WrapWithOverflow
                     });
                 }
-                lbEmerg.Items.Add("Не выбран тип ЧС");
+                if(lbEmerg.Items.Count!=0)
+                {
+                    lbEmerg.Items.Clear();
+                    lbEmerg.Items.Add("Не выбран тип ЧС");
+                }
+
                 lbEmerg.IsEnabled = false;
                 lbType.ItemsSource = tb;
             }

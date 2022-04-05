@@ -13,7 +13,7 @@
         WindowState="Maximized"
         ResizeMode="NoResize">
     <Window.Background>
-        <ImageBrush ImageSource="./data/ЗвездаМЧС.png"/>
+        <ImageBrush ImageSource="./data/ЗвездаМЧСauth.png"/>
     </Window.Background>
     <Window.Resources>
         <Style TargetType="Button">
@@ -26,66 +26,71 @@
             <Setter Property="Button.HorizontalContentAlignment" Value="Center"/>
             <Setter Property="Button.VerticalContentAlignment" Value="Center"/>
         </Style>
+        <Style TargetType="Label">
+            <Setter Property="Label.Foreground" Value="DarkOrange"/>
+            <Setter Property="Label.HorizontalContentAlignment" Value="Left"/>
+            <Setter Property="Label.VerticalAlignment" Value="Center"/>
+            <Setter Property="Label.FontSize" Value="30"/>
+            <Setter Property="Label.Width" Value="Auto"/>
+            <Setter Property="Label.Height" Value="Auto"/>
+        </Style>
     </Window.Resources>
 
     <Grid Name="grid">
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
-            <ColumnDefinition Width="100"/>
+            <ColumnDefinition/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="40"/>
+            <RowDefinition Height="100"/>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="300"/>
+            <RowDefinition Height="100"/>
         </Grid.RowDefinitions>
-        <gmaps:GMapControl 
-                x:Name="mapView" 
-                x:FieldModifier="public"
-                Loaded="MapView_Loaded"
-                MouseRightButtonDown="MapView_RightButtonDown"
-                Grid.ColumnSpan="3"
-                Grid.RowSpan="3"/>
-        <Button
-            Name="ZoomUP"
+        <StackPanel
+            Grid.Row="1"
             Grid.Column="1"
-            Grid.Row="0"
-            Width="25"
-            Height="25"
-            HorizontalAlignment="Right"
-            Click="ZoomUP_Click">
-            <Image Source="./data/Плюс.png"/>
-        </Button>
-        <Button
-            Name="ZoomDOWN"
-            Grid.Column="1"
-            Grid.Row="0"
-            Width="25"
-            Height="25"
-            HorizontalAlignment="Left"
-            Click="ZoomDOWN_Click">
-            <Image Source="./data/Минус.png"/>
-        </Button>
+            Orientation="Vertical"
+            VerticalAlignment="Center"
+            HorizontalAlignment="Center"
+            Background="#13294B">
+            <Label
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center">Логин</Label>
+            <TextBox
+                Name="login"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                HorizontalContentAlignment="Center"
+                VerticalContentAlignment="Center"
+                FontSize="30"
+                Width="300"
+                Height="40"/>
+            <Label
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center">Пароль</Label>
+            <PasswordBox
+                Name="pwd"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                HorizontalContentAlignment="Center"
+                VerticalContentAlignment="Center"
+                FontSize="30"
+                Width="300"
+                Height="40">
+            </PasswordBox>
+            <Button
+                Click="Auth_Click"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Margin="0,30,0,0">Войти</Button>
+        </StackPanel>
         <Button 
                 Click="Exit_Click" 
                 HorizontalAlignment="Right" 
-                VerticalAlignment="Center"  
+                VerticalAlignment="Top"  
                 Grid.Column="2"
                 Width="70"
                 Grid.Row="0">Выход</Button>
-        <Frame 
-			    Grid.Column="0"
-			    Grid.RowSpan="3"
-			    Name="leftPlace"
-			    Source="source/PageChoseModule.xaml" 
-			    NavigationUIVisibility="Hidden"/>
-        <WebBrowser
-            Grid.Row="6"
-            Grid.Column="2"
-            Name="weather"
-            HorizontalAlignment="Right"
-            VerticalAlignment="Bottom"
-            Width="600"
-            Height="350"></WebBrowser>
     </Grid>
 </Window>

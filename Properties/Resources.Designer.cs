@@ -86,5 +86,14 @@ namespace dektopCS.Properties {
                 return ResourceManager.GetString("markerPath", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на -1.
+        /// </summary>
+        internal static string roll {
+            get {
+                return ResourceManager.GetString("roll", resourceCulture);
+            }
+        }
     }
 }

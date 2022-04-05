@@ -8,66 +8,67 @@ using GMap.NET;
 using GMap.NET.MapProviders;
 using GMap.NET.WindowsPresentation;
 using MySql.Data.MySqlClient;
-
+using System.Runtime.InteropServices;
+using System.Security;
+using System.Collections.Generic;
+using System.Data.Common;
 
 namespace dektopCS
 {
     public partial class MainWindow : Window
     {
-        //Координаты стартового положения центра карты
-        public double startLat = 55.796127;
-        public double startLng = 49.106414;
+        //Получение данных подключения к БД
+        private readonly MySqlConnection myConnection;
         public MainWindow()
         {
             InitializeComponent();
             //Подключение к базе данных
             MySqlConnection conn = DBconnection.GetDBConnection();
+            myConnection = conn;
             //Добавление параметров подключения в ресурсы приложения
             App.Current.Resources["connectionMySQL"] = conn;
         }
 
-        //Метод отрисовки карты при загрузке окна
-        private void MapView_Loaded(object sender, RoutedEventArgs e)
+        private void Auth_Click(object sender, RoutedEventArgs e)
         {
-            //Проверка соединения с сетью Интернет
-            if (InternetAvailability.IsInternetAvailable())
-            {
-                //Отрисовка карты с центро в г.Казань
-                mapView.MapProvider = GoogleMapProvider.Instance;
-                mapView.MinZoom = 4;
-                mapView.MaxZoom = 20;
-                mapView.Zoom = 10;
-                mapView.Position = new PointLatLng(startLat, startLng);
-                //mapView.SetPositionByKeywords("Moscow, Russia");
-                mapView.MouseWheelZoomType = MouseWheelZoomType.MousePositionAndCenter;
-                mapView.CanDragMap = true;
-                mapView.DragButton = MouseButton.Left;
-                mapView.ShowCenter = false;
-                mapView.ShowTileGridLines = false;
 
-                //Создание строки запроса к Я.Погоде и добавление её в ресурс WebBrowser
-                try
+            try
+            {
+                //Составление и отпарвка запроса к БД
+                string sql = "SELECT Roll FROM Users WHERE BINARY Login = '"+login.Text+ 
+                    "' AND BINARY Passwd = '" + SecureStringToString(pwd.SecurePassword)+"'";
+                MySqlCommand cmd = new MySqlCommand(sql, myConnection);
+
+                //Чтение ответа БД построчно
+                List<int> list = new List<int>();
+                using (DbDataReader reader = cmd.ExecuteReader())
                 {
-                    string weatherPath = "https://yandex.ru/pogoda/?lat=" + 
-                        startLat.ToString("G", CultureInfo.InvariantCulture) + 
-                        "&lon=" + startLng.ToString("G", CultureInfo.InvariantCulture);
-                    Uri weaterUri = new Uri(weatherPath, UriKind.RelativeOrAbsolute);
-                    weather.Source = weaterUri;
+                    if (reader.HasRows)
+                    {
+                        //Построчное считывание ответа
+                        while (reader.Read())
+                        {
+                            list.Add(reader.GetInt32(0));
+                        }
+                    }
                 }
-                catch
+                if (list.Count==0)
                 {
-                    MessageBox.Show("Внешний ресурс ПОГОДА недоступен. Возможно отсутствует соединение с сетью Интернет", 
-                        "Ошибка соединения", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    MessageBox.Show("Введён неверный логин или пароль!!!", "Внимание", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    pwd.Clear();
+                }
+                else
+                {
+                    App.Current.Resources["roll"] = list[0];
+                    pwd.Clear();
+                    login.Clear();
+                    WorkWindow workWindow = new WorkWindow();
+                    workWindow.ShowDialog();
                 }
             }
-            else
+            catch
             {
-                MessageBox.Show("Кажется отсутствует соединение с сетью Интернет, либо оно слабое\n" +
-                    "Для доступа к некоторым функциям приложения требуется наличие подключения к сети. " +
-                    "Устарните проблемы и перезапустите приложение", "Ошибка сети", MessageBoxButton.OK, MessageBoxImage.Warning);
-                //Удаление объектов, для работы которых требуется соединение с сетью интернет
-                grid.Children.Remove(weather);
-                grid.Children.Remove(mapView);
+                MessageBox.Show("Не удалось выгрузить данные из базы данных", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
@@ -79,41 +80,17 @@ namespace dektopCS
             Close();
         }
 
-        //Приближение
-        private void ZoomUP_Click(object sender, RoutedEventArgs e)
+        private string SecureStringToString(SecureString value)
         {
-            mapView.Zoom += 1;
-        }
-
-        //Отдаление
-        private void ZoomDOWN_Click(object sender, RoutedEventArgs e)
-        {
-            mapView.Zoom -= 1;
-        }
-
-        //Метод постановки метки на карту по ПКМ
-        void MapView_RightButtonDown(object sender, MouseEventArgs e)
-        {
-            //Проверка на наличие данных о метке в ресурсах
-            if (App.Current.Resources["markerPath"] != null)
+            IntPtr valuePtr = IntPtr.Zero;
+            try
             {
-                //Получение, подготовка и вставка изображения метки на карту
-                string path = @"/data/Marks/" + App.Current.Resources["markerPath"];
-                GMapMarker marker = new GMapMarker(mapView.FromLocalToLatLng((int)e.GetPosition(mapView).X - 15, (int)e.GetPosition(mapView).Y - 15));
-                BitmapImage bitmapImage = new BitmapImage();
-                bitmapImage.BeginInit();
-                bitmapImage.UriSource = new Uri(path, UriKind.RelativeOrAbsolute);
-                bitmapImage.EndInit();
-
-                Image img = new Image()
-                {
-                    Source = bitmapImage,
-                    Width = 30,
-                    Height = 30,
-                    ToolTip = App.Current.Resources["markerName"]
-                };
-                marker.Shape = img;
-                mapView.Markers.Add(marker);
+                valuePtr = Marshal.SecureStringToGlobalAllocUnicode(value);
+                return Marshal.PtrToStringUni(valuePtr);
+            }
+            finally
+            {
+                Marshal.ZeroFreeGlobalAllocUnicode(valuePtr);
             }
         }
     }
