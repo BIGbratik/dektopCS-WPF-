@@ -14,17 +14,24 @@ namespace dektopCS.source
         //Инициализация БД и пути к локальным данным
         private string path = @"/data/MPS/";
 
+        private readonly string type;
+
         //Получение данных подключения к БД
         private readonly MySqlConnection myConnection = (MySqlConnection)App.Current.Resources["connectionMySQL"];
         public PageMPSinfo(string type)
         {
             InitializeComponent();
             path =path+type+"/";
-            
+            this.type = type;
+        }
+
+        //Метод заполнения страницы при загрузке
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
             try
             {
                 //СОставление запроса к БД
-                string sql = "SELECT MPSfile FROM MPS WHERE MPStype = '"+type+"' AND ObjectID IS NULL";
+                string sql = "SELECT MPSfile FROM MPS WHERE MPStype = '" + type + "' AND ObjectID IS NULL";
                 MySqlCommand cmd = new MySqlCommand(sql, myConnection);
                 List<string> list = new List<string>();
 
@@ -67,9 +74,8 @@ namespace dektopCS.source
             }
             catch
             {
-                MessageBox.Show("Потеряно соединение с базой данных");
+                MessageBox.Show("Не удалось выгрузить данные из базы данных", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-
         }
 
         //Возврат на предыдущю страницу
@@ -111,12 +117,6 @@ namespace dektopCS.source
 
                 lb.SelectedIndex = -1;
             }
-        }
-        //ДОРАБОТАТЬ ПРИБЛИЖЕНИЕ КАРТИНКИ!!!
-        private void Zoom_Wheel (object sender, RoutedEventArgs e)
-        {
-            /*img.Width = 200;
-            img.Height = 200;*/
         }
     }
 }

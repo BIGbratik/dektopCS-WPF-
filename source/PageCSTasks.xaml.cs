@@ -15,15 +15,19 @@ namespace dektopCS.source
         private readonly MySqlConnection myConnection = (MySqlConnection)App.Current.Resources["connectionMySQL"];
 
         DispatcherTimer timer = new DispatcherTimer();
-        private int ID;
+        private readonly int id;
         public PageCSTasks(int id)
         {
             InitializeComponent();
-            ID = id;
+            this.id = id;
+        }
+
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
             try
             {
                 //Составление и отпарвка запроса к БД
-                string sql = "SELECT TaskName FROM EmergTasks WHERE EmergTypeID = "+id;
+                string sql = "SELECT TaskName FROM EmergTasks WHERE EmergTypeID = " + id;
                 MySqlCommand cmd = new MySqlCommand(sql, myConnection);
 
                 //Чтение ответа БД
@@ -62,10 +66,9 @@ namespace dektopCS.source
             }
             catch
             {
-                MessageBox.Show("Потеряно соединение с базой данных", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Не удалось выгрузить данные из базы данных", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
-
         private void Back_Click(object sender, RoutedEventArgs e)
         {
             NavigationService.GoBack();
@@ -73,7 +76,7 @@ namespace dektopCS.source
 
         private void AddCS_Click(object sender, RoutedEventArgs e)
         {
-            PageCSAdd pageCSAdd = new PageCSAdd(ID);
+            PageCSAdd pageCSAdd = new PageCSAdd(id);
             NavigationService.Navigate(pageCSAdd);
         }
 

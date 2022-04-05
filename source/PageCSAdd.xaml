@@ -8,6 +8,7 @@
       d:DesignHeight="800" 
       d:DesignWidth="900"
       Title="PageCSAdd"
+      Loaded="Page_Loaded"
       Background="MidnightBlue">
     <Page.Resources>
         <Style TargetType="Button">
@@ -93,13 +94,19 @@
             FontSize="20"
             Grid.Column="0"
             Grid.Row="4">Время возникновения ЧС:</Label>
-        <Label
+        <!--<Label
             Foreground="White"
             HorizontalContentAlignment="Left"
             FontSize="20"
             Grid.Column="1"
             Grid.Row="4"
-            Name="CSData"/>
+            Name="CSDate"/>-->
+        <TextBox
+            HorizontalContentAlignment="Left"
+            FontSize="20"
+            Grid.Column="1"
+            Grid.Row="4"
+            Name="CSDate"/>
         <Label
             Foreground="White"
             HorizontalContentAlignment="Left"

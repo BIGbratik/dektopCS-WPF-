@@ -18,7 +18,11 @@ namespace dektopCS.source
         public PageAnalytics()
         {
             InitializeComponent();
+        }
 
+        //Метод заполнения страницы при загрузке
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
             try
             {
                 //Составление и отправка запроса к БД
@@ -54,7 +58,7 @@ namespace dektopCS.source
             }
             catch
             {
-                MessageBox.Show("Потеряно соединение с базой данных");
+                MessageBox.Show("Не удалось выгрузить данные из базы данных", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
@@ -95,12 +99,12 @@ namespace dektopCS.source
                     }
                     catch
                     {
-                        MessageBox.Show("Не удаётся запустить выбранную программу");
+                        MessageBox.Show("Не удалось выгрузить данные из базы данных", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
                     }
                 }
                 catch
                 {
-                    MessageBox.Show("Потеряно соединение с базой данных");
+                    MessageBox.Show("Потеряно соединение с базой данных","Внимание!!!", MessageBoxButton.OK, MessageBoxImage.Warning);
                 }
             }
         }
@@ -135,12 +139,12 @@ namespace dektopCS.source
                     }
                     catch
                     {
-                        MessageBox.Show("Не удаётся запустить выбранную программу");
+                        MessageBox.Show("Не удалось выгрузить данные из базы данных", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
                     }
                 }
                 catch
                 {
-                    MessageBox.Show("Потеряно соединение с базой данных");
+                    MessageBox.Show("Потеряно соединение с базой данных", "Внимание!!!", MessageBoxButton.OK, MessageBoxImage.Warning);
                 }
             }
         }

@@ -1,20 +1,10 @@
 ﻿using GMap.NET;
 using GMap.NET.WindowsPresentation;
 using MySql.Data.MySqlClient;
-using System;
 using System.Collections.Generic;
-using System.Data.Entity;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Data.Common;
@@ -24,21 +14,25 @@ namespace dektopCS.source
     public partial class PageFM : Page
     {
         //Инициализация переменной индекса, объекта ЧС и БД
-        private static int ind;
+        private readonly int id;
         private PMobject obj = new PMobject();
 
         //Получение данных подключения к БД
         private readonly MySqlConnection myConnection = (MySqlConnection)App.Current.Resources["connectionMySQL"];
 
-        public PageFM(int num)
+        public PageFM(int id)
         {
             InitializeComponent();
-            ind = num;
+            this.id = id;
+        }
 
+        //Метод заполнения страницы при загрузке
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
             try
             {
                 //Составление и отправка запроса к БД
-                string sql = "SELECT ObjectName FROM CSobject WHERE CategoryID = " + ind;
+                string sql = "SELECT ObjectName FROM CSobject WHERE CategoryID = " + id;
                 MySqlCommand cmd = new MySqlCommand(sql, myConnection);
 
                 //Чтение ответа построчно
@@ -70,9 +64,8 @@ namespace dektopCS.source
             }
             catch
             {
-                MessageBox.Show("Потеряно соединение с базой данных");
+                MessageBox.Show("Не удалось выгрузить данные из базы данных", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-
         }
 
         //Возвращение на предыдущую страницу
@@ -90,7 +83,7 @@ namespace dektopCS.source
                 try
                 {
                     //Формирование и отпарвка запроса к БД
-                    string sql = "SELECT ID FROM CSobject WHERE CategoryID = " + ind+" LIMIT 1";
+                    string sql = "SELECT ID FROM CSobject WHERE CategoryID = " + id+" LIMIT 1";
                     MySqlCommand cmd = new MySqlCommand(sql, myConnection);
 
                     //Чтение ответа БД построчно
@@ -159,12 +152,12 @@ namespace dektopCS.source
                     }
                     catch
                     {
-                        MessageBox.Show("Не удалось отобразить точку объекта");
+                        MessageBox.Show("Не удалось отобразить точку объекта", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
                     }
                 }
                 catch
                 {
-                    MessageBox.Show("Потеряно соединение с базой данных");
+                    MessageBox.Show("Не удалось выгрузить данные из базы данных", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
                 
             }
@@ -178,7 +171,7 @@ namespace dektopCS.source
                 try
                 {
                     //Формирование и отпарвка запроса к БД
-                    string sql = "SELECT ID FROM CSobject WHERE CategoryID = " + ind + " LIMIT 1";
+                    string sql = "SELECT ID FROM CSobject WHERE CategoryID = " + id + " LIMIT 1";
                     MySqlCommand cmd = new MySqlCommand(sql, myConnection);
 
                     //Чтение ответа БД построчно
@@ -247,12 +240,12 @@ namespace dektopCS.source
                     }
                     catch
                     {
-                        MessageBox.Show("Не удалось отобразить точку объекта");
+                        MessageBox.Show("Не удалось отобразить точку объекта", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
                     }
                 }
                 catch
                 {
-                    MessageBox.Show("Потеряно соединение с базой данных");
+                    MessageBox.Show("Не удалось выгрузить данные из базы данных", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
         }

@@ -9,6 +9,7 @@
       d:DesignWidth="600"
       Title="Классификаторы"
       Background="MidnightBlue"
+      Loaded="Page_Loaded"
       Name="Claasifs">
     <Page.Resources>
         <Style TargetType="ListBoxItem">

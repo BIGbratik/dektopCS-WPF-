@@ -38,6 +38,7 @@ namespace dektopCS
                 mapView.MaxZoom = 20;
                 mapView.Zoom = 10;
                 mapView.Position = new PointLatLng(startLat, startLng);
+                //mapView.SetPositionByKeywords("Moscow, Russia");
                 mapView.MouseWheelZoomType = MouseWheelZoomType.MousePositionAndCenter;
                 mapView.CanDragMap = true;
                 mapView.DragButton = MouseButton.Left;
@@ -94,11 +95,11 @@ namespace dektopCS
         void MapView_RightButtonDown(object sender, MouseEventArgs e)
         {
             //Проверка на наличие данных о метке в ресурсах
-            if (App.Current.Resources["markerPath"]!=null)
+            if (App.Current.Resources["markerPath"] != null)
             {
                 //Получение, подготовка и вставка изображения метки на карту
                 string path = @"/data/Marks/" + App.Current.Resources["markerPath"];
-                GMapMarker marker = new GMapMarker(mapView.FromLocalToLatLng((int)e.GetPosition(mapView).X-15, (int)e.GetPosition(mapView).Y-15));
+                GMapMarker marker = new GMapMarker(mapView.FromLocalToLatLng((int)e.GetPosition(mapView).X - 15, (int)e.GetPosition(mapView).Y - 15));
                 BitmapImage bitmapImage = new BitmapImage();
                 bitmapImage.BeginInit();
                 bitmapImage.UriSource = new Uri(path, UriKind.RelativeOrAbsolute);

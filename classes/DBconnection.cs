@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using MySql.Data.MySqlClient;
 
@@ -29,7 +25,7 @@ namespace dektopCS
             }
             catch
             {
-                MessageBox.Show("Не удалось установить соединение с сервером БАЗЫ ДАННЫХ");
+                MessageBox.Show("Не удалось установить соединение с сервером БАЗЫ ДАННЫХ","Ошибка подключения!!!",MessageBoxButton.OK, MessageBoxImage.Error);
             }
 
             return conn; 

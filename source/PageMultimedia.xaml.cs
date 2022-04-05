@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.Entity;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
@@ -18,7 +17,11 @@ namespace dektopCS.source
         public PageMultimedia()
         {
             InitializeComponent();
+        }
 
+        //Метод заполнения страницы при загрузке
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
             List<string> fNames = new List<string>();
             List<string> marksNames = new List<string>();
             try
@@ -39,15 +42,14 @@ namespace dektopCS.source
                             fNames.Add(reader.GetString(1));
                             marksNames.Add(reader.GetString(0));
                         }
-
                     }
                 }
             }
             catch
             {
-                MessageBox.Show("Потеряно соединение с базой данных");
+                MessageBox.Show("Не удалось выгрузить данные из базы данных", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-            lb.ItemsSource = GetSP(fNames,marksNames);
+            lb.ItemsSource = GetSP(fNames, marksNames);
         }
 
         //Возврат на предыдущую страницу
@@ -90,7 +92,7 @@ namespace dektopCS.source
                 }
                 catch
                 {
-                    MessageBox.Show("Потеряно соединение с базой данных");
+                    MessageBox.Show("Не удалось выгрузить данные из базы данных", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
 
 
@@ -130,7 +132,7 @@ namespace dektopCS.source
                 }
                 catch
                 {
-                    MessageBox.Show("Потеряно соединение с базой данных");
+                    MessageBox.Show("Не удалось выгрузить данные из базы данных", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
 
 

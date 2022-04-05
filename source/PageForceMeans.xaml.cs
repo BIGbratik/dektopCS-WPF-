@@ -14,7 +14,11 @@ namespace dektopCS.source
         public PageForceMeans()
         {
             InitializeComponent();
+        }
 
+        //Метод заполнения страницы при загрузке
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
             try
             {
                 //Составление и отправка запроса к БД
@@ -50,9 +54,8 @@ namespace dektopCS.source
             }
             catch
             {
-                MessageBox.Show("Потеряно соединение с базой данных");
+                MessageBox.Show("Не удалось выгрузить данные из базы данных", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-
         }
 
         //Возврат на предыдущю страницу

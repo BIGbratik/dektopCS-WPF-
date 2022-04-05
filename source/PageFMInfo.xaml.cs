@@ -9,18 +9,23 @@ namespace dektopCS.source
     public partial class PageFMInfo : Page
     {
         //Инициализация объекта ЧС
-        private PMobject pmObject=new PMobject();
+        private readonly PMobject obj=new PMobject();
         public PageFMInfo(PMobject obj)
         {
             InitializeComponent();
-            pmObject = obj;
-            Name.Text = pmObject.Name;
-            Structer.Text = pmObject.Structer;
-            Subord.Text = pmObject.Subord;
-            isReady.Text = pmObject.isReady;
-            Count.Text = pmObject.Count;
-            Place.Text = pmObject.Place;
-            Phone.Text = pmObject.Phone;
+            this.obj = obj;
+        }
+
+        //Метод заполнения страницы при загрузке
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            Name.Text = obj.Name;
+            Structer.Text = obj.Structer;
+            Subord.Text = obj.Subord;
+            isReady.Text = obj.isReady;
+            Count.Text = obj.Count;
+            Place.Text = obj.Place;
+            Phone.Text = obj.Phone;
         }
 
         //Возврат на предыдущю страницу и удаление метки объекта с карты
@@ -36,7 +41,7 @@ namespace dektopCS.source
         //Переход на страницу дополнительных графических материалов, относящихс к данному объекту
         private void MPS_Click(object sender, RoutedEventArgs e)
         {
-            PageMPS pageMPS = new PageMPS(pmObject.Number);
+            PageMPS pageMPS = new PageMPS(obj.Number);
             NavigationService.Navigate(pageMPS);
         }
     }

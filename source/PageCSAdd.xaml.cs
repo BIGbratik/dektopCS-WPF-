@@ -11,13 +11,21 @@ namespace dektopCS.source
     {
         //Получение данных подключения к БД
         private readonly MySqlConnection myConnection = (MySqlConnection)App.Current.Resources["connectionMySQL"];
+
+        private readonly int EmergTypeID;
         public PageCSAdd(int id)
         {
             InitializeComponent();
+            EmergTypeID = id;
+        }
+
+        //Метод заполнения страницы при загрузке
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
             try
             {
                 //Составление и отпарвка запроса к БД
-                string sql = "SELECT EmergTypeName FROM EmergType WHERE ID = " + id;
+                string sql = "SELECT EmergTypeName FROM EmergType WHERE ID = " + EmergTypeID;
                 MySqlCommand cmd = new MySqlCommand(sql, myConnection);
 
                 //Чтение ответа БД построчно
@@ -33,12 +41,13 @@ namespace dektopCS.source
                         }
                     }
                 }
-                CSType.Content= str;
-                CSData.Content = (DateTime.UtcNow.AddHours(3)).ToString("G");
+                CSType.Content = str;
+                //CSDate.Content = (DateTime.Now).ToString("G");
+                CSDate.Text = (DateTime.Now).ToString("G");
             }
             catch
             {
-                MessageBox.Show("Потеряно соединение с базой данных", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Не удалось выгрузить данные из базы данных", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
@@ -49,7 +58,21 @@ namespace dektopCS.source
 
         private void Save_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Функция находится в разработке", "Внимание!!!", MessageBoxButton.OK, MessageBoxImage.Information);
+            try
+            {
+                string sql = "INSERT EmergTasks(EmergTypeID, TaskName, EmergTime) VALUE (" + EmergTypeID+",'"+ CSName.Text + "',@dt)";
+
+                MySqlCommand cmd = new MySqlCommand(sql, myConnection);
+                cmd.Parameters.AddWithValue("@dt", DateTime.Parse(CSDate.Text));
+                cmd.ExecuteNonQuery();
+                MessageBox.Show("Сохранение прошло успешно","Успех!!!",MessageBoxButton.OK, MessageBoxImage.Information);
+                NavigationService.GoBack();
+            }
+            catch
+            {
+                MessageBox.Show("Ошибка сохранения","Внимание!!!",MessageBoxButton.OK,MessageBoxImage.Error);
+            }
+
         }
     }
 }

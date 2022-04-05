@@ -8,6 +8,7 @@
       d:DesignHeight="450" 
       d:DesignWidth="600"
       Title="Дополнительные материалы"
+      Loaded="Page_Loaded"
       Background="MidnightBlue">
     <Page.Resources>
         <Style TargetType="ListBoxItem">

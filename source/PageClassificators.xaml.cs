@@ -16,6 +16,11 @@ namespace dektopCS.source
         public PageClassificators()
         {
             InitializeComponent();
+        }
+
+        //Метод заполнения страницы при загрузке
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
 
             try
             {
@@ -32,7 +37,7 @@ namespace dektopCS.source
                         //Построчное считывание ответа
                         while (reader.Read())
                         {
-                            left=reader.GetString(0);
+                            left = reader.GetString(0);
                         }
                     }
                     BtnLeft.Content = left;
@@ -59,7 +64,7 @@ namespace dektopCS.source
             }
             catch
             {
-                MessageBox.Show("Потеряно соединение с базой данных");
+                MessageBox.Show("Потеряно соединение с базой данных", "Внимание!!!", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
             page = Claasifs.Content;
         }
@@ -109,7 +114,7 @@ namespace dektopCS.source
             }
             catch
             {
-                MessageBox.Show("Потеряно соединение с базой данных");
+                MessageBox.Show("Не удалось выгрузить данные из базы данных", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
             }
 
             Grid grid = new Grid();
@@ -159,11 +164,6 @@ namespace dektopCS.source
         private void ReturnBtn_Click(object sender, RoutedEventArgs e)
         {
             Claasifs.Content = page;
-        }
-
-        private void LB_Loaded(object sender, RoutedEventArgs e)
-        {
-
         }
     }
 }

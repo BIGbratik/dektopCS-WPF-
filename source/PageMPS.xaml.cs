@@ -16,11 +16,18 @@ namespace dektopCS.source
 
         private readonly string path = @"/data/MPS/";
 
-        List<string> types = new List<string>();
+        private readonly int id;
+
+        private List<string> types = new List<string>();
         public PageMPS(int id)
         {
             InitializeComponent();
-            
+            this.id = id;
+        }
+
+        //Метод заполнения страницы при загрузке
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
             try
             {
                 //Составление и отпарвка запроса к БД
@@ -67,7 +74,7 @@ namespace dektopCS.source
             }
             catch
             {
-                MessageBox.Show("Потеряно соединение с базой данных");
+                MessageBox.Show("Не удалось выгрузить данные из базы данных", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
@@ -82,7 +89,7 @@ namespace dektopCS.source
         {
             if (lb.SelectedIndex != -1)
             {
-                Uri uri = new Uri(path+ types[lb.SelectedIndex] + "/" + lb.SelectedItem.ToString(), UriKind.RelativeOrAbsolute);
+                Uri uri = new Uri(path + types[lb.SelectedIndex] + "/" + lb.SelectedItem.ToString(), UriKind.RelativeOrAbsolute);
                 BitmapImage bitmapImage = new BitmapImage();
                 bitmapImage.BeginInit();
                 bitmapImage.UriSource = uri;
@@ -109,4 +116,5 @@ namespace dektopCS.source
                 lb.SelectedIndex = -1;
             }
         }
+    }
 }

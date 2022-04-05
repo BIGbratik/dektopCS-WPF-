@@ -17,7 +17,11 @@ namespace dektopCS.source
         public PageCSAction()
         {
             InitializeComponent();
+        }
 
+        //Метод заполнения страницы при загрузке
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
             try
             {
                 //Составление и отпарвка запроса к БД
@@ -54,7 +58,7 @@ namespace dektopCS.source
             }
             catch
             {
-                MessageBox.Show("Потеряно соединение с базой данных","Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Не удалось выгрузить данные из базы данных", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
@@ -104,7 +108,7 @@ namespace dektopCS.source
             }
             catch
             {
-                MessageBox.Show("Не удалось выгрузить данные из Базы Данных","Ошибка",MessageBoxButton.OK,MessageBoxImage.Error);
+                MessageBox.Show("Не удалось выгрузить данные из базы данных", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
@@ -149,7 +153,7 @@ namespace dektopCS.source
             }
             catch
             {
-                MessageBox.Show("Не удалось выгрузить данные из Базы Данных", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Не удалось выгрузить данные из базы данных", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
