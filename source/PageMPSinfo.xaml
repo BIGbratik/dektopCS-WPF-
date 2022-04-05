@@ -66,7 +66,6 @@
             Grid.ColumnSpan="2"
             ScrollViewer.HorizontalScrollBarVisibility="Auto"
             ScrollViewer.VerticalScrollBarVisibility="Auto"
-            MouseWheel="Zoom_Wheel"
             Name="img"
             >
             <Image.RenderTransform>
