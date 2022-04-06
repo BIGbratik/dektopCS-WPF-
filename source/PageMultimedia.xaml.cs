@@ -204,7 +204,7 @@ namespace dektopCS.source
         //Метод удаления всех поставленных меток на карту
         private void  Clear_Btn(object sender, RoutedEventArgs e)
         {
-            GMapControl map = (GMapControl)App.Current.MainWindow.FindName("mapView");
+            GMapControl map = (GMapControl)App.Current.Windows[1].FindName("mapView");
             App.Current.Resources["markerPath"] = "";
             map.Markers.Clear();
         }

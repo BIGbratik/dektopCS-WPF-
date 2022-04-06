@@ -32,7 +32,7 @@ namespace dektopCS.source
         private void Back_Click(object sender, RoutedEventArgs e)
         {
             NavigationService.GoBack();
-            GMapControl map = (GMapControl)App.Current.MainWindow.FindName("mapView");
+            GMapControl map = (GMapControl)App.Current.Windows[1].FindName("mapView");
             App.Current.Resources["markerPath"] = "";
             map.Markers.Clear();
             map.Zoom = 10;

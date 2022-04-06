@@ -131,7 +131,7 @@ namespace dektopCS.source
                     //Поставка метки выбранного объекта на карту
                     try
                     {
-                        GMapControl map = (GMapControl)App.Current.MainWindow.FindName("mapView");
+                        GMapControl map = (GMapControl)App.Current.Windows[1].FindName("mapView");
                         App.Current.Resources["markerPath"] = "";
 
                         GMapMarker marker = new GMapMarker(new PointLatLng(obj.Latitude, obj.Longitude));
@@ -219,7 +219,7 @@ namespace dektopCS.source
                     //Поставка метки выбранного объекта на карту
                     try
                     {
-                        GMapControl map = (GMapControl)App.Current.MainWindow.FindName("mapView");
+                        GMapControl map = (GMapControl)App.Current.Windows[1].FindName("mapView");
                         App.Current.Resources["markerPath"] = "";
 
                         GMapMarker marker = new GMapMarker(new PointLatLng(obj.Latitude, obj.Longitude));

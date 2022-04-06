@@ -54,7 +54,8 @@ namespace dektopCS
                 }
                 if (list.Count==0)
                 {
-                    MessageBox.Show("Введён неверный логин или пароль!!!", "Внимание", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    //MessageBox.Show("Введён неверный логин или пароль!!!", "Внимание", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    reaction.Content = "Неверный логин или пароль";
                     pwd.Clear();
                 }
                 else
@@ -70,6 +71,54 @@ namespace dektopCS
             {
                 MessageBox.Show("Не удалось выгрузить данные из базы данных", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
             }
+        }
+
+        private void Auth_KeyDown(object sender, KeyEventArgs e)
+        {
+            if ((e.Key == Key.Enter)&&(login.Text!=""))
+            {
+                try
+                {
+                    //Составление и отпарвка запроса к БД
+                    string sql = "SELECT Roll FROM Users WHERE BINARY Login = '" + login.Text +
+                        "' AND BINARY Passwd = '" + SecureStringToString(pwd.SecurePassword) + "'";
+                    MySqlCommand cmd = new MySqlCommand(sql, myConnection);
+
+                    //Чтение ответа БД построчно
+                    List<int> list = new List<int>();
+                    using (DbDataReader reader = cmd.ExecuteReader())
+                    {
+                        if (reader.HasRows)
+                        {
+                            //Построчное считывание ответа
+                            while (reader.Read())
+                            {
+                                list.Add(reader.GetInt32(0));
+                            }
+                        }
+                    }
+                    if (list.Count == 0)
+                    {
+                        //MessageBox.Show("Введён неверный логин или пароль!!!", "Внимание", MessageBoxButton.OK, MessageBoxImage.Warning);
+                        reaction.Content = "Неверный логин или пароль";
+                        pwd.Clear();
+                    }
+                    else
+                    {
+                        App.Current.Resources["roll"] = list[0];
+                        pwd.Clear();
+                        login.Clear();
+                        reaction.Content = "";
+                        WorkWindow workWindow = new WorkWindow();
+                        workWindow.ShowDialog();
+                    }
+                }
+                catch
+                {
+                    MessageBox.Show("Не удалось выгрузить данные из базы данных", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
+
         }
 
         //Метод закрытия окна

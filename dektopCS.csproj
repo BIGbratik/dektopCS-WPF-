@@ -31,7 +31,7 @@
     <ProductName>Командно-штабной стол</ProductName>
     <PublisherName>Ливчак К.В.</PublisherName>
     <OpenBrowserOnPublish>false</OpenBrowserOnPublish>
-    <ApplicationRevision>4</ApplicationRevision>
+    <ApplicationRevision>6</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -72,7 +72,7 @@
     <SignManifests>true</SignManifests>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>Стол.ico</ApplicationIcon>
+    <ApplicationIcon>Стол %281%29.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="BouncyCastle.Crypto, Version=1.8.9.0, Culture=neutral, PublicKeyToken=0e99375e54769942">
@@ -330,6 +330,7 @@
     <Content Include="data\Analityc\Система прогнозирования пожаров.exe" />
     <Content Include="data\Analityc\Температура здания.exe" />
     <Content Include="data\Analityc\ЧП при аварии на АЭС.exe" />
+    <Resource Include="Стол %281%29.ico" />
     <Resource Include="Стол.ico" />
     <Resource Include="data\ЗвездаМЧСauth.png" />
     <Resource Include="СтолИКОНКА.ico" />

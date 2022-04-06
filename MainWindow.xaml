@@ -11,7 +11,8 @@
         Width="900" 
         Height="600"
         WindowState="Maximized"
-        ResizeMode="NoResize">
+        ResizeMode="NoResize"
+        KeyDown="Auth_KeyDown">
     <Window.Background>
         <ImageBrush ImageSource="./data/ЗвездаМЧСauth.png"/>
     </Window.Background>
@@ -79,6 +80,12 @@
                 Width="300"
                 Height="40">
             </PasswordBox>
+            <Label
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Foreground="Red"
+                Name="reaction"
+                FontSize="20"></Label>
             <Button
                 Click="Auth_Click"
                 HorizontalAlignment="Center"
