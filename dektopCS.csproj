@@ -31,7 +31,7 @@
     <ProductName>Командно-штабной стол</ProductName>
     <PublisherName>Ливчак К.В.</PublisherName>
     <OpenBrowserOnPublish>false</OpenBrowserOnPublish>
-    <ApplicationRevision>6</ApplicationRevision>
+    <ApplicationRevision>8</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -176,6 +176,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="classes\CSTask.cs" />
     <Compile Include="classes\InternetAvailability.cs" />
     <Compile Include="classes\DBconnection.cs" />
     <Compile Include="classes\PMobject.cs" />
@@ -193,6 +194,9 @@
     </Compile>
     <Compile Include="source\PageCSAdd.xaml.cs">
       <DependentUpon>PageCSAdd.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="source\PageCSTaskInfo.xaml.cs">
+      <DependentUpon>PageCSTaskInfo.xaml</DependentUpon>
     </Compile>
     <Compile Include="source\PageCSTasks.xaml.cs">
       <DependentUpon>PageCSTasks.xaml</DependentUpon>
@@ -250,6 +254,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="source\PageCSAdd.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="source\PageCSTaskInfo.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -326,14 +334,13 @@
     <Content Include="data\Analityc\ЛВЖ.exe" />
     <Content Include="data\Analityc\Паспорт здания.exe" />
     <Content Include="data\Analityc\Показатель защищенности здания %28взрыв%29.exe" />
+    <Content Include="data\Analityc\Расчёт защитных сооружений.exe" />
     <Content Include="data\Analityc\Расчет токсодозы внурти здания.exe" />
     <Content Include="data\Analityc\Система прогнозирования пожаров.exe" />
     <Content Include="data\Analityc\Температура здания.exe" />
     <Content Include="data\Analityc\ЧП при аварии на АЭС.exe" />
     <Resource Include="Стол %281%29.ico" />
-    <Resource Include="Стол.ico" />
     <Resource Include="data\ЗвездаМЧСauth.png" />
-    <Resource Include="СтолИКОНКА.ico" />
     <Resource Include="data\Минус.png" />
     <Resource Include="data\Плюс.png" />
     <Resource Include="data\ЗвездаМЧС.png" />

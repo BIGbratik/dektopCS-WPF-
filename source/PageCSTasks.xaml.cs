@@ -1,10 +1,14 @@
-﻿using MySql.Data.MySqlClient;
+﻿using GMap.NET;
+using GMap.NET.WindowsPresentation;
+using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.Data.Common;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 using System.Windows.Navigation;
+using System.Windows.Shapes;
 using System.Windows.Threading;
 
 namespace dektopCS.source
@@ -27,7 +31,7 @@ namespace dektopCS.source
             try
             {
                 //Составление и отпарвка запроса к БД
-                string sql = "SELECT TaskName FROM EmergTasks WHERE EmergTypeID = " + id;
+                string sql = "SELECT ID,TaskName FROM EmergTasks WHERE EmergTypeID = " + id;
                 MySqlCommand cmd = new MySqlCommand(sql, myConnection);
 
                 //Чтение ответа БД
@@ -39,7 +43,7 @@ namespace dektopCS.source
                         //Построчное считывание ответа
                         while (reader.Read())
                         {
-                            list.Add(reader.GetString(0));
+                            list.Add(reader.GetString(0)+" | "+reader.GetString(1));
                         }
                     }
                 }
@@ -58,7 +62,7 @@ namespace dektopCS.source
                     }
                     lb.ItemsSource = tb;
                 }
-                else
+                else if (lb.Items.Count==0)
                 {
                     lb.Items.Add("Активных задач пока нет");
                     lb.IsEnabled = false;
@@ -83,10 +87,10 @@ namespace dektopCS.source
         //Получение списка задач по выбранному ЧС (по клику мыши)
         private void CheckTask_Click(object sender, RoutedEventArgs e)
         {
-            timer.Tick += new EventHandler(DispatcherTimer_Tick);
+            /*timer.Tick += new EventHandler(DispatcherTimer_Tick);
             timer.Interval = new TimeSpan(0, 0, 0, 0, 50);
             timer.Start();
-            /*ProgressBar bar = new ProgressBar()
+            ProgressBar bar = new ProgressBar()
             {
                 Minimum = 0,
                 Maximum = 100,
@@ -100,6 +104,22 @@ namespace dektopCS.source
             TaskGrid.Children.Add(bar);
             Grid.SetRow(bar, 3);
             Grid.SetColumnSpan(bar, 2);*/
+            //Проверка, выбран ли какой-либо пункт
+            if (lb.SelectedIndex != -1)
+            {
+                try
+                {
+                    TextBlock obj = (TextBlock)lb.Items[lb.SelectedIndex];
+                    string[] str = obj.Text.Split('|');
+                    //Открытие страницы с подробными данными о выбранном объекте
+                    PageCSTaskInfo taskInfo = new PageCSTaskInfo(Convert.ToInt32(str[0]));
+                    NavigationService.Navigate(taskInfo);
+                }
+                catch
+                {
+                    MessageBox.Show("Не удалось выгрузить данные из базы данных", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
         }
 
         //Получение списка задач по выбранному ЧС (по касанию экрана)
@@ -122,6 +142,21 @@ namespace dektopCS.source
             TaskGrid.Children.Add(bar);
             Grid.SetRow(bar, 3);
             Grid.SetColumnSpan(bar, 2);*/
+            if (lb.SelectedIndex != -1)
+            {
+                try
+                {
+                    TextBlock obj = (TextBlock)lb.Items[lb.SelectedIndex];
+                    string[] str = obj.Text.Split('|');
+                    //Открытие страницы с подробными данными о выбранном объекте
+                    PageCSTaskInfo taskInfo = new PageCSTaskInfo(Convert.ToInt32(str[0]));
+                    NavigationService.Navigate(taskInfo);
+                }
+                catch
+                {
+                    MessageBox.Show("Не удалось выгрузить данные из базы данных", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
         }
 
         //Метод, вызываемый по тику таймера (заполнение прогресс бара)

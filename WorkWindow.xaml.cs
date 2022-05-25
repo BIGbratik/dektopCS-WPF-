@@ -32,8 +32,8 @@ namespace dektopCS
                 mapView.MinZoom = 4;
                 mapView.MaxZoom = 20;
                 mapView.Zoom = 10;
+                mapView.SetPositionByKeywords("Москва");
                 mapView.Position = new PointLatLng(startLat, startLng);
-                //mapView.SetPositionByKeywords("Moscow, Russia");
                 mapView.MouseWheelZoomType = MouseWheelZoomType.MousePositionAndCenter;
                 mapView.CanDragMap = true;
                 mapView.DragButton = MouseButton.Left;
@@ -41,7 +41,7 @@ namespace dektopCS
                 mapView.ShowTileGridLines = false;
 
                 //Создание строки запроса к Я.Погоде и добавление её в ресурс WebBrowser
-                try
+                /*try
                 {
                     string weatherPath = "https://yandex.ru/pogoda/?lat=" +
                         startLat.ToString("G", CultureInfo.InvariantCulture) +
@@ -53,7 +53,7 @@ namespace dektopCS
                 {
                     MessageBox.Show("Внешний ресурс ПОГОДА недоступен. Возможно отсутствует соединение с сетью Интернет",
                         "Ошибка соединения", MessageBoxButton.OK, MessageBoxImage.Warning);
-                }
+                }*/
             }
             else
             {
@@ -61,7 +61,7 @@ namespace dektopCS
                     "Для доступа к некоторым функциям приложения требуется наличие подключения к сети. " +
                     "Устарните проблемы и перезапустите приложение", "Ошибка сети", MessageBoxButton.OK, MessageBoxImage.Warning);
                 //Удаление объектов, для работы которых требуется соединение с сетью интернет
-                grid.Children.Remove(weather);
+                //grid.Children.Remove(weather);
                 grid.Children.Remove(mapView);
             }
         }

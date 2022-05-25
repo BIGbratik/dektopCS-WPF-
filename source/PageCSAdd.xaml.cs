@@ -60,7 +60,7 @@ namespace dektopCS.source
         {
             try
             {
-                string sql = "INSERT EmergTasks(EmergTypeID, TaskName, EmergTime) VALUE (" + EmergTypeID+",'"+ CSName.Text + "',@dt)";
+                string sql = "INSERT EmergTasks(EmergTypeID, TaskName, EmergTime, EmergParams, EmergMeasures) VALUE (" + EmergTypeID+",'"+ CSName.Text + "',@dt,'"+CSParams.Text+"','"+CSMeasurs.Text+"')";
 
                 MySqlCommand cmd = new MySqlCommand(sql, myConnection);
                 cmd.Parameters.AddWithValue("@dt", DateTime.Parse(CSDate.Text));
