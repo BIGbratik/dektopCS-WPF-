@@ -15,7 +15,7 @@
             <Setter Property="Button.Background" Value="DarkOrange"/>
             <Setter Property="Button.Foreground" Value="Black"/>
             <Setter Property="Button.Margin" Value="5,5,5,5"/>
-            <Setter Property="Button.FontSize" Value="18"/>
+            <Setter Property="Button.FontSize" Value="14"/>
             <Setter Property="Button.Height" Value="30"/>
             <Setter Property="Button.Width" Value="200"/>
             <Setter Property="Button.HorizontalContentAlignment" Value="Center"/>
@@ -64,15 +64,14 @@
             HorizontalContentAlignment="Center"
             Grid.ColumnSpan="2"
             Grid.Row="0"
-            FontSize="20">
+            FontSize="14">
             <TextBlock
                 TextWrapping="WrapWithOverflow">Подробная инфомрация об объекте</TextBlock>
         </Label>
 
         <Label
             Grid.Column="0"
-            Grid.Row="1"
-            FontSize="14">
+            Grid.Row="1">
             <TextBlock TextWrapping="WrapWithOverflow">Наименование:</TextBlock>
         </Label>
         <Label
@@ -85,8 +84,7 @@
 
         <Label
             Grid.Column="0"
-            Grid.Row="2"
-            FontSize="14">
+            Grid.Row="2">
             <TextBlock TextWrapping="WrapWithOverflow"> Ведомственная принадлежность :</TextBlock>
         </Label>
         <Label
@@ -99,8 +97,7 @@
 
         <Label
             Grid.Column="0"
-            Grid.Row="3"
-            FontSize="14">
+            Grid.Row="3">
             <TextBlock TextWrapping="WrapWithOverflow"> Подчиненность (федеральная, региональная, территориальная, местная, объектовая):</TextBlock>
         </Label>
         <Label
@@ -113,8 +110,7 @@
 
         <Label
             Grid.Column="0"
-            Grid.Row="4"
-            FontSize="14">
+            Grid.Row="4">
             <TextBlock TextWrapping="WrapWithOverflow"> Степень готовности (постоянная, повышенная, общая):</TextBlock>
         </Label>
         <Label
@@ -127,8 +123,7 @@
 
         <Label
             Grid.Column="0"
-            Grid.Row="5"
-            FontSize="14">
+            Grid.Row="5">
             <TextBlock TextWrapping="WrapWithOverflow"> Численный состав :</TextBlock>
         </Label>
         <Label
@@ -141,8 +136,7 @@
 
         <Label
             Grid.Column="0"
-            Grid.Row="6"
-            FontSize="14">
+            Grid.Row="6">
             <TextBlock TextWrapping="WrapWithOverflow">Место дислокации (адрес):</TextBlock>
         </Label>
         <Label
@@ -155,8 +149,7 @@
 
         <Label
             Grid.Column="0"
-            Grid.Row="7"
-            FontSize="14">
+            Grid.Row="7">
             <TextBlock TextWrapping="WrapWithOverflow">Телефон:</TextBlock>
         </Label>
         <Label

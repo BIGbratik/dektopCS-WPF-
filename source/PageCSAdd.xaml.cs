@@ -58,21 +58,27 @@ namespace dektopCS.source
 
         private void Save_Click(object sender, RoutedEventArgs e)
         {
-            try
-            {
-                string sql = "INSERT EmergTasks(EmergTypeID, TaskName, EmergTime, EmergParams, EmergMeasures) VALUE (" + EmergTypeID+",'"+ CSName.Text + "',@dt,'"+CSParams.Text+"','"+CSMeasurs.Text+"')";
-
-                MySqlCommand cmd = new MySqlCommand(sql, myConnection);
-                cmd.Parameters.AddWithValue("@dt", DateTime.Parse(CSDate.Text));
-                cmd.ExecuteNonQuery();
-                MessageBox.Show("Сохранение прошло успешно","Успех!!!",MessageBoxButton.OK, MessageBoxImage.Information);
-                NavigationService.GoBack();
+            if ((CSName.Text!="")&&(CSParams.Text!="")&&(CSMeasurs.Text!=""))
+            {            
+                try
+                {   
+                    string sql = "INSERT EmergTasks(EmergTypeID, TaskName, EmergTime, EmergParams, EmergMeasures) VALUE (" 
+                        + EmergTypeID+",'"+ CSName.Text + "',@dt,'"+CSParams.Text+"','"+CSMeasurs.Text+"')";
+                    MySqlCommand cmd = new MySqlCommand(sql, myConnection);
+                    cmd.Parameters.AddWithValue("@dt", DateTime.Parse(CSDate.Text));
+                    cmd.ExecuteNonQuery();
+                    MessageBox.Show("Сохранение прошло успешно","Успех!!!",MessageBoxButton.OK, MessageBoxImage.Information);
+                    NavigationService.GoBack();
+                }
+                catch
+                {
+                    MessageBox.Show("Ошибка сохранения","Внимание!!!",MessageBoxButton.OK,MessageBoxImage.Error);
+                }
             }
-            catch
+            else
             {
-                MessageBox.Show("Ошибка сохранения","Внимание!!!",MessageBoxButton.OK,MessageBoxImage.Error);
+                MessageBox.Show("Вы заполнили не все поля!", "Внимание!!!", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
-
         }
     }
 }

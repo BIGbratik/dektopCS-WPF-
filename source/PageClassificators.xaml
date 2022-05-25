@@ -20,7 +20,7 @@
             <Setter Property="Button.Background" Value="DarkOrange"/>
             <Setter Property="Button.Foreground" Value="Black"/>
             <Setter Property="Button.Margin" Value="5,5,5,5"/>
-            <Setter Property="Button.FontSize" Value="18"/>
+            <Setter Property="Button.FontSize" Value="14"/>
             <Setter Property="Button.HorizontalContentAlignment" Value="Center"/>
             <Setter Property="Button.VerticalContentAlignment" Value="Center"/>
         </Style>
@@ -41,7 +41,7 @@
             VerticalAlignment="Center"
             Grid.Row="0"
             Grid.ColumnSpan="2"
-            FontSize="20"
+            FontSize="14"
             Foreground="White">
             Характер ЧС
         </TextBlock>

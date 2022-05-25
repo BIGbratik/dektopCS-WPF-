@@ -12,7 +12,7 @@
             <Setter Property="Button.Background" Value="DarkOrange"/>
             <Setter Property="Button.Foreground" Value="Black"/>
             <Setter Property="Button.Margin" Value="5,5,5,5"/>
-            <Setter Property="Button.FontSize" Value="18"/>
+            <Setter Property="Button.FontSize" Value="14"/>
             <Setter Property="Button.Height" Value="30"/>
             <Setter Property="Button.Width" Value="350"/>
             <Setter Property="Button.HorizontalContentAlignment" Value="Center"/>
@@ -57,45 +57,35 @@
             Grid.Column="0"
             Grid.Row="3">Аналитика</Button>
         <Button 
-            Click="CheckIS_Click" 
-            VerticalAlignment="Top" 
-            Grid.Column="0"
-            Grid.Row="4">Информационная безопасность</Button>
-        <Button 
             Click="CheckNorSprav_Click" 
             VerticalAlignment="Top" 
             Grid.Column="0"
-            Grid.Row="5">Нормативно-справочная информация</Button>
+            Grid.Row="4">Нормативно-справочная информация</Button>
         <Button 
             Click="CheckClassifs_Click" 
             VerticalAlignment="Top" 
             Grid.Column="0"
-            Grid.Row="6">Классификаторы</Button>
+            Grid.Row="5">Классификаторы</Button>
         <Button 
             Click="CheckExtSys_Click" 
             VerticalAlignment="Top" 
             Grid.Column="0"
-            Grid.Row="7">Внешние системы</Button>
-        <Button 
-            Click="CheckInfExchange_Click" 
-            VerticalAlignment="Top" 
-            Grid.Column="0"
-            Grid.Row="8">Информационный обмен</Button>
+            Grid.Row="6">Внешние системы</Button>
         <Button 
             Click="CheckGuids_Click" 
             VerticalAlignment="Top" 
             Grid.Column="0"
-            Grid.Row="9">Справочные данные</Button>
+            Grid.Row="7">Справочные данные</Button>
         <Button 
             Click="CheckMultimedia_Click" 
             VerticalAlignment="Top" 
             Grid.Column="0"
-            Grid.Row="10">Мультимедия</Button>
+            Grid.Row="8">Мультимедия</Button>
         <Button
             Click="CheckCSAction_Click"
             VerticalAlignment="Top"
             Grid.Column="0"
-            Grid.Row="11">Действия при ЧС</Button>
+            Grid.Row="9">Действия при ЧС</Button>
         
     </Grid>
 </Page>

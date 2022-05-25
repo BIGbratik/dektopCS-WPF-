@@ -15,7 +15,7 @@
             <Setter Property="Button.Background" Value="DarkOrange"/>
             <Setter Property="Button.Foreground" Value="Black"/>
             <Setter Property="Button.Margin" Value="5,5,5,5"/>
-            <Setter Property="Button.FontSize" Value="18"/>
+            <Setter Property="Button.FontSize" Value="14"/>
             <Setter Property="Button.Height" Value="30"/>
             <Setter Property="Button.Width" Value="200"/>
             <Setter Property="Button.HorizontalContentAlignment" Value="Center"/>
@@ -33,7 +33,7 @@
             <Setter Property="Foreground" Value="White"/>
             <Setter Property="HorizontalAlignment" Value="Right"/>
             <Setter Property="VerticalAlignment" Value="Top"/>
-            <Setter Property="FontSize" Value="20"/>
+            <Setter Property="FontSize" Value="12"/>
             <Setter Property="TextWrapping" Value="WrapWithOverflow"/>
         </Style>
 

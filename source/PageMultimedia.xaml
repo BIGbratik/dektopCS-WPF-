@@ -21,7 +21,7 @@
             <Setter Property="Button.Background" Value="DarkOrange"/>
             <Setter Property="Button.Foreground" Value="Black"/>
             <Setter Property="Button.Margin" Value="5,5,5,5"/>
-            <Setter Property="Button.FontSize" Value="18"/>
+            <Setter Property="Button.FontSize" Value="14"/>
             <Setter Property="Button.Height" Value="30"/>
             <Setter Property="Button.Width" Value="200"/>
             <Setter Property="Button.HorizontalContentAlignment" Value="Center"/>
@@ -41,7 +41,7 @@
         <Label 
             Foreground="White"
             HorizontalContentAlignment="Stretch"
-            FontSize="20"
+            FontSize="14"
             Grid.ColumnSpan="2"
             HorizontalAlignment="Center"
             Grid.Row="0">Выберите интересующую метку</Label>

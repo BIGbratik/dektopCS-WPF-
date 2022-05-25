@@ -53,8 +53,9 @@ namespace dektopCS.source
         //Метод перехода на страницу классификаторов
         private void CheckClassifs_Click(object sender, RoutedEventArgs e)
         {
-            PageClassificators pageClassificators = new PageClassificators();
-            NavigationService.Navigate(pageClassificators);
+            MessageBox.Show("Модуль КЛАССИФИКАТОРЫ находится в разработке", "ВНИМАНИЕ!!!", MessageBoxButton.OK, MessageBoxImage.Information);
+            /*PageClassificators pageClassificators = new PageClassificators();
+            NavigationService.Navigate(pageClassificators);*/
         }
 
         //Метод перехода на страницу внешних систем
