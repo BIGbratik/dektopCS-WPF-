@@ -11,18 +11,22 @@
     <Page.Resources>
         <Style TargetType="ListBoxItem">
             <Setter Property="ListBoxItem.BorderBrush" Value="DarkOrange"/>
-            <Setter Property="ListBoxItem.Margin" Value="0,5,5,0"/>
+            <Setter Property="ListBoxItem.Margin" Value="3"/>
             <!--<Setter Property="ListBoxItem.Width" Value="300"/>-->
         </Style>
         <Style TargetType="Button">
             <Setter Property="Button.Background" Value="DarkOrange"/>
             <Setter Property="Button.Foreground" Value="Black"/>
-            <Setter Property="Button.Margin" Value="5,5,5,5"/>
+            <Setter Property="Button.Margin" Value="5"/>
             <Setter Property="Button.FontSize" Value="14"/>
             <Setter Property="Button.Height" Value="30"/>
             <Setter Property="Button.Width" Value="200"/>
             <Setter Property="Button.HorizontalContentAlignment" Value="Center"/>
             <Setter Property="Button.VerticalContentAlignment" Value="Center"/>
+        </Style>
+        <Style TargetType="ListBox">
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Disabled"/>
         </Style>
     </Page.Resources>
     <Grid>
@@ -46,11 +50,9 @@
             Общие планы, планы, схемы
         </TextBlock>
         <ListBox
-            Margin="10,5,10,5"
             Name="lb"
             Grid.ColumnSpan="2"
             Grid.Row="1"
-            ScrollViewer.HorizontalScrollBarVisibility="Disabled"
             MouseLeftButtonUp="CheckItem_Click"
             TouchUp="CheckItem_TouchUp">
         </ListBox>
@@ -64,14 +66,7 @@
         <Image  
             Grid.Row="2"
             Grid.ColumnSpan="2"
-            ScrollViewer.HorizontalScrollBarVisibility="Auto"
-            ScrollViewer.VerticalScrollBarVisibility="Auto"
             Name="img"
-            >
-            <Image.RenderTransform>
-                <ScaleTransform 
-                    x:Name="imgScale"/>
-            </Image.RenderTransform>
-        </Image>
+            Margin="5"/>
     </Grid>
 </Page>

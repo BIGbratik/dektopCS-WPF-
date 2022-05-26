@@ -31,7 +31,7 @@
     <ProductName>Командно-штабной стол</ProductName>
     <PublisherName>Ливчак К.В.</PublisherName>
     <OpenBrowserOnPublish>false</OpenBrowserOnPublish>
-    <ApplicationRevision>8</ApplicationRevision>
+    <ApplicationRevision>10</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -344,14 +344,14 @@
     <Resource Include="data\Минус.png" />
     <Resource Include="data\Плюс.png" />
     <Resource Include="data\ЗвездаМЧС.png" />
-    <Resource Include="data\MPS\Maps\Казань ЗОНЫ.jpg" />
-    <Resource Include="data\MPS\Maps\Казань ОБЪЕКТЫ.jpg" />
-    <Resource Include="data\MPS\Maps\Казань ПОДТОПЛЕНИЯ.jpg" />
-    <Resource Include="data\MPS\Maps\Казань РАЙОНЫ.jpg" />
-    <Resource Include="data\MPS\Plans\План метро.jpg" />
-    <Resource Include="data\MPS\Plans\План порт.jpg" />
-    <Resource Include="data\MPS\Plans\План электросетей.jpg" />
-    <Resource Include="data\MPS\Shemes\Схема оповещения.jpg" />
+    <Resource Include="data\Documentation\Казань ЗОНЫ.jpg" />
+    <Resource Include="data\Documentation\Казань ОБЪЕКТЫ.jpg" />
+    <Resource Include="data\Documentation\Казань ПОДТОПЛЕНИЯ.jpg" />
+    <Resource Include="data\Documentation\Казань РАЙОНЫ.jpg" />
+    <Resource Include="data\Documentation\План метро.jpg" />
+    <Resource Include="data\Documentation\План порт.jpg" />
+    <Resource Include="data\Documentation\План электросетей.jpg" />
+    <Resource Include="data\Documentation\Схема оповещения.jpg" />
     <Resource Include="data\Marks\БОО.png" />
     <Resource Include="data\Marks\ВодозаборнаяСтанция.png" />
     <Resource Include="data\Marks\ВПО.png" />
@@ -380,6 +380,7 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

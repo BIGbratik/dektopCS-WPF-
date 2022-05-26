@@ -11,8 +11,8 @@ namespace dektopCS.source
 {
     public partial class PageMPSinfo : Page
     {
-        //Инициализация БД и пути к локальным данным
-        private string path = @"/data/MPS/";
+        //Путь к локальным данным
+        private string path = @"/data/Documentation/";
 
         private readonly string type;
 
@@ -21,7 +21,6 @@ namespace dektopCS.source
         public PageMPSinfo(string type)
         {
             InitializeComponent();
-            path =path+type+"/";
             this.type = type;
         }
 
@@ -31,7 +30,7 @@ namespace dektopCS.source
             try
             {
                 //СОставление запроса к БД
-                string sql = "SELECT MPSfile FROM MPS WHERE MPStype = '" + type + "' AND ObjectID IS NULL";
+                string sql = "SELECT Name FROM Files WHERE Type = '" + type + "'";
                 MySqlCommand cmd = new MySqlCommand(sql, myConnection);
                 List<string> list = new List<string>();
 

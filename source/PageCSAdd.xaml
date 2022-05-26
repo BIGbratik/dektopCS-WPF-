@@ -14,7 +14,7 @@
         <Style TargetType="Button">
             <Setter Property="Button.Background" Value="DarkOrange"/>
             <Setter Property="Button.Foreground" Value="Black"/>
-            <Setter Property="Button.Margin" Value="5,5,5,5"/>
+            <Setter Property="Button.Margin" Value="5"/>
             <Setter Property="Button.FontSize" Value="14"/>
             <Setter Property="Button.Height" Value="30"/>
             <Setter Property="Button.Width" Value="350"/>
@@ -24,13 +24,14 @@
         </Style>
         <Style TargetType="ListBoxItem">
             <Setter Property="ListBoxItem.BorderBrush" Value="DarkOrange"/>
-            <Setter Property="ListBoxItem.Margin" Value="0,5,5,0"/>
+            <Setter Property="ListBoxItem.Margin" Value="3"/>
         </Style>
         <Style TargetType="Label">
             <Setter Property="FontSize" Value="12"/>
         </Style>
         <Style TargetType="TextBlock">
             <Setter Property="FontSize" Value="12"/>
+            <Setter Property="TextWrapping" Value="Wrap"/>
         </Style>
     </Page.Resources>
     <Grid>
@@ -40,6 +41,7 @@
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="40"/>
+            <RowDefinition Height="100"/>
             <RowDefinition Height="100"/>
             <RowDefinition Height="100"/>
             <RowDefinition Height="100"/>
@@ -93,12 +95,6 @@
             HorizontalContentAlignment="Left"
             Grid.Column="0"
             Grid.Row="4">Время возникновения ЧС:</Label>
-        <!--<Label
-            Foreground="White"
-            HorizontalContentAlignment="Left"
-            Grid.Column="1"
-            Grid.Row="4"
-            Name="CSDate"/>-->
         <TextBox
             HorizontalContentAlignment="Left"
             Grid.Column="1"
@@ -127,20 +123,37 @@
             HorizontalContentAlignment="Left"
             TextWrapping="Wrap"
             Name="CSMeasurs"/>
+        <Label
+            Foreground="White"
+            HorizontalContentAlignment="Left"
+            Grid.Column="0"
+            Grid.Row="7">Дополнительные материалы:</Label>
+        <Button
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Width="150"
+            Click="AddFile_Click"
+            Grid.Column="1"
+            Grid.Row="7">Добавить документ</Button>
+        <ListBox
+            Grid.Column="1"
+            Grid.Row="7"
+            Margin="0,50,0,0"
+            Name="lf">
+        </ListBox>
         <Button
             HorizontalAlignment="Left"
             VerticalAlignment="Bottom"
             Width="70"
             Click="Back_Click"
             Grid.Column="0"
-            Grid.Row="10">Назад</Button>
+            Grid.Row="8">Назад</Button>
         <Button
             HorizontalAlignment="Right"
             VerticalAlignment="Bottom"
             Width="100"
             Click="Save_Click"
             Grid.Column="1"
-            Grid.Row="10">Сохранить</Button>
-
+            Grid.Row="8">Сохранить</Button>
     </Grid>
 </Page>

@@ -1,9 +1,11 @@
 ﻿using dektopCS.classes;
 using GMap.NET.WindowsPresentation;
+using Microsoft.Win32;
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.Data.Common;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -37,33 +39,6 @@ namespace dektopCS.source
             //Составление и отправка запроса к БД
             string sql = "SELECT TaskName,EmergLat,EmergLng,EmergTime,EmergParams,EmergMeasures FROM EmergTasks WHERE ID = " + id;
             MySqlCommand cmd = new MySqlCommand(sql, myConnection);
-
-            //Чтение ответа построчно
-            /*CSTask task = new CSTask();
-            task.ID = id;
-            using (DbDataReader reader = cmd.ExecuteReader())
-            {
-                if (reader.HasRows)
-                {
-                    //Построчное считывание ответа
-                    while (reader.Read())
-                    {
-                        task.TaskName = reader.GetString(0);
-                        if (!reader.IsDBNull(1))
-                            task.EmergLat = reader.GetDouble(1);
-                        if (!reader.IsDBNull(2))
-                            task.EmergLng = reader.GetDouble(2);
-                        if (!reader.IsDBNull(3))
-                            task.dateTime = reader.GetDateTime(3);
-                        if (!reader.IsDBNull(4))
-                            task.EmergParams = reader.GetString(4);
-                        if (!reader.IsDBNull(5))
-                            task.EmergMeasures = reader.GetString(5);
-                    }
-                }
-            }
-            title.Text =task.TaskName;
-            datetime.Text = task.dateTime.ToString();*/
             using (DbDataReader reader = cmd.ExecuteReader())
             {
                 if (reader.HasRows)
@@ -81,6 +56,40 @@ namespace dektopCS.source
                     }
                 }
             }
+
+            sql = "SELECT Name FROM Files WHERE TaskID = " + id;
+            cmd=new MySqlCommand(sql, myConnection);
+            using (DbDataReader reader = cmd.ExecuteReader())
+            {
+                if (reader.HasRows)
+                {
+                    //Построчное считывание ответа
+                    while (reader.Read())
+                    {
+                        TextBlock tb = new TextBlock()
+                        {
+                            Text = reader.GetString(0),
+                            Foreground = Brushes.Black,
+                            TextWrapping=TextWrapping.WrapWithOverflow
+                        };
+                        ld.Items.Add(tb);
+                    }
+                }
+            }
+            if (ld.Items.Count == 0)
+            {
+                TextBlock tb = new TextBlock()
+                {
+                    Text = "Отсутствуют связанные документы",
+                    Foreground = Brushes.Black
+                };
+                ld.Items.Add(tb);
+                ld.IsEnabled = false;
+            }
+            else
+            {
+                ld.IsEnabled = true;
+            }    
             //Поставка метки выбранного объекта на карту
             /*try
             {

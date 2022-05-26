@@ -14,7 +14,7 @@ namespace dektopCS.source
         //Получение данных подключения к БД
         private readonly MySqlConnection myConnection = (MySqlConnection)App.Current.Resources["connectionMySQL"];
 
-        private readonly string path = @"/data/MPS/";
+        private readonly string path = @"/data/Documentation/";
 
         private readonly int id;
 
@@ -30,8 +30,8 @@ namespace dektopCS.source
         {
             try
             {
-                //Составление и отпарвка запроса к БД
-                string sql = "SELECT MPStype,MPSfile FROM MPS WHERE ObjectID IS NOT NULL AND ObjectID = " + id;
+                //Составление и отправка запроса к БД
+                string sql = "SELECT Name FROM Files WHERE ObjectID IS NOT NULL AND ObjectID = " + id;
                 MySqlCommand cmd = new MySqlCommand(sql, myConnection);
 
                 //Чтение ответа БД построчно
@@ -43,8 +43,7 @@ namespace dektopCS.source
                         //Построчное считывание ответа
                         while (reader.Read())
                         {
-                            types.Add(reader.GetString(0));
-                            list.Add(reader.GetString(1));
+                            list.Add(reader.GetString(0));
                         }
 
                     }
@@ -89,7 +88,7 @@ namespace dektopCS.source
         {
             if (lb.SelectedIndex != -1)
             {
-                Uri uri = new Uri(path + types[lb.SelectedIndex] + "/" + lb.SelectedItem.ToString(), UriKind.RelativeOrAbsolute);
+                Uri uri = new Uri(path  + lb.SelectedItem.ToString(), UriKind.RelativeOrAbsolute);
                 BitmapImage bitmapImage = new BitmapImage();
                 bitmapImage.BeginInit();
                 bitmapImage.UriSource = uri;

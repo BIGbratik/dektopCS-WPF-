@@ -24,21 +24,21 @@ namespace dektopCS.source
         //Метод перехода к списку имеющихся общих карт
         private void CheckMap_Click(object sender, RoutedEventArgs e)
         {
-            PageMPSinfo pageMPSinfo = new PageMPSinfo("Maps");
+            PageMPSinfo pageMPSinfo = new PageMPSinfo("map");
             NavigationService.Navigate(pageMPSinfo);
         }
 
         //Метод перехода к списку имеющихся общих планов
         private void CheckPlans_Click(object sender, RoutedEventArgs e)
         {
-            PageMPSinfo pageMPSinfo = new PageMPSinfo("Plans");
+            PageMPSinfo pageMPSinfo = new PageMPSinfo("plan");
             NavigationService.Navigate(pageMPSinfo);
         }
 
         //Метод перехода к списку имеющихся общих схем
         private void CheckShemes_Click(object sender, RoutedEventArgs e)
         {
-            PageMPSinfo pageMPSinfo = new PageMPSinfo("Shemes");
+            PageMPSinfo pageMPSinfo = new PageMPSinfo("sheme");
             NavigationService.Navigate(pageMPSinfo);
         }
     }

@@ -14,7 +14,7 @@
         <Style TargetType="Button">
             <Setter Property="Button.Background" Value="DarkOrange"/>
             <Setter Property="Button.Foreground" Value="Black"/>
-            <Setter Property="Button.Margin" Value="5,5,5,5"/>
+            <Setter Property="Button.Margin" Value="5"/>
             <Setter Property="Button.FontSize" Value="14"/>
             <Setter Property="Button.Height" Value="30"/>
             <Setter Property="Button.Width" Value="200"/>
@@ -34,24 +34,29 @@
             <Setter Property="HorizontalAlignment" Value="Right"/>
             <Setter Property="VerticalAlignment" Value="Top"/>
             <Setter Property="FontSize" Value="12"/>
-            <Setter Property="TextWrapping" Value="WrapWithOverflow"/>
+            <Setter Property="TextWrapping" Value="Wrap"/>
+        </Style>
+        <Style TargetType="ListBoxItem">
+            <Setter Property="ListBoxItem.BorderBrush" Value="DarkOrange"/>
+            <Setter Property="ListBoxItem.Margin" Value="3"/>
+        </Style>
+        <Style TargetType="ListBox">
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Disabled"/>
         </Style>
 
     </Page.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*"/>
-            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="2*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="50"/>
             <RowDefinition Height="50"/>
             <RowDefinition Height="50"/>
             <RowDefinition Height="100"/>
-            <RowDefinition Height="50"/>
-            <RowDefinition Height="50"/>
-            <RowDefinition Height="50"/>
-            <RowDefinition Height="50"/>
+            <RowDefinition Height="150"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
@@ -88,6 +93,15 @@
             HorizontalAlignment="Center"
             FontSize="12"
             Name="description"></TextBlock>
+        <TextBlock
+            Grid.Row="4"
+            Grid.Column="0">
+            Документы, связанные с заданием:
+        </TextBlock>
+        <ListBox
+            Grid.Row="4"
+            Grid.Column="1"
+            Name="ld"/>
         <Button 
             Click="Back_Click" 
             HorizontalAlignment="Left" 
