@@ -91,34 +91,54 @@ namespace dektopCS.source
             if ((CSName.Text!="")&&(CSParams.Text!="")&&(CSMeasurs.Text!=""))
             {            
                 try
-                {   
-                    string sql = "INSERT EmergTasks(EmergTypeID, TaskName, EmergTime, EmergParams, EmergMeasures) VALUE (" 
-                        + EmergTypeID+",'"+ CSName.Text + "',@dt,'"+CSParams.Text+"','"+CSMeasurs.Text+"')";
-                    ///
-                    ///Запрос на добавление файлов!!!
-                    ///
+                {
+                    //Запись основноый информации о задаче
+                    string sql = "INSERT EmergTasks(EmergTypeID, TaskName, EmergTime, EmergParams, EmergMeasures) VALUE ("
+    + EmergTypeID + ",'" + CSName.Text + "',@dt,'" + CSParams.Text + "','" + CSMeasurs.Text + "')";
+                    MySqlCommand cmd = new MySqlCommand(sql, myConnection);
+                    cmd.Parameters.AddWithValue("@dt", DateTime.Parse(CSDate.Text));
+                    cmd.ExecuteNonQuery();
+
+                    //Получение ID новосозданной записи
+                    sql = "SELECT ID FROM EmergTasks ORDER BY ID DESC LIMIT 1";
+                    cmd = new MySqlCommand(sql, myConnection);
+                    int lastID=0;
+                    using (DbDataReader reader = cmd.ExecuteReader())
+                    {
+                        if (reader.HasRows)
+                        {
+                            //Построчное считывание ответа
+                            while (reader.Read())
+                            {
+                                lastID = reader.GetInt32(0);
+                            }
+                        }
+                    }
+                    //Запись названий файлов, связанных с создаваемой задачей
                     foreach (FileInfo file in docs)
                     {
                         switch (file.Extension)
                         {
                             case ".doc":
                                 file.CopyTo(dir + file.Name, true);
+                                sql = "INSERT Files(Name,Type,ObjectID,TaskID) VALUE ('" + file.Name + "','document',null," + lastID.ToString() + ")";
                                 break;
                             case ".docx":
                                 file.CopyTo(dir + file.Name, true);
+                                sql = "INSERT Files(Name,Type,ObjectID,TaskID) VALUE ('" + file.Name + "','document',null," + lastID.ToString() + ")";
                                 break;
                             case ".jpg":
                                 file.CopyTo(dir + file.Name, true);
+                                sql = "INSERT Files(Name,Type,ObjectID,TaskID) VALUE ('" + file.Name + "','image',null," + lastID.ToString() + ")";
                                 break;
                             case ".png":
                                 file.CopyTo(dir + file.Name, true);
+                                sql = "INSERT Files(Name,Type,ObjectID,TaskID) VALUE ('" + file.Name + "','image',null," + lastID.ToString() + ")";
                                 break;
                         }
+                        cmd = new MySqlCommand(sql, myConnection);
+                        cmd.ExecuteNonQuery();
                     }
-                    
-                    MySqlCommand cmd = new MySqlCommand(sql, myConnection);
-                    cmd.Parameters.AddWithValue("@dt", DateTime.Parse(CSDate.Text));
-                    cmd.ExecuteNonQuery();
                     MessageBox.Show("Сохранение прошло успешно","Успех!!!",MessageBoxButton.OK, MessageBoxImage.Information);
                     NavigationService.GoBack();
                 }
